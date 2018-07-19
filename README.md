@@ -116,7 +116,6 @@ $ npm install --save vuex
 
 公用组件放在 /src/components 下。
 
-```
 |-- src                              // 源码目录
 |   |-- components                   // 公用组件
 |       |-- MyComponent              // MyComponent 组件
@@ -129,7 +128,6 @@ $ npm install --save vuex
 |           |-- components           // MyComponent 的子组件
 |               |-- ChildComponent   // MyComponent 的子组件 ChildComponent，组件规范和 MyComponent 一致
 
-```
 #### 5.4. 业务组件规范
 
 业务组件放在 /src/pages 下，也就是一个页面，对应一个路由。规范和公用组件一直。
