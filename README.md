@@ -38,8 +38,6 @@ $ npm run dev
 # 构建
 $ npm run build
 
-```
-
 ## 4. 对 vue-cli 的一些修改和增强
 
 #### 4.1. 用 axios 作为 ajax 方案
@@ -71,10 +69,10 @@ import 'core-js/es6/promise'
 $ npm install --save vuex
 ```
 
-```
 ## 5. 规范
 
 #### 5.1. 项目结构
+```
 |-- build                            // Webpack 项目构建
 |-- config                           // 项目开发环境配置
 |-- node_modules                     // 项目开发依赖包
@@ -106,7 +104,7 @@ $ npm install --save vuex
 |-- .babelrc                         // babel-loader 配置
 |-- .editorconfig                    // 定义代码格式
 |-- package.json                     // 项目基本信息
-
+```
 #### 5.2. 组件的命名规范
 
 按照 vue-cli 的 Hello 示例，组件（这里说的是组件文件夹）命名应遵循帕斯卡（pascal）命名法，如：MyComponent。
@@ -115,7 +113,7 @@ $ npm install --save vuex
 #### 5.3. 公用组件规范
 
 公用组件放在 /src/components 下。
-
+```
 |-- src                              // 源码目录
 |   |-- components                   // 公用组件
 |       |-- MyComponent              // MyComponent 组件
@@ -127,7 +125,7 @@ $ npm install --save vuex
 |           |-- utils                // MyComponent 的工具集合
 |           |-- components           // MyComponent 的子组件
 |               |-- ChildComponent   // MyComponent 的子组件 ChildComponent，组件规范和 MyComponent 一致
-
+```
 #### 5.4. 业务组件规范
 
 业务组件放在 /src/pages 下，也就是一个页面，对应一个路由。规范和公用组件一直。
