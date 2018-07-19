@@ -10,15 +10,15 @@
       </div>
       <div class="clean"></div>
     </div>
-    <div class="nav">
+    <div class="nav" v-show="showSider">
       <ul>
-        <router-link v-for="item in meauList" :to="{ path:item.path, query:{ name:itemname }}" tag="li"  :key="item.id">
+        <router-link v-for="item in meauList" :to="{ path:item.path, query:{ name:item.name }}" tag="li"  :key="item.id">
           {{ item.name }}
         </router-link>
       </ul>
     </div>
     <div class="condotion">
-      {{meauCondition}}
+      {{pathName}}
     </div>
     <div class="content">
       <keep-alive>
@@ -31,14 +31,26 @@
 </template>
 
 <script>
+
+  import {mapGetters,mapActions} from 'vuex'
+
   export default {
     name: 'Layout',
+
+    watch:{
+      $route(to,from){
+        var path=to.path.substring(1);
+        this.pathName=this.$route.query.name
+        console.log(path)
+        this.siderChange(path);
+      }
+    },
     data(){
       return{
-        meauCondition:this.$route.query.name,
+        pathName:this.$route.query.name,
         headerMeau:{
           name: '首页',
-          path: 'home',
+          path: '/home',
         },
         meauList:[
           {
@@ -75,6 +87,23 @@
           }
         ]
       }
+    },
+    computed: {
+      ...mapGetters([
+        'showSider'
+      ])
+    },
+    methods:{
+      siderChange(path){
+        if(path!='home'&&path!='home/index' ){
+          this.$store.dispatch('showSider')
+        }else{
+          this.$store.dispatch('hideSider')
+        }
+      }
+    },
+    mounted(){
+      console.log()
     }
   }
 </script>
@@ -155,20 +184,25 @@
     bottom: 0;
   }
   .nav{
-    width:20%;
+    width:10%;
     float: left;
     min-height: 500px;
     background: aqua;
   }
   .condotion{
     width: 75%;
-    float: right;
+    margin:0 auto;
+    /*float: right;*/
     min-height: 50px;
   }
   .content{
     width: 75%;
-    float: right;
+    margin:0 auto;
+    /*float: right;*/
     min-height: 450px;
     background: aquamarine;
+  }
+  .router-link-active{
+      color:red;
   }
 </style>

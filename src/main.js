@@ -6,8 +6,12 @@ import Layout from './components/Layout.vue'
 import VueResource  from 'vue-resource'
 import routes from './router'
 
+import store from './store/store'
+
 Vue.use(VueResource)
 Vue.use(Vuerouter)
+
+
 
 const router=new Vuerouter({
   mode:'history',
@@ -21,6 +25,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template:"<Layout/>",
   components: { Layout }
 })

@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="meauPanel" v-for="item in userList">
-      <div>{{ item.name }}</div>
-      <div>{{ item.num }}</div>
+      <router-link :to="{ path:item.path }" tag="li">{{ item.name }}</router-link>
+      <!--<div>{{ item.name }}</div>-->
+      <!--<div>{{ item.num }}</div>-->
     </div>
     <div class="clean"></div>
   </div>
