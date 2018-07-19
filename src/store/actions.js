@@ -7,6 +7,12 @@ export default{
      },
      hideSider:({commit})=>{
       commit('hideSider')
-    }
+     },
+      showLoading:({commit})=>{
+      commit('showLoading')
+      },
+      hideLoading:({commit})=>{
+        commit('hideLoading')
+      },
 
 }

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <LoadView v-show="loading"></LoadView>
     <div class="header">
       <div class="logo">会议管理系统</div>
       <div class="user">陈敏</div>
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-
+  import LoadView from './Loading'
   import {mapGetters,mapActions} from 'vuex'
 
   export default {
@@ -90,7 +91,8 @@
     },
     computed: {
       ...mapGetters([
-        'showSider'
+        'showSider',
+        'loading'
       ])
     },
     methods:{
@@ -104,6 +106,9 @@
     },
     mounted(){
       console.log()
+    },
+    components:{
+      LoadView
     }
   }
 </script>
