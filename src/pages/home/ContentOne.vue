@@ -19,7 +19,7 @@
     //方法中可以设置数据处理和数据的获取等等
     methods: {
       getUser () {
-        this.$http.get('/api/list')//代替http://localhost:3000/user
+        this.$http.get('/api/list')//代替http://localhost:3000/list
           .then((res) => {
             console.log(res.data)
             this.userList = res.data

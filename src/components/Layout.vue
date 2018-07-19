@@ -12,7 +12,7 @@
     </div>
     <div class="nav">
       <ul>
-        <router-link v-for="item in meauList" :to="{ path:item.path, query:{ name:item.name }}" tag="li"  :key="item.id">
+        <router-link v-for="item in meauList" :to="{ path:item.path, query:{ name:itemname }}" tag="li"  :key="item.id">
           {{ item.name }}
         </router-link>
       </ul>
