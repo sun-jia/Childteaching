@@ -1,9 +1,13 @@
 <template>
   <div>
     <div class="meauPanel" v-for="item in userList">
-      <router-link :to="{ path:item.path }" tag="li">{{ item.name }}</router-link>
-      <!--<div>{{ item.name }}</div>-->
-      <!--<div>{{ item.num }}</div>-->
+      <router-link :to="{ path:item.path , query:{ name:item.name }}">
+        <div>
+          <p>{{ item.name }}</p>
+          <p>{{ item.num }}</p>
+        </div>
+      </router-link>
+
     </div>
     <div class="clean"></div>
   </div>
@@ -15,7 +19,6 @@
       return {
         userList:[]
       }
-
     },
     //方法中可以设置数据处理和数据的获取等等
     methods: {

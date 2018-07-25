@@ -19,6 +19,13 @@ module.exports = {
         pathRewrite: {
           '^/api': ''//后面可以使重写的新路径，一般不做更改
         }
+      },
+      '/yii': {
+        changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+        target: 'http://localhost:80/clubManage/clubApi/backend/web/index.php',// 接口的域名
+        pathRewrite: {
+          '^/yii': ''//后面可以使重写的新路径，一般不做更改
+        }
       }
     },
 

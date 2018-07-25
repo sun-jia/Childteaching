@@ -1,9 +1,10 @@
 <template>
-    <ul>
-      <router-link v-for="item in postItem" :to="{ path: item.path }" tag="li" :key="item.id">
-        {{ item.name }}/{{ item.path }}
-      </router-link>
-    </ul>
+    <p>
+      {{ postTitle }}
+      <!--<router-link v-for="item in postItem" :to="{ path: item.path }" tag="li" :key="item.id">-->
+        <!--{{ item.name }}/{{ item.path }}-->
+      <!--</router-link>-->
+    </p>
 
 </template>
 
@@ -14,7 +15,7 @@
       data(){
         return{}
       },
-      props: ['postItem'],
+      props: ['postTitle'],
       //这里可以对传过来的数据进行二次加工
       computed: {
         // getProp: function () {

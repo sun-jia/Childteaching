@@ -9,8 +9,8 @@ import MeetList from '../pages/meetlist/Index'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
-import ContentOne from '../pages/home/ContentOne.vue'
-
+import Content from '../pages/home/Content.vue'
+import Login from '../pages/home/Login.vue'
 
 export default  [
   {
@@ -64,7 +64,11 @@ export default  [
     children: [
       {
         path: 'index',
-        component: ContentOne
+        component: Content
+      },
+      {
+        path: 'login',
+        component: Login
       }
     ]
   }
