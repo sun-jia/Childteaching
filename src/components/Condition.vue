@@ -20,11 +20,11 @@
       },
       methods:{
         siderChange(path){
-          console.log(path);
+          const user = this.$store.state.mutations.user;
+          console.log(user);
           if(path=='/home/login' ){
             this.$store.dispatch('hideByLogin')
           }else{
-            console.log(this.$store.getters.getAccessToken);
             if(this.$store.getters.getAccessToken==""){
               alert("请先登入")
               this.$router.push("/home/login");

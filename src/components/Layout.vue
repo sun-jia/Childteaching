@@ -46,7 +46,42 @@
       Nav,
       Condition,
       Fooster
-    }
+    },
+    beforeCreate: function() {
+      console.group('------beforeCreate创建前状态------');
+    },
+    created: function() {
+      console.group('------created创建完毕状态------');
+      console.log(this.$store.state);
+      // //在页面加载时读取localStorage里的状态信息
+      // console.log(JSON.parse(localStorage.getItem("vuex")));
+
+      // this.$store.replaceState(Object.assign(this.$store.state,JSON.parse(localStorage.getItem("vuex"))));
+      //
+      //在页面刷新时将vuex里的信息保存到localStorage里
+      // window.addEventListener("beforeunload",()=>{
+      //   localStorage.setItem("userMsg",JSON.stringify(this.$store.state))
+      // })
+
+    },
+    // beforeMount: function() {
+    //   console.group('------beforeMount挂载前状态------');
+    // },
+    // mounted: function() {
+    //   console.group('------mounted 挂载结束状态------');
+    // },
+    // beforeUpdate: function () {
+    //   console.group('beforeUpdate 更新前状态===============》');
+    // },
+    // updated: function () {
+    //   console.group('updated 更新完成状态===============》');
+    // },
+    // beforeDestroy: function () {
+    //   console.group('beforeDestroy 销毁前状态===============》');
+    // },
+    // destroyed: function () {
+    //   console.group('destroyed 销毁完成状态===============》');
+    // }
   }
 </script>
 

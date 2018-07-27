@@ -29,11 +29,10 @@
       methods:{
         logout:function () {
           console.log(this.$store.getters.getAccessToken);
-          this.$http.get('/yii/index/logout?access_token='+this.$store.getters.getAccessToken)
+          this.$http.get('/yii/index/logout')
             .then((res) => {
-              console.log(res.data);
-              alert(res.data.message);
               this.$store.dispatch("logout");
+              alert(res.data.message);
               this.$router.push('/home/login');
             }, (err) => {
               console.log(err)

@@ -24,7 +24,7 @@
               console.log(res.data)
               if(res.data.data!=null){
                 this.$store.dispatch('login',res.data.data)
-                alert(res.data.message);
+                alert(res.data.message)
                 this.$store.dispatch('showByLogin')
                 this.$router.push('/home/index');
               }else{
