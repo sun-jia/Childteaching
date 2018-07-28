@@ -8,7 +8,7 @@
 
     <Condition v-show="showByLogin"></Condition>
 
-    <div class="content">
+    <div v-bind:class="{ 'content': showByLogin, 'login_content': !showByLogin }">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
@@ -27,6 +27,7 @@
   import Header from './Header'
 
   import { mapGetters } from 'vuex'
+  import $ from 'jquery'
 
   export default {
     name: 'Layout',
@@ -47,110 +48,23 @@
       Condition,
       Fooster
     },
-    beforeCreate: function() {
-      console.group('------beforeCreate创建前状态------');
-    },
-    created: function() {
-      console.group('------created创建完毕状态------');
-      console.log(this.$store.state);
-      // //在页面加载时读取localStorage里的状态信息
-      // console.log(JSON.parse(localStorage.getItem("vuex")));
-
-      // this.$store.replaceState(Object.assign(this.$store.state,JSON.parse(localStorage.getItem("vuex"))));
-      //
-      //在页面刷新时将vuex里的信息保存到localStorage里
-      // window.addEventListener("beforeunload",()=>{
-      //   localStorage.setItem("userMsg",JSON.stringify(this.$store.state))
-      // })
-
-    },
-    // beforeMount: function() {
-    //   console.group('------beforeMount挂载前状态------');
-    // },
-    // mounted: function() {
-    //   console.group('------mounted 挂载结束状态------');
-    // },
-    // beforeUpdate: function () {
-    //   console.group('beforeUpdate 更新前状态===============》');
-    // },
-    // updated: function () {
-    //   console.group('updated 更新完成状态===============》');
-    // },
-    // beforeDestroy: function () {
-    //   console.group('beforeDestroy 销毁前状态===============》');
-    // },
-    // destroyed: function () {
-    //   console.group('destroyed 销毁完成状态===============》');
-    // }
   }
 </script>
 
 <style>
-  /* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
   @import "../common/css/common.css";
+  @import "../common/css/reset.css";
 
-  html, body, div, span, applet, object, iframe,
-  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-  a, abbr, acronym, address, big, cite, code,
-  del, dfn, em, img, ins, kbd, q, s, samp,
-  small, strike, strong, sub, sup, tt, var,
-  b, u, i, center,
-  dl, dt, dd, ol, ul, li,
-  fieldset, form, label, legend,
-  table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed,
-  figure, figcaption, footer, header, hgroup,
-  menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
-  /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure,
-  footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
-  body {
-    line-height: 1;
-  }
-  ol, ul{
-    list-style: none;
-  }
-  li{
-    display: inline-block;
-    width:200px;
-    height:30px;
-    line-height: 30px;
-    border-right: beige 1px solid;
-    text-align: center;
-    cursor: pointer;
-  }
-  blockquote, q {
-    quotes: none;
-  }
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-    content: '';
-    content: none;
-  }
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  .login_content{
+    width: 100%;
   }
 
   .content{
     width: 75%;
     margin:0 auto;
-    /*float: right;*/
     min-height: 450px;
     background: aquamarine;
   }
+
 
 </style>

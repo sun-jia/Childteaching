@@ -59,4 +59,13 @@
     min-height: 500px;
     background: aqua;
   }
+  li{
+    display: inline-block;
+    width:200px;
+    height:30px;
+    line-height: 30px;
+    border-right: beige 1px solid;
+    text-align: center;
+    cursor: pointer;
+  }
 </style>
