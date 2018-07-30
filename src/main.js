@@ -4,22 +4,30 @@ import Vue from 'vue'
 import Vuerouter from 'vue-router'
 import Layout from './components/Layout.vue'
 // import VueResource  from 'vue-resource'
-import routes from './router'
+import routes from './router/index'
 import store from './store/store'
-
+//引入bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'
+//引入ajax库
 import axios from 'axios'
-
+import VueAxios from 'Vue-axios'
+//引入图标库
+import VueIconFont from 'vue-icon-font'
+import './common/css/fonts/iconfont.css'
+import './common/css/fonts/iconfont.js'
+Vue.use(VueIconFont)
+Vue.use(VueAxios,axios)//注册
 // Vue.use(VueResource)
 Vue.use(Vuerouter)
 
-axios.interceptors.request.use(function (config) {  //配置发送请求的信息
+axios.interceptors.request.use(function (config){
   store.dispatch('showLoading')
   return config;
 }, function (error) {
   return Promise.reject(error);
-});
+}); //配置发送请求的信息
 
-axios.interceptors.response.use(function (response) { //配置请求回来的信息
+axios.interceptors.response.use(function (response){ //配置请求回来的信息
   store.dispatch('hideLoading')
   return response;
 }, function (error) {
@@ -27,7 +35,7 @@ axios.interceptors.response.use(function (response) { //配置请求回来的信
   return Promise.reject(error);
 });
 
-Vue.prototype.$http=axios;
+// Vue.prototype.$http=axios;
 
 const router=new Vuerouter({
   mode:'history',
@@ -45,3 +53,11 @@ new Vue({
   template:"<Layout/>",
   components: { Layout }
 })
+//注册router
+// new Vue({
+//   el:'#APP',
+//   router,
+//   compontents:{APP},
+//   template:'<APP/>'
+// })
+

@@ -10,8 +10,15 @@ import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
 import ContentOne from '../pages/home/ContentOne.vue'
+import Vue from 'vue'
+import Router from 'vue-router'
+/*映射*/
+import money from '@/pages/finance/money'
+import invoice from '@/pages/finance/invoice'
+import neworder from '@/pages/finance/neworder'
 
-
+Vue.use(Router)   //注册
+/*映射*/
 export default  [
   {
     path: '/',
@@ -67,6 +74,21 @@ export default  [
         component: ContentOne
       }
     ]
+  },
+  {
+    path:'/money',
+    name:'money',
+    component:money
+  },
+  {
+    path:'/invoice',
+    name:'invoice',
+    component:invoice
+  },
+  {
+    path:'/neworder',
+    name:'neworder',
+    component:neworder
   }
 
 ]
