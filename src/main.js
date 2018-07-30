@@ -6,8 +6,14 @@ import Layout from './components/Layout.vue'
 // import VueResource  from 'vue-resource'
 import routes from './router'
 import store from './store/store'
-
 import axios from 'axios'
+
+import $ from 'jquery'
+
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+
+
 
 // Vue.use(VueResource)
 Vue.use(Vuerouter)

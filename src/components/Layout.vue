@@ -1,21 +1,24 @@
 <template>
   <div>
     <LoadView v-show="loading"></LoadView>
-
-    <Header v-show="showByLogin" v-bind:user-name="getUserName"></Header>
-
-    <Nav v-show="showSider"></Nav>
-
     <Condition v-show="showByLogin"></Condition>
 
-    <div v-bind:class="{ 'content': showByLogin, 'login_content': !showByLogin }">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+    <div id="wrapper">
+      <Header v-show="showByLogin" v-bind:user-name="getUserName"></Header>
+
+      <Nav v-show="showSider"></Nav>
+
+      <div v-bind:class="{ 'main': showByLogin, 'login_content': !showByLogin }">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <Fooster v-show="showByLogin"></Fooster>
+
     </div>
-
-    <Fooster v-show="showByLogin"></Fooster>
-
   </div>
 </template>
 
@@ -25,9 +28,10 @@
   import Condition from './Condition'
   import Nav from './Nav'
   import Header from './Header'
-
   import { mapGetters } from 'vuex'
-  import $ from 'jquery'
+
+  import '../utils/jquery-slimscroll/jquery.slimscroll'
+  import '../common/js/klorofil-common'
 
   export default {
     name: 'Layout',
@@ -46,7 +50,7 @@
       Header,
       Nav,
       Condition,
-      Fooster
+      Fooster,
     },
   }
 </script>
@@ -54,17 +58,15 @@
 <style>
   @import "../common/css/common.css";
   @import "../common/css/reset.css";
+  @import '../utils/bootstrap/css/bootstrap.min.css';
+  @import '../utils/font-awesome/css/font-awesome.css';
+  @import '../utils/linearicons/style.css';
+  @import "../common/css/main.css";
 
   .login_content{
     width: 100%;
   }
 
-  .content{
-    width: 75%;
-    margin:0 auto;
-    min-height: 450px;
-    background: aquamarine;
-  }
 
 
 </style>

@@ -1,5 +1,10 @@
 <template>
-  <div>logistics</div>
+  <div>
+    logistics
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </div>
 </template>
 
 <script>

@@ -1,71 +1,58 @@
 <template>
-  <div class="nav">
-    <ul>
-      <router-link v-for="item in meauList" :to="{ path:item.path, query:{ name:item.name }}" tag="li"  :key="item.id">
-        {{ item.name }}
-      </router-link>
-    </ul>
+  <!-- LEFT SIDEBAR -->
+  <div id="sidebar-nav" class="sidebar">
+    <div class="sidebar-scroll">
+      <nav>
+        <ul class="nav">
+            <li v-for="meau in meauList">
+              <a v-bind:href="'#'+meau.url" data-toggle="collapse" class="collapsed">
+                <!--<router-link :to="{ path:'/'+meau.url, query:{ name:meau.name }}">-->
+                  <i v-bind:class=" meau.icon "></i>
+                  <span>{{ meau.name }}</span>
+                <!--</router-link>-->
+                <i class="icon-submenu lnr lnr-chevron-left" v-if="meau.list.length!=0"></i>
+              </a>
+              <div v-bind:id="meau.url" class="collapse ">
+                <ul class="nav">
+                  <router-link v-for="item in meau.list" :to="{ path:item.url, query:{ name:item.name }}" tag="li" :key="item.funcId">
+                    <a>
+                      {{ item.name }}
+                    </a>
+                  </router-link>
+                </ul>
+              </div>
+            </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
 <script>
-    export default {
+  export default {
       name: "Nav",
       data(){
         return{
-          meauList:[
-            {
-              name: '会议列表',
-              path: '/meetList',
-            },
-            {
-              name: '会议编辑',
-              path: '/meetEdit',
-            },
-            {
-              name: '会议财务',
-              path: '/finance',
-            },
-            {
-              name: '会议后勤',
-              path: '/logistics',
-            },
-            {
-              name: '会议宣传',
-              path: '/advertise',
-            },
-            {
-              name: '组织成员',
-              path: '/member',
-            },
-            {
-              name: '会议数据',
-              path: '/statics',
-            },
-            {
-              name: '系统管理',
-              path: '/system',
-            }
-          ]
+          meauList:[]
         }
       },
+      methods: {
+        getNavList () {
+          this.$http.post('/yii/system/index/nav')
+            .then((res) => {
+              console.log(res.data);
+              this.meauList=res.data.data;
+            }, (err) => {
+              console.log(err)
+            })
+        }
+      },
+      created(){
+        this.getNavList();
+      }
     }
 </script>
 
 <style scoped>
-  .nav{
-    width:10%;
-    float: left;
-    min-height: 500px;
-    background: aqua;
-  }
-  li{
-    display: inline-block;
-    width:200px;
-    height:30px;
-    line-height: 30px;
-    border-right: beige 1px solid;
-    text-align: center;
-    cursor: pointer;
-  }
 </style>
+

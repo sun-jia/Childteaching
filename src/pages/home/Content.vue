@@ -3,8 +3,8 @@
     <div class="meauPanel" v-for="item in userList">
       <router-link :to="{ path:item.path , query:{ name:item.name }}">
         <div>
-          <p>{{ item.name }}</p>
-          <p>{{ item.num }}</p>
+          <span>{{ item.name }}</span>
+          <span>{{ item.num }}</span>
         </div>
       </router-link>
 
@@ -89,8 +89,13 @@
 
 <style scoped>
 .meauPanel{
+  text-align: center;
+  line-height: 250px;
   width: 250px;
   height: 250px;
   float: left;
+  border: 1px solid #ccc;
+  background:#fff;
+  margin: 10px;
 }
 </style>

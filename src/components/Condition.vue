@@ -1,6 +1,5 @@
 <template>
-  <div class="condition">
-    {{pathName}}
+  <div>
   </div>
 </template>
 
@@ -16,7 +15,7 @@
       },
       watch:{
         $route(to,from){
-          this.pathName=this.$route.query.name
+          // this.pathName=this.$route.query.name
           this.siderChange(this.$route.path);
         }
       },
@@ -40,26 +39,16 @@
             }
             startCanvas(config);
           }else{
-
             if(this.$store.getters.getAccessToken==""){
               alert("请先登入")
               this.$router.push("/home/login");
             }
             stopCanvas();
-
-            if(path!='/home'&&path!='/home/index' ) {
-              this.$store.dispatch('showSider')
-            }else{
-              this.$store.dispatch('hideSider')
-            }
           }
         }
       },
       created(){
         this.siderChange(this.$route.path);
-        if(this.$route.path!='/home/login' ){
-          this.pathName=this.$route.query.name;
-        }
       }
     }
 </script>
@@ -67,8 +56,8 @@
 <style scoped>
   .condition{
     width: 75%;
-    margin:0 auto;
-    /*float: right;*/
+    margin-left: 1%;
+    float: left;
     min-height: 50px;
   }
 </style>

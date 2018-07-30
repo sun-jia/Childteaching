@@ -3,7 +3,12 @@ import Home from '../pages/home/Index.vue'
 import Advertise from '../pages/advertise/Index'
 import Finance from  '../pages/finance/Index'
 import Frontend from  '../pages/frontend/Index'
+
 import Logistics from  '../pages/logistics/Index'
+import LogisticsRestaurant from  '../pages/logistics/Restaurant'
+import LogisticsBus from  '../pages/logistics/Bus'
+import LogisticsHotel from  '../pages/logistics/Hotel'
+
 import MeetEdit from '../pages/meetedit/Index'
 import MeetList from '../pages/meetlist/Index'
 import Member from '../pages/member/Index'
@@ -32,6 +37,20 @@ export default  [
   {
     path: '/logistics',
     component: Logistics,
+    children: [
+      {
+        path: 'bus',
+        component: LogisticsBus
+      },
+      {
+        path: 'hotel',
+        component: LogisticsHotel
+      },
+      {
+        path: 'restaurant',
+        component: LogisticsRestaurant
+      }
+    ]
   },
   {
     path: '/meetEdit',

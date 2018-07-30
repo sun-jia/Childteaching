@@ -1,5 +1,9 @@
 <template>
-  <div class="fooster">i am fooster</div>
+  <footer>
+    <div class="container-fluid">
+      底部信息
+    </div>
+  </footer>
 </template>
 
 <script>
@@ -9,11 +13,5 @@
 </script>
 
 <style scoped>
-  .fooster{
-    height: 50px;
-    line-height: 50px;
-    background-color: beige;
-    width: 100%;
-    bottom: 0;
-  }
+
 </style>
