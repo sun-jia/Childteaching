@@ -2,6 +2,18 @@
 import * as types from './type'
 
 export default{
+      login:({commit},obj)=>{
+        commit('setUser',obj.user),commit('setUserName',obj.name),commit('setUserKind',obj.kind),commit("setAccessToken",obj.access_token)
+      },
+      logout:({commit})=>{
+        commit('delUser'),commit('delUserName'),commit('delUserKind'),commit('delAccessToken')
+      },
+      showByLogin:({commit})=>{
+        commit('showByLogin'), commit('showSider')
+      },
+      hideByLogin:({commit})=>{
+        commit('hideByLogin'),commit('hideSider')
+      },
      showSider:({commit})=>{
          commit('showSider')
      },

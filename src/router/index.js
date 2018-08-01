@@ -3,13 +3,17 @@ import Home from '../pages/home/Index.vue'
 import Advertise from '../pages/advertise/Index'
 import Finance from  '../pages/finance/Index'
 import Frontend from  '../pages/frontend/Index'
+
 import Logistics from  '../pages/logistics/Index'
+import LogisticsRestaurant from  '../pages/logistics/Restaurant'
+import LogisticsBus from  '../pages/logistics/Bus'
+import LogisticsHotel from  '../pages/logistics/Hotel'
+
 import MeetEdit from '../pages/meetedit/Index'
 import MeetList from '../pages/meetlist/Index'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
-import ContentOne from '../pages/home/ContentOne.vue'
 import Vue from 'vue'
 import Router from 'vue-router'
 /*映射*/
@@ -19,6 +23,11 @@ import neworder from '@/pages/finance/neworder'
 
 Vue.use(Router)   //注册
 /*映射*/
+
+import Content from '../pages/home/Content.vue'
+import Login from '../pages/home/Login.vue'
+
+
 export default  [
   {
     path: '/',
@@ -39,6 +48,20 @@ export default  [
   {
     path: '/logistics',
     component: Logistics,
+    children: [
+      {
+        path: 'bus',
+        component: LogisticsBus
+      },
+      {
+        path: 'hotel',
+        component: LogisticsHotel
+      },
+      {
+        path: 'restaurant',
+        component: LogisticsRestaurant
+      }
+    ]
   },
   {
     path: '/meetEdit',
@@ -57,10 +80,6 @@ export default  [
     component: Statics,
   },
   {
-    path: '/finance',
-    component: Finance,
-  },
-  {
     path: '/syetem',
     component: System,
   },
@@ -71,7 +90,11 @@ export default  [
     children: [
       {
         path: 'index',
-        component: ContentOne
+        component: Content
+      },
+      {
+        path: 'login',
+        component: Login
       }
     ]
   },
