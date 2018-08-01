@@ -1,7 +1,7 @@
 <template>
   <div>
     <LoadView v-show="loading"></LoadView>
-    <div class="header">
+    <div class="header" v-show="showHeader">
       <div class="logo">会议管理系统</div>
       <div class="user">陈敏</div>
       <div class="home">
@@ -13,21 +13,21 @@
     </div>
     <div class="nav" v-show="showSider">
       <ul>
-        <router-link v-for="item in meauList" :to="{ path:item.path, query:{ name:item.name }}" tag="li"  :key="item.id">
+        <router-link v-for="(item,index) in meauList" :to="{ path:item.path, query:{ name:item.name }}" tag="li"  :key="item.id" :class="[index==num ? 'router-link-active' : '']"  @click.native="changeNum">
           {{ item.name }}
         </router-link>
       </ul>
     </div>
-    <div class="condotion">
+    <div :class="[isActive ? condotion : myfade]">
       {{pathName}}
     </div>
-    <div class="content">
+    <div :class="[isActive ? activeClass : errorClass]">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
     </div>
     <div class="clean"></div>
-    <div class="fooster">i am fooster</div>
+    <div class="fooster" v-show="showFooter">i am fooster</div>
   </div>
 </template>
 
@@ -37,17 +37,31 @@
 
   export default {
     name: 'Layout',
-
     watch:{
       $route(to,from){
+
+        //当路由变化时，侧边栏样式作相应变化
+        if(to.query.id){
+            this.num=to.query.id-1
+        }
         var path=to.path.substring(1);
         this.pathName=this.$route.query.name
+
         console.log(path)
         this.siderChange(path);
+        this.headerChange(path);
+        this.footerChange(path);
       }
     },
     data(){
       return{
+        num:0,//侧边栏的条目
+        condotion:'condotion',
+        myfade:'myfade',
+
+        isActive:true,//
+        activeClass:'content',//
+        errorClass:'content2',//控制templates组件的样式
         pathName:this.$route.query.name,
         headerMeau:{
           name: '首页',
@@ -92,20 +106,42 @@
     computed: {
       ...mapGetters([
         'showSider',
-        'loading'
+        'loading',
+        'showHeader',
+        'showFooter',
       ])
     },
     methods:{
+      //当路由变化时，显示侧边栏
       siderChange(path){
-        if(path!='home'&&path!='home/index' ){
+        if(path!='home'&&path!='home/index'&&path!='selectTemp' ){
           this.$store.dispatch('showSider')
         }else{
           this.$store.dispatch('hideSider')
         }
+      },
+      //当显示模板页时，头部和底部隐藏
+      headerChange(path){
+         this.isActive=false
+
+         if(path=='templates'||path=='selectTemp'||path=='result'){
+           this.$store.dispatch('hideHeader')
+         }
+      },
+      footerChange(path){
+        if(path=='templates'||path=='selectTemp'||path=='result'){
+          this.$store.dispatch('hideFooter')
+        }
+      },
+      changeNum(){
+         this.num=-1;
       }
     },
     mounted(){
-      console.log()
+
+      this.headerChange(this.$route.path.substring(1));
+      this.footerChange(this.$route.path.substring(1));
+      // console.log(this.$route.path)
     },
     components:{
       LoadView
@@ -113,7 +149,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -151,15 +187,15 @@
   ol, ul{
     list-style: none;
   }
-  li{
-    display: inline-block;
-    width:200px;
-    height:30px;
-    line-height: 30px;
-    border-right: beige 1px solid;
-    text-align: center;
-    cursor: pointer;
-  }
+  /*li{*/
+    /*display: inline-block;*/
+    /*width:200px;*/
+    /*height:30px;*/
+    /*line-height: 30px;*/
+    /*border-right: beige 1px solid;*/
+    /*text-align: center;*/
+    /*cursor: pointer;*/
+  /*}*/
   blockquote, q {
     quotes: none;
   }
@@ -204,10 +240,20 @@
     width: 75%;
     margin:0 auto;
     /*float: right;*/
-    min-height: 450px;
-    background: aquamarine;
+    min-height: 650px;
+    /*background: aquamarine;*/
+  }
+  .content2{
+    width: 100%;
+    margin:0 auto;
+    min-height: 650px;
+    /*background: aquamarine;*/
+  }
+  .myfade{
+    display: none;
   }
   .router-link-active{
       color:red;
   }
+
 </style>

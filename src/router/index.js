@@ -9,8 +9,10 @@ import MeetList from '../pages/meetlist/Index'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
-import ContentOne from '../pages/home/ContentOne.vue'
-
+import Carousel from '../pages/home/Carousel.vue'
+import ATemplates from '../pages/aTemplates/Index'
+import SelectTemp from '../pages/aTemplates/SelectTemp'
+import Result from '../pages/aTemplates/Result'
 
 export default  [
   {
@@ -64,10 +66,22 @@ export default  [
     children: [
       {
         path: 'index',
-        component: ContentOne
+        component:Carousel
       }
     ]
-  }
+  },
+  {
+    path: '/templates',
+    component: ATemplates,
+  },
+  {
+    path: '/selectTemp',
+    component: SelectTemp,
+  },
+  {
+    path: '/result',
+    component: Result,
+  },
 
 ]
 

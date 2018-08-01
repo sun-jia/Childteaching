@@ -7,9 +7,26 @@ import Layout from './components/Layout.vue'
 import routes from './router'
 import store from './store/store'
 
-import axios from 'axios'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+//VUE-Beauty
+// import 'vue-beauty/package/style/vue-beauty.min.css'
+// import vueBeauty from 'vue-beauty'
+import filters from './filters'
 
-// Vue.use(VueResource)
+import axios from 'axios'
+//富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor)
+
+
+Vue.use(ElementUI)
+// Vue.use(vueBeauty)
+//过滤器
+Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 Vue.use(Vuerouter)
 
 axios.interceptors.request.use(function (config) {  //配置发送请求的信息
