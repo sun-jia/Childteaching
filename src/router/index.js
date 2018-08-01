@@ -3,7 +3,6 @@ import Home from '../pages/home/Index.vue'
 import Advertise from '../pages/advertise/Index'
 import Finance from  '../pages/finance/Index'
 import Frontend from  '../pages/frontend/Index'
-
 import Logistics from  '../pages/logistics/Index'
 import LogisticsRestaurant from  '../pages/logistics/Restaurant'
 import LogisticsBus from  '../pages/logistics/Bus'
@@ -14,8 +13,11 @@ import MeetList from '../pages/meetlist/Index'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
-import Vue from 'vue'
-import Router from 'vue-router'
+import Carousel from '../pages/home/Carousel.vue'
+import ATemplates from '../pages/aTemplates/Index'
+import SelectTemp from '../pages/aTemplates/SelectTemp'
+import Result from '../pages/aTemplates/Result'
+
 /*映射*/
 import money from '@/pages/finance/money'
 import invoice from '@/pages/finance/invoice'
@@ -26,7 +28,6 @@ Vue.use(Router)   //注册
 
 import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
-
 
 export default  [
   {
@@ -80,6 +81,10 @@ export default  [
     component: Statics,
   },
   {
+    path: '/finance',
+    component: Finance,
+  },
+  {
     path: '/syetem',
     component: System,
   },
@@ -113,6 +118,19 @@ export default  [
     name:'neworder',
     component:neworder
   }
+  },
+  {
+    path: '/templates',
+    component: ATemplates,
+  },
+  {
+    path: '/selectTemp',
+    component: SelectTemp,
+  },
+  {
+    path: '/result',
+    component: Result,
+  },
 
 ]
 

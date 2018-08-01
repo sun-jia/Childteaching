@@ -7,16 +7,33 @@ import Layout from './components/Layout.vue'
 import routes from './router/index'
 import store from './store/store'
 
-//引入bootstrap
-// import 'bootstrap/dist/css/bootstrap.min.css'
-//引入ajax库
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+//VUE-Beauty
+// import 'vue-beauty/package/style/vue-beauty.min.css'
+// import vueBeauty from 'vue-beauty'
+import filters from './filters'
+
 import axios from 'axios'
 import VueAxios from 'Vue-axios'
 //引入图标库
 import VueIconFont from 'vue-icon-font'
 import './common/css/fonts/iconfont.css'
 import './common/css/fonts/iconfont.js'
+//富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor)
+
+
+Vue.use(ElementUI)
+// Vue.use(vueBeauty)
+//过滤器
+Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 import $ from 'jquery'
+
 import 'bootstrap/dist/js/bootstrap.min.js'
 
 Vue.use(VueIconFont)
@@ -34,16 +51,16 @@ axios.interceptors.request.use(function (config) {  //配置发送请求的信�
   return config;
 }, function (error) {
   return Promise.reject(error);
-}); //配置发送请求的信息
+});
 
-axios.interceptors.response.use(function (response){ //配置请求回来的信息
+axios.interceptors.response.use(function (response) { //配置请求回来的信息
   store.dispatch('hideLoading')
   return response;
 }, function (error) {
   return Promise.reject(error);
 });
 
-// Vue.prototype.$http=axios;
+Vue.prototype.$http=axios;
 
 const router=new Vuerouter({
   mode:'history',
@@ -62,11 +79,3 @@ new Vue({
   template:"<Layout/>",
   components: { Layout }
 })
-//注册router
-// new Vue({
-//   el:'#APP',
-//   router,
-//   compontents:{APP},
-//   template:'<APP/>'
-// })
-
