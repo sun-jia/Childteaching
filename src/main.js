@@ -27,10 +27,22 @@ Vue.use(ElementUI)
 // Vue.use(vueBeauty)
 //过滤器
 Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
+import $ from 'jquery'
+
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+
+
+
+// Vue.use(VueResource)
 Vue.use(Vuerouter)
 
 axios.interceptors.request.use(function (config) {  //配置发送请求的信息
   store.dispatch('showLoading')
+  const temp_token=JSON.parse(localStorage.getItem("vuex"))?JSON.parse(localStorage.getItem("vuex"))['access_token']:""
+  if (temp_token!="") {
+      config.url +="?access_token="+temp_token ;
+  }
   return config;
 }, function (error) {
   return Promise.reject(error);
@@ -51,6 +63,7 @@ const router=new Vuerouter({
   scrollBehavior: () => ({ y: 0 }),
   routes
 })
+
 
 Vue.config.productionTip = false
 

@@ -4,6 +4,10 @@ import Advertise from '../pages/advertise/Index'
 import Finance from  '../pages/finance/Index'
 import Frontend from  '../pages/frontend/Index'
 import Logistics from  '../pages/logistics/Index'
+import LogisticsRestaurant from  '../pages/logistics/Restaurant'
+import LogisticsBus from  '../pages/logistics/Bus'
+import LogisticsHotel from  '../pages/logistics/Hotel'
+
 import MeetEdit from '../pages/meetedit/Index'
 import MeetList from '../pages/meetlist/Index'
 import Member from '../pages/member/Index'
@@ -13,6 +17,8 @@ import Carousel from '../pages/home/Carousel.vue'
 import ATemplates from '../pages/aTemplates/Index'
 import SelectTemp from '../pages/aTemplates/SelectTemp'
 import Result from '../pages/aTemplates/Result'
+import Content from '../pages/home/Content.vue'
+import Login from '../pages/home/Login.vue'
 
 export default  [
   {
@@ -66,7 +72,11 @@ export default  [
     children: [
       {
         path: 'index',
-        component:Carousel
+        component: Content
+      },
+      {
+        path: 'login',
+        component: Login
       }
     ]
   },

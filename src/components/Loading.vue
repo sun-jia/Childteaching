@@ -21,7 +21,7 @@
 <style scoped>
 	.zns-loading{
 		position: fixed;
-		z-index: 1000;
+		z-index: 999999;
 		width:100%;
 		height:90px;
 	}
