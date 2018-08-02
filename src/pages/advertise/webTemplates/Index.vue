@@ -258,7 +258,7 @@
             let fd = new FormData();
             fd.append('templateDates',JSON.stringify(this.alldata));//传文件
             fd.append('sitename',this.sitename);//传网址
-            this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/templates',fd).then(function(res){
+            this.$http.post('/yii/advertise/templates/templates',fd).then(function(res){
                console.log(res.data);
             })
             // this.$router.push('/result')
@@ -325,7 +325,7 @@
   .el-notification{width: 220px !important;
     height: 300px;}
   #index{padding:0px 20px}
-  .topImg{background-image: url("../../common/img/body.jpg");background-repeat: no-repeat;}
+  .topImg{background-image: url("../../../common/img/body.jpg");background-repeat: no-repeat;}
   .banners{height: 200px;}
   .carouselColor{background-color: azure}
 
