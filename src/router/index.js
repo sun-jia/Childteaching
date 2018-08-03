@@ -23,7 +23,7 @@ import money from '@/pages/finance/money'
 import invoice from '@/pages/finance/invoice'
 import neworder from '@/pages/finance/neworder'
 
-Vue.use(Router)   //注册
+// Vue.use(VueRouter)   //注册
 /*映射*/
 
 import Content from '../pages/home/Content.vue'
@@ -117,8 +117,8 @@ export default  [
     path:'/neworder',
     name:'neworder',
     component:neworder
-  }
   },
+
   {
     path: '/templates',
     component: ATemplates,

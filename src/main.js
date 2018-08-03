@@ -60,7 +60,7 @@ axios.interceptors.response.use(function (response) { //配置请求回来的信
   return Promise.reject(error);
 });
 
-Vue.prototype.$http=axios;
+// Vue.prototype.$http=axios;
 
 const router=new Vuerouter({
   mode:'history',
