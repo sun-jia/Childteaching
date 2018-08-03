@@ -1,8 +1,8 @@
 
 import Home from '../pages/home/Index.vue'
-import Advertise from '../pages/advertise/Index'
+import WebAdvertise from '../pages/advertise/webIndex'
+import H5Advertise from '../pages/advertise/h5Index'
 import Finance from  '../pages/finance/Index'
-import Frontend from  '../pages/frontend/Index'
 import Logistics from  '../pages/logistics/Index'
 import LogisticsRestaurant from  '../pages/logistics/Restaurant'
 import LogisticsBus from  '../pages/logistics/Bus'
@@ -36,7 +36,15 @@ export default  [
   },
   {
     path: '/advertise',
-    component: Advertise,
+    component: WebAdvertise,
+  },
+  {
+    path: '/advertise/web',
+    component: WebAdvertise,
+  },
+  {
+    path: '/advertise/h5',
+    component: H5Advertise,
   },
   {
     path: '/finance',
@@ -103,22 +111,6 @@ export default  [
       }
     ]
   },
-  {
-    path:'/money',
-    name:'money',
-    component:money
-  },
-  {
-    path:'/invoice',
-    name:'invoice',
-    component:invoice
-  },
-  {
-    path:'/neworder',
-    name:'neworder',
-    component:neworder
-  },
-
   {
     path: '/templates',
     component: ATemplates,
