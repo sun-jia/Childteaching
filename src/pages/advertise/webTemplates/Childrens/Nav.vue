@@ -10,7 +10,7 @@
       active-text-color="#ffd04b"
     >
       <el-menu-item index="0">今天是{{timeNow |normalTime}}</el-menu-item>
-
+      v-for
       <el-menu-item  v-for="(item,index) in items"  :key="index" :index="index+1+''">{{item}}</el-menu-item>
       <el-submenu :index="num+'-'+index1" v-for="(item1,index1) in subitems" >
          <template slot="title">{{Object.keys(item1)[0]}}</template>

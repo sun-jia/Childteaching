@@ -263,7 +263,7 @@
               .then(function(res){
                  that.$router.push( {path:'/advertise',query:{name:"宣传管理"}})
             })
-            //
+            // this.$router.push('/result')
             console.log(this.alldata)
             console.log(typeof(this.alldata))
           }

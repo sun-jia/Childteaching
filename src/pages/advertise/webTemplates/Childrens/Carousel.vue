@@ -17,9 +17,9 @@
        data(){
           return{
             imgList:[
-              {text:"图片介绍",url:require("../../../common/img/201872182738.jpg")}
-            ,{text:"图片介绍2",url:require("../../../common/img/201872354475.png")}
-            ,{text:"图片介绍3",url:require("../../../common/img/201872541290.jpg")}
+              {text:"图片介绍",url:require("../../../../common/img/201872182738.jpg")}
+            ,{text:"图片介绍2",url:require("../../../../common/img/201872354475.png")}
+            ,{text:"图片介绍3",url:require("../../../../common/img/201872541290.jpg")}
             ]
           }
 

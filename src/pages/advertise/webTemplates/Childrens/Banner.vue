@@ -55,6 +55,6 @@
 
 <style scoped>
    .a{font-size: 2.2em;padding: 10px 0px}
-   .b{margin-top:10px;font-size: 1.3em;padding: 0px 0px 0px 30px;background: url(../../../common/img/address.png) left center no-repeat;}
-   .c{margin-top:10px;font-size: 1.3em;padding: 0px 0px 0px 30px;background: url(../../../common/img/time.png) left center no-repeat;}
+   .b{margin-top:10px;font-size: 1.3em;padding: 0px 0px 0px 30px;background: url(../../../../common/img/address.png) left center no-repeat;}
+   .c{margin-top:10px;font-size: 1.3em;padding: 0px 0px 0px 30px;background: url(../../../../common/img/time.png) left center no-repeat;}
 </style>

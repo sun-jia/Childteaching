@@ -5,12 +5,12 @@
       </el-row>
       <el-row :gutter="20">
         <el-col :span="6" class="grid-content" :offset="3">
-          <img src="../../common/img/temp1.png" class="a">
+          <img src="../../../common/img/temp1.png" class="a">
           <el-button type="primary" class="b">模板一</el-button>
           <el-button type="success" @click="jump">预览</el-button>
         </el-col>
         <el-col :span="6" class="grid-content" :offset="3">
-          <img src="../../common/img/temp1.png" class="a">
+          <img src="../../../common/img/temp1.png" class="a">
           <el-button type="primary" class="b">模板二</el-button>
           <el-button type="success" @click="jump">预览</el-button>
         </el-col>

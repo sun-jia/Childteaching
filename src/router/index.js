@@ -1,8 +1,8 @@
 
 import Home from '../pages/home/Index.vue'
-import Advertise from '../pages/advertise/Index'
+import WebAdvertise from '../pages/advertise/webIndex'
+import H5Advertise from '../pages/advertise/h5Index'
 import Finance from  '../pages/finance/Index'
-import Frontend from  '../pages/frontend/Index'
 import Logistics from  '../pages/logistics/Index'
 import LogisticsRestaurant from  '../pages/logistics/Restaurant'
 import LogisticsBus from  '../pages/logistics/Bus'
@@ -17,6 +17,15 @@ import Carousel from '../pages/home/Carousel.vue'
 import ATemplates from '../pages/aTemplates/Index'
 import SelectTemp from '../pages/aTemplates/SelectTemp'
 import Result from '../pages/aTemplates/Result'
+
+/*映射*/
+import money from '@/pages/finance/money'
+import invoice from '@/pages/finance/invoice'
+import neworder from '@/pages/finance/neworder'
+
+// Vue.use(VueRouter)   //注册
+/*映射*/
+
 import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
 
@@ -27,7 +36,15 @@ export default  [
   },
   {
     path: '/advertise',
-    component: Advertise,
+    component: WebAdvertise,
+  },
+  {
+    path: '/advertise/web',
+    component: WebAdvertise,
+  },
+  {
+    path: '/advertise/h5',
+    component: H5Advertise,
   },
   {
     path: '/advertise/web',
@@ -44,6 +61,20 @@ export default  [
   {
     path: '/logistics',
     component: Logistics,
+    children: [
+      {
+        path: 'bus',
+        component: LogisticsBus
+      },
+      {
+        path: 'hotel',
+        component: LogisticsHotel
+      },
+      {
+        path: 'restaurant',
+        component: LogisticsRestaurant
+      }
+    ]
   },
   {
     path: '/meetEdit',
