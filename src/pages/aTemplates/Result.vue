@@ -22,16 +22,16 @@
         <el-col :span="11" :offset="4">
           <div class="grid-content carouselColor"><Carousel :hide="1" v-bind:carousel="carousel"></Carousel></div>
           <div class="grid-content"><Information v-bind:information="information"></Information></div>
-          <div class="grid-content"><Dynamic></Dynamic></div>
-          <div class="grid-content"><Links></Links></div>
-          <div><Advertise></Advertise></div>
+          <div class="grid-content"><Dynamic v-bind:dynamic="dynamic"></Dynamic></div>
+          <div class="grid-content"><Links v-bind:links="links"></Links></div>
+          <div><Advertise v-bind:advertise="advertise"></Advertise></div>
         </el-col>
         <el-col :span="5" class="side">
-          <div class="grid-content"><DeadTime></DeadTime></div>
-          <div class="grid-content m30"><TimeInfo></TimeInfo></div>
-          <div class="grid-content m30"><Button></Button></div>
-          <div class="grid-content"><Organization></Organization></div>
-          <div class="grid-content"><Connect></Connect></div>
+          <div class="grid-content"><DeadTime v-bind:deadtime="deadtime"></DeadTime></div>
+          <div class="grid-content m30"><TimeInfo v-bind:timeinfo="timeinfo"></TimeInfo></div>
+          <div class="grid-content m30"><Button v-bind:buttons="buttons"></Button></div>
+          <div class="grid-content"><Organization v-bind:organization="organization"></Organization></div>
+          <div class="grid-content"><Connect v-bind:connect="connect"></Connect></div>
         </el-col>
       </el-row>
 
@@ -82,7 +82,10 @@
         methods:{
            getdatas(){
              let _this=this
-             this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/getdatas').then(function(res){
+             // console.log(_this.$route.query.sitename)
+             this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/getdatas',{
+                 sitename:_this.$route.query.sitename
+             }).then(function(res){
 
                _this.alldata=JSON.parse(res.data.datas)
                console.log(_this.alldata);
@@ -92,43 +95,93 @@
            renderdatas(){
              let _this=this
              this.alldata.forEach(function (elem,item,array) {
-                  if(item==0){
+                console.log(Object.keys(elem)[0])
+                 switch (Object.keys(elem)[0]) {
+                   case "language":
                      _this.Lshow=elem.language
-                  }
-                  if(item==1){
+                     break;
+                   case "banner":
                      _this.banner=elem.banner
-                     console.log( _this.banner)
-
-                  }
-                  if(item==2){
+                     break;
+                   case "nav":
                      _this.nav=elem.nav
-                  }
-                  if(item==3){
-                    _this.carousel=elem.carousel
-                  }
-                  if(item==4){
+                     break;
+                   case "carousel":
+                     _this.carousel=elem.carousel
+                      break;
+                   case  "dynamic":
+                     _this.dynamic=elem.dynamic
+                      break;
+                   case  "information":
                      _this.information=elem.information
-                  }
+                     break;
+                   case  "link":
+                     _this.links=elem.link
+                      break;
+                   case "deadtime":
+                     _this.deadtime=elem.deadtime
+                      break;
+                   case  "timeinfo":
+                     _this.timeinfo=elem.timeinfo
+                      break;
+                   case  "organization":
+                     _this.organization=elem.organization
+                     break;
+                   case  "button":
+                     // console.log(elem.buttons)
+                     _this.buttons=elem.button
+                     // console.log(_this.buttons)
+                     break;
+                   case  "connect":
+                     _this.connect=elem.connect
+                     break;
+                   case  "advertise":
+                     _this.advertise=elem.advertise
+                     break;
+                   default:
+                   // ...
+                 }
+
              })
            }
         },
         created(){
-          this.getdatas()
-
           // this.renderdatas()
           // console.log(this.alldata)
         },
         mounted(){
-          // console.log(this.banner)
+           this.sitename=this.$route.query.sitename
+           this.getdatas()
+        },
+        watch:{
+          $route(){
+             if(this.$route.path=='/result'){
+               this.sitename=this.$route.query.sitename
+               this.getdatas()
+               // console.log(this.sitename)
+             }
+
+          }
         },
         data(){
           return{
+            sitename:'',
             alldata:[],
             Lshow:true,
             banner:{},
             nav:[],
             carousel:[],
-            information:''
+            information:'',
+            dynamic:[],
+            links:[],
+            deadtime:[],
+            timeinfo:[],
+            buttons:[],
+            organization:[],
+            connect:'',
+            advertise:''
+
+
           }
         }
     }

@@ -258,16 +258,16 @@
             let fd = new FormData();
             fd.append('templateDates',JSON.stringify(this.alldata));//传文件
             fd.append('sitename',this.sitename);//传网址
-            this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/templates',fd).then(function(res){
-               console.log(res.data);
+            var that=this
+            this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/templates',fd)
+              .then(function(res){
+                 that.$router.push( {path:'/advertise',query:{name:"宣传管理"}})
             })
-            // this.$router.push('/result')
+            //
             console.log(this.alldata)
             console.log(typeof(this.alldata))
-          },
-          uploadImg(){
-
           }
+
         },
         mounted(){
            setTimeout(this.open,2000)

@@ -30,6 +30,10 @@ export default  [
     component: Advertise,
   },
   {
+    path: '/advertise/web',
+    component: SelectTemp,
+  },
+  {
     path: '/finance',
     component: Finance,
   },

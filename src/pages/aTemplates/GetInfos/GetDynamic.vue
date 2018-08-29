@@ -44,13 +44,22 @@
         },
         nextSteps2(){
           let _this=this
+           var dynamic=[]
+          if(this.datalist.length>0){
+            this.datalist.forEach(function (element,index , array) {
+              dynamic[index]={};
+              dynamic[index].path=element;
+              dynamic[index].text=_this.text[index];
+            })
+          }else{
+            this.text.forEach(function (element,index , array) {
+              dynamic[index]={};
+              dynamic[index].text=element
+            })
+          }
 
-          this.datalist.forEach(function (element,index , array) {
-                 element.text=_this.text[index]
-          })
-           // console.log(this.text)
-           console.log(this.datalist)
-          this.$emit('nextLink',[{dynamic:this.datalist},true])
+          // console.log(dynamic)
+          this.$emit('nextLink',[{dynamic:dynamic},true])
         },
         add(e){
           // console.log(e)
@@ -58,39 +67,40 @@
           // e.target.parentNode.appendChild(oBox)
           // console.log(this.$refs.one)
           this.items.push(this.items[this.items.length-1]+1)
-          console.log(this.text)
+          // console.log(this.text)
         },
         deletes(e,item){
-          console.log(item)
+          // console.log(item)
           this.items.splice(item,1)
           this.text.splice(item,1)
         },
         handleRemove(file, fileList) {
-          console.log(file, fileList);
+          // console.log(file, fileList);
         },
         handlePreview(file) {
-          console.log(file);
+          // console.log(file);
         },
         beforeRemove(file, fileList) {
           return this.$confirm(`确定移除 ${ file.name }？`);
         },
         handleSuccess(response, file, fileList){
-          console.log(response)
+          // console.log(response)
         },
         beforeUpload(file){
           let fd = new FormData();
           let that=this
           fd.append('file',file);//传文件
-          this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/files/files',fd).then(function(res){
-            console.log(res);
+          this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/files/files',fd)
+            .then(function(res){
+            // console.log(res.data.path);
             that.$message("文件上传完成")
-            that.datalist.push(res.data)
-            console.log(that.datalist)
+            that.datalist.push(res.data.path)
+            // console.log(that.datalist)
           })
         },
         //覆盖默认的提交动作
         uploadfile(){
-          console.log(this.$refs.a)
+          // console.log(this.$refs.a)
         }
 
       },

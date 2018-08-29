@@ -22,14 +22,19 @@
 
 <script>
     export default {
-        name: "DeadTime",
-        data(){
-          return{
-              time:"2019-01-03-20-30-40",
-              nowtime: new Date()
+      name: "DeadTime",
+      data(){
+        return{
+            time:"2019-01-03-20-30-40",
+            nowtime: new Date()
 
-          }
-        },
+        }
+      },
+      props:{
+        deadtime:{
+          type:Array
+        }
+      },
       watch:{
         deadMinute:function () {
 
@@ -40,6 +45,14 @@
           }
           return S
         },
+        deadtime:{
+          handler(newValue, oldValue){
+            console.log(newValue)
+            this.time=newValue[newValue.length-1]
+          },
+          deep:true
+        }
+
       },
       computed:{
         deadDay:function () {
@@ -106,15 +119,15 @@
 <style scoped>
   .a{background: url(../../../common/img/panelt.png) left center no-repeat;padding-left: 10px;line-height: 48px;
     font-size: 1.2em;margin-top: 20px;color: #000;padding: 0px 15px}
-  .b{background: url(../../../common/img/countdown.png) left center no-repeat;width: 284px;
+  .b{background: url(../../../common/img/countdown.png) left center no-repeat;width: auto;
     margin-left: 13px;}
-  .b li{height: 50px;line-height:50px;font-size: 1.6em;padding-left:10px;padding-right: 30px;color: white;}
+  .b li{height: 50px;line-height:50px;font-size: 1.6em;color: white;width: 54px;margin:0px;}
   .c{margin-left: 27px;}
   .c li{height: 25px;line-height:25px;font-size: 1.0em;padding-left:3px;padding-right: 42px;color: black;}
-  ul, li {
-    list-style-type: none;list-style:none;margin: 0;padding: 0;text-align: center;
+   ul, li {
+    list-style-type: none;list-style:none;text-align: center;
    }
 
-   li{float: left;}
+   li{display:inline-block}
   .clearfix:after{clear: both;content: '';display: block}
 </style>

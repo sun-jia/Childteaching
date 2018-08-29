@@ -74,5 +74,7 @@
 </script>
 
 <style scoped>
-
+  .el-upload__input{
+     display: none;
+  }
 </style>

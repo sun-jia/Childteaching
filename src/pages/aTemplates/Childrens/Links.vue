@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="a">{{title}}</div>
-    <div v-for="item in linklist"><a href="#">{{item}}</a></div>
+    <div v-for="item in linklist" class="b"><a href="#">{{item}}</a></div>
   </div>
 </template>
 
@@ -12,7 +12,21 @@
           title:"友情链接",
           linklist:["中国医学会"]
         }
+        },
+      props:{
+        links:{
+          type:Array
         }
+      },
+      watch:{
+        links:{
+          handler(newValue, oldValue){
+
+            this.linklist=newValue
+          },
+          deep:true
+        }
+      }
     }
 </script>
 
@@ -21,4 +35,5 @@
     font-size: 18px;margin-top: 20px;color: #000;padding: 0px 15px}
   a{text-decoration: none;padding-left: 20px;}
   a:hover{color: blue;}
+  .b{margin-top: 5px;}
 </style>
