@@ -4,9 +4,9 @@ import WebAdvertise from '../pages/advertise/webIndex'
 import H5Advertise from '../pages/advertise/h5Index'
 import Finance from  '../pages/finance/Index'
 import Logistics from  '../pages/logistics/Index'
-import LogisticsRestaurant from  '../pages/logistics/Restaurant'
-import LogisticsBus from  '../pages/logistics/Bus'
-import LogisticsHotel from  '../pages/logistics/Hotel'
+import LogisticsRestaurant from  '../pages/logistics/restaurant/Restaurant'
+import LogisticsBus from  '../pages/logistics/bus/Bus'
+import LogisticsHotel from  '../pages/logistics/hotel/Hotel'
 
 import MeetEdit from '../pages/meetedit/Index'
 import MeetList from '../pages/meetlist/Index'
@@ -14,9 +14,9 @@ import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
 import Carousel from '../pages/home/Carousel.vue'
-import ATemplates from '../pages/aTemplates/Index'
-import SelectTemp from '../pages/aTemplates/SelectTemp'
-import Result from '../pages/aTemplates/Result'
+import ATemplates from '../pages/advertise/webTemplates/Index'
+import SelectTemp from '../pages/advertise/webTemplates/SelectTemp'
+import Result from '../pages/advertise/webTemplates/Result'
 
 /*映射*/
 import money from '@/pages/finance/money'
@@ -54,10 +54,10 @@ export default  [
     path: '/finance',
     component: Finance,
   },
-  {
-    path: '/frontend',
-    component: Frontend,
-  },
+  // {
+  //   path: '/frontend',
+  //   component: Frontend,
+  // },
   {
     path: '/logistics',
     component: Logistics,

@@ -325,7 +325,7 @@
   .el-notification{width: 220px !important;
     height: 300px;}
   #index{padding:0px 20px}
-  .topImg{background-image: url("../../common/img/body.jpg");background-repeat: no-repeat;}
+  .topImg{background-image: url("../../../common/img/body.jpg");background-repeat: no-repeat;}
   .banners{height: 200px;}
   .carouselColor{background-color: azure}
 
