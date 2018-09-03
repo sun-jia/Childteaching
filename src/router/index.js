@@ -21,9 +21,9 @@ import SelectTemp from '../pages/advertise/webTemplates/SelectTemp'
 import Result from '../pages/advertise/webTemplates/Result'
 
 /*映射*/
-import Index from '@/pages/finance/Index'
-import invoice from '@/pages/finance/invoice'
-import neworder from '@/pages/finance/neworder'
+import Index from '../pages/finance/Index'
+import invoice from '../pages/finance/invoice'
+import neworder from '../pages/finance/neworder'
 
 // Vue.use(VueRouter)   //注册
 /*映射*/
