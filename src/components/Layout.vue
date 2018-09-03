@@ -18,6 +18,7 @@
 
       <Fooster v-show="showByLogin"></Fooster>
 
+      <SmartQuery  v-show="showByLogin"></SmartQuery>
     </div>
   </div>
 </template>
@@ -28,6 +29,7 @@
   import Condition from './Condition'
   import Nav from './Nav'
   import Header from './Header'
+  import SmartQuery from './SmartQuery'
   import { mapGetters } from 'vuex'
 
   import '../utils/jquery-slimscroll/jquery.slimscroll'
@@ -51,6 +53,7 @@
       Nav,
       Condition,
       Fooster,
+      SmartQuery
     },
   }
 </script>
@@ -66,6 +69,9 @@
   .login_content{
     width: 100%;
   }
+  /*#wrapper{*/
+    /*position: relative;*/
+  /*}*/
 
 
 

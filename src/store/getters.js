@@ -21,4 +21,7 @@ export default {
   showFooter:(state)=>{
     return state.footer
   },
+  showSmart:(state)=>{
+    return state.Smart
+  },
 }
