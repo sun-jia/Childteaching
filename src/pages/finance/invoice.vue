@@ -1,6 +1,6 @@
 <template>
   <div class="display1">
-    <router-link  to="/money"> <button class="btn1 " >订单管理</button></router-link>
+    <router-link  to="/finance/Index"> <button class="btn1 " >订单管理</button></router-link>
     <button class="btn1 btn2"  v-bind:class="{ active: isActive }">发票管理</button>
     <!--<button class="btn3 icon-sousuo">搜索</button>-->
     <div class="display2">

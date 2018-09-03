@@ -5,7 +5,7 @@
       <hr>
     </div>
     <div class="form">
-        <span >输入会议名称：<input v-model="conference" placeholder=""></span> <br>
+        <span >输入会议名称：<input v-model="conference" placeholder="" style="width:300px"></span> <br>
         <span >输入姓名：<input v-model="name" placeholder="如张三"></span> <br>
         <span  style="margin-top: 10px;">输入身份证号：<input v-model="identity" placeholder="共18位" style="width:200px;"></span><br>
         <span >

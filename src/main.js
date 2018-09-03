@@ -9,6 +9,7 @@ import store from './store/store'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
 //VUE-Beauty
 // import 'vue-beauty/package/style/vue-beauty.min.css'
 // import vueBeauty from 'vue-beauty'
@@ -17,6 +18,13 @@ import filters from './filters'
 import axios from 'axios'
 import VueAxios from 'Vue-axios'
 //引入图标库
+//下载
+// import file-saver from 'file-saver'
+// Vue.use(file-saver)
+//引入图表库
+import echarts from 'echarts';
+Vue.prototype.$echarts = echarts
+
 import VueIconFont from 'vue-icon-font'
 import './common/css/fonts/iconfont.css'
 import './common/css/fonts/iconfont.js'
@@ -26,7 +34,10 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 Vue.use(VueQuillEditor)
-
+//引入excel下载所需文件
+// import Bolb from "@/excel/Bolb.js"
+// import "@/excel/Bolb.js"
+// import "@/excel/Export2Excel.js"
 
 Vue.use(ElementUI)
 // Vue.use(vueBeauty)

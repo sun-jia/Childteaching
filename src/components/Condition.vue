@@ -43,7 +43,7 @@
               alert("请先登入")
               this.$router.push("/home/login");
             }
-            stopCanvas();
+            // stopCanvas();
           }
         }
       },
