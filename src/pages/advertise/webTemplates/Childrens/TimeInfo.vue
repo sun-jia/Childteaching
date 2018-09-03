@@ -16,6 +16,31 @@
           "2019年6月30日","网上注册截止日期:","2019年9月12日",
         "现场报到日期：","2019年09月19日"]
        }
+
+      },
+      props:{
+        timeinfo:{
+          type:Array
+        }
+      },
+      watch:{
+        timeinfo:{
+          handler(newValue, oldValue){
+            // console.log(newValue)
+            var first=newValue.slice(0,newValue.length/2);
+            var last=newValue.slice(newValue.length/2,newValue.length)
+
+            var i=0;
+            this.dataList=[];
+            while (i<first.length) {
+               this.dataList.push(first[i]);
+               this.dataList.push(last[i])
+               i++;
+            }
+
+          },
+          deep:true
+        }
       }
     }
 </script>

@@ -11,6 +11,20 @@
           return{
              datalist:["个人代表注册","团队代表注册","论文投稿通道"]
           }
+      },
+      props:{
+        buttons:{
+          type:Array
+        }
+      },
+      watch:{
+        buttons:{
+          handler(newValue, oldValue){
+            // console.log(newValue)
+            this.datalist=newValue
+          },
+          deep:true
+        }
       }
     }
 </script>

@@ -15,6 +15,25 @@
           title:"会议动态",
           linklist:["2018年河南省肠外肠内营养学术年会的通知"]
         }
+      },
+      props:{
+        dynamic:{
+          type:Array
+        }
+      },
+      watch:{
+        dynamic:{
+          handler(newValue, oldValue){
+            // console.log(newValue)
+            var newlist=[];
+            newValue.forEach(function (elem) {
+                newlist.push(elem.text)
+            })
+            // console.log(newlist)
+            this.linklist=newlist
+          },
+          deep:true
+        }
       }
 
     }

@@ -3,25 +3,25 @@ import * as types from './type'
 
 export default{
       login:({commit},obj)=>{
-        commit('setUser',obj.user),commit('setUserName',obj.name),commit('setUserKind',obj.kind),commit("setAccessToken",obj.access_token)
+          commit('setUser',obj.user),commit('setUserName',obj.name),commit('setUserKind',obj.kind),commit("setAccessToken",obj.access_token)
       },
       logout:({commit})=>{
-        commit('delUser'),commit('delUserName'),commit('delUserKind'),commit('delAccessToken')
+          commit('delUser'),commit('delUserName'),commit('delUserKind'),commit('delAccessToken')
       },
       showByLogin:({commit})=>{
-        commit('showByLogin'), commit('showSider')
+          commit('showByLogin'), commit('showSider')
       },
       hideByLogin:({commit})=>{
-        commit('hideByLogin'),commit('hideSider')
+          commit('hideByLogin'),commit('hideSider')
       },
-     showSider:({commit})=>{
-         commit('showSider')
-     },
-     hideSider:({commit})=>{
-      commit('hideSider')
-     },
+      showSider:({commit})=>{
+          commit('showSider')
+      },
+      hideSider:({commit})=>{
+          commit('hideSider')
+      },
       showLoading:({commit})=>{
-      commit('showLoading')
+          commit('showLoading')
       },
       hideLoading:({commit})=>{
         commit('hideLoading')
@@ -38,5 +38,10 @@ export default{
       hideFooter:({commit})=>{
         commit('hideFooter')
       },
-
+      showSmart:({commit})=>{
+        commit('showSmart')
+      },
+      hideSmart:({commit})=>{
+        commit('hideSmart')
+      },
 }

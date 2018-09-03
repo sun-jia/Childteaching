@@ -15,6 +15,22 @@
             ,"联系地址：北京市大兴区金星西路星创大厦501","中国营养学会秘书处","邮箱：meeting@cnsoc.org",
             "电话：010—83554781","联系地址：北京市朝阳区建国门外大街甲14号北京广播大厦1405"]
         }
+      },
+      props:{
+        connect:{
+          type:String
+        }
+      },
+      watch:{
+        connect:{
+          handler(newValue, oldValue){
+            // console.log(newValue.split(';'))
+
+            this.linklist=newValue.split('；')
+
+          },
+          deep:true
+        }
       }
     }
 </script>

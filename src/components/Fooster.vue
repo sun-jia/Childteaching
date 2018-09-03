@@ -1,8 +1,6 @@
 <template>
   <footer>
-    <div class="container-fluid">
-      底部信息
-    </div>
+    <!--底部-->
   </footer>
 </template>
 

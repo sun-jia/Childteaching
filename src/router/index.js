@@ -20,7 +20,6 @@ import ATemplates from '../pages/advertise/webTemplates/Index'
 import SelectTemp from '../pages/advertise/webTemplates/SelectTemp'
 import Result from '../pages/advertise/webTemplates/Result'
 
-
 /*映射*/
 import Index from '@/pages/finance/Index'
 import invoice from '@/pages/finance/invoice'
@@ -50,13 +49,17 @@ export default  [
     component: H5Advertise,
   },
   {
+    path: '/advertise/web',
+    component: SelectTemp,
+  },
+  {
     path: '/finance',
     component: Finance,
   },
-  {
-    path: '/advertise/h5',
-    component: H5Advertise,
-  },
+  // {
+  //   path: '/frontend',
+  //   component: Frontend,
+  // },
   {
     path: '/logistics',
     component: Logistics,

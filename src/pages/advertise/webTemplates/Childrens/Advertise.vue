@@ -10,14 +10,42 @@
       },
       methods: {
         open() {
-          this.$notify({
+          var _this=this;
+          this.instance = this.$notify({
             title: 'gg',
             dangerouslyUseHTMLString: true,
             duration:0,
             width:200,
             offset: 200,
-            message: '<strong>这是 <i>HTML</i> 广告</strong>'
+            message: _this.datalist
           });
+        },
+        close() {
+          this.$notify.close()
+        }
+      },
+      data(){
+        return{
+           datalist:'<strong>这是HTMLxin广告</strong>',
+           instance
+        }
+      },
+      props:{
+        advertise:{
+          type:String
+        }
+      },
+      watch:{
+        advertise:{
+          handler(newValue, oldValue){
+            // console.log(newValue)
+            this.datalist=newValue
+            this.instance.close();
+
+            this.open();
+
+          },
+          deep:true
         }
       }
     }

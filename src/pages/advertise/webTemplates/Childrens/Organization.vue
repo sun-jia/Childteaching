@@ -14,6 +14,22 @@
           title:"组织结构",
           linklist:["中国营养学会","亚太临床营养学会 "]
         }
+      },
+      props:{
+        organization:{
+          type:Array
+        }
+      },
+      watch:{
+        organization:{
+          handler(newValue, oldValue){
+            // console.log(newValue)
+            var temp=newValue.slice()
+            temp.shift();
+            this.linklist=temp
+          },
+          deep:true
+        }
       }
     }
 </script>

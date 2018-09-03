@@ -29,8 +29,8 @@
         watch:{
           information:{
             handler(newValue, oldValue){
-              console.log(newValue)
-              this.datalist=newValue
+              // console.log(newValue)
+              this.datalist=newValue.split(/\n/)
             },
             deep:true
           }

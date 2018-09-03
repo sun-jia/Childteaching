@@ -42,6 +42,8 @@
             .then((res) => {
               console.log(res.data);
               this.meauList=res.data.data;
+              console.log('目录')
+              console.log(this.meauList)
             }, (err) => {
               console.log(err)
             })

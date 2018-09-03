@@ -25,7 +25,7 @@
         },
         nextSteps2(){
           console.log(this.checkedCities)
-          this.$emit('nextOrganization',[{organization:this.checkedCities},true])
+          this.$emit('nextOrganization',[{button:this.checkedCities},true])
         },
         handleCheckAllChange(val) {
           this.checkedCities = val ? this.cities : [];

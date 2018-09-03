@@ -64,7 +64,7 @@
                   //有待完善
                }
           })
-          console.log(newValue)
+          // console.log(newValue)
           this.name=newValue.name
           this.address=newValue.address
           this.time=newValue.time
