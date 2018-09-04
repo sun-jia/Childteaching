@@ -82,8 +82,7 @@
         methods:{
            getdatas(){
              let _this=this
-             this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/getdatas').then(function(res){
-
+             this.$http.post('http://127.0.0.1:80/clubApi/backend/web/index.php/advertise/templates/getdatas').then(function(res){
                _this.alldata=JSON.parse(res.data.datas)
                console.log(_this.alldata);
                _this.renderdatas()

@@ -258,7 +258,7 @@
             let fd = new FormData();
             fd.append('templateDates',JSON.stringify(this.alldata));//传文件
             fd.append('sitename',this.sitename);//传网址
-            this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/templates',fd).then(function(res){
+            this.$http.post('http://127.0.0.1/clubApi/backend/web/index.php/advertise/templates/templates',fd).then(function(res){
                console.log(res.data);
             })
             // this.$router.push('/result')
