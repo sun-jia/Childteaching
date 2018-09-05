@@ -156,7 +156,7 @@
     methods: {
       deletechange: function (a) {
         console.log(a);
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/deletedata?DATAID="+a).then(function(res){
+        this.axios.get("/yii/finance/finance/deletedata?DATAID="+a).then(function(res){
           console.log(res.data);
           if(res.data==1){
             location.reload();
@@ -175,7 +175,7 @@
         fd.append('ACCOUNT_MODE', a5);//传收款方式
         fd.append('STRTDATE', a6);//传开始时间
         fd.append('ENDDATE', a7);//传结束时间
-        this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+        this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
           this.details = body.data.data;
         })
       },
@@ -183,7 +183,7 @@
         this.type=4;
         this.moneysort=!this.moneysort;
         console.log(this.moneysort);
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
         })
@@ -192,7 +192,7 @@
         this.type=3;
         this.moneysort=!this.moneysort;
         console.log(this.moneysort);
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
         })
@@ -202,7 +202,7 @@
         console.log(this.type);
         this.datesort=!this.datesort;
         console.log(this.datesort);
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
         })
@@ -211,7 +211,7 @@
         this.type=1;
         this.datesort=!this.datesort;
         console.log(this.datesort);
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
         })
@@ -222,7 +222,7 @@
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
         console.log(page);
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+page+"&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page="+page+"&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
           console.log(this.details);
@@ -235,7 +235,7 @@
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
         console.log(page);
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+page+"&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page="+page+"&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
           console.log(this.details);
@@ -248,7 +248,7 @@
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
         console.log(page);
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+page+"&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page="+page+"&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
           console.log(this.details);
@@ -259,7 +259,7 @@
       'date-picker': myDatepicker
     },
     mounted() {
-      this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page=1&&type="+this.type).then(body => {
+      this.axios.get("/yii/finance/page?page=1&&type="+this.type).then(body => {
         this.details = body.data.data.pageall;
         this.totlepage = body.data.data.totlepage;
         console.log(this.details);
@@ -330,7 +330,7 @@
     border-collapse: collapse;
     width:100%;
     margin-top: 10px;
-    margin-left: 20px；
+    margin-left: 20px;
   }
   th{
     font-size: 14px;
