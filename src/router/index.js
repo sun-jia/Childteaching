@@ -22,8 +22,6 @@ import Result from '../pages/advertise/webTemplates/Result'
 
 /*映射*/
 import Index from '../pages/finance/Index'
-import invoice from '../pages/finance/invoice'
-import neworder from '../pages/finance/neworder'
 
 // Vue.use(VueRouter)   //注册
 /*映射*/
@@ -32,7 +30,6 @@ import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
 
 /*映射*/
-import money from '@/pages/finance/money'
 import invoice from '@/pages/finance/invoice'
 import neworder from '@/pages/finance/neworder'
 
