@@ -1,12 +1,10 @@
 <template>
-  <footer>
-    <!--底部-->
-  </footer>
+    <div>h5</div>
 </template>
 
 <script>
     export default {
-        name: "Fooster"
+        name: "h5Index"
     }
 </script>
 
