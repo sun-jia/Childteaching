@@ -62,7 +62,7 @@
     require('echarts/lib/component/title');
     require('echarts/lib/component/toolbox');
     export default {
-      name: "charlist.vue",
+      name: "Charlist",
       data() {
         return {
           Arguments:'',
@@ -88,6 +88,7 @@
           console.log(this.type);
         },
         pie:function () {
+          var that=this;
           this.type='pie';
           console.log(this.type);
           // console.log(this.key);
@@ -117,11 +118,11 @@
                 data:(function(){
                   var res = [];
                   // var len = result.length;
-                  for(var i=0;i<this.value.length;i++) {
+                  for(var i=0;i<that.value.length;i++) {
                     res.push({
                       //通过把result进行遍历循环来获取数据并放入Echarts中
-                      name: this.key[i],
-                      value: this.value[i]
+                      name: that.key[i],
+                      value: that.value[i]
                     });
                   }
                   return res;
@@ -163,7 +164,7 @@
         bymoney: function () {
           this.visibled = true;
           this.type = 'line';
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance?type=MONEY").then(body => {
+          this.axios.get("/yii/finance/finance?type=MONEY").then(body => {
            this.data= body.data.data;
            console.log(this.data);
            this.key=this.data.key;
@@ -194,7 +195,7 @@
         byway: function () {
           this.visibled = true;
           this.type = 'line';
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance?type=ACCOUNT_MODE").then(body => {
+          this.axios.get("/yii/finance/finance?type=ACCOUNT_MODE").then(body => {
             this.data= body.data.data;
             console.log(this.data);
             this.key=this.data.key;

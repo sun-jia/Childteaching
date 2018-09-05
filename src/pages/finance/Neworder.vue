@@ -128,7 +128,7 @@
             fd.append('ACCOUNT_TYPE', money);//传消费类型
             fd.append('ACCOUNT_MODE', account_mode);//传支付方式
             fd.append('STRTDATE', date);//传日期
-            this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then
+            this.$http.post('/yii/finance/finance/querydata', fd).then
               (function(res){
                 console.log(res.data);
               });

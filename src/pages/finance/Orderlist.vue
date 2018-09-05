@@ -77,7 +77,7 @@
 <script>
     import myDatepicker from 'vue-datepicker2'; //引入对应的组件
     export default {
-      name: "Orderlist.vue",
+      name: "Orderlist",
       data() {
         return {
           details: [

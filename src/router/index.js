@@ -3,8 +3,8 @@ import Home from '../pages/home/Index.vue'
 import WebAdvertise from '../pages/advertise/webIndex'
 import H5Advertise from '../pages/advertise/h5Index'
 import Finance from '../pages/finance/Index'
-import charlist from '../pages/finance/charlist'
-import orderlist from '../pages/finance/Orderlist'
+import Charlist from '../pages/finance/Charlist'
+import Orderlist from '../pages/finance/Orderlist'
 import Logistics from  '../pages/logistics/Index'
 import LogisticsRestaurant from  '../pages/logistics/restaurant/Restaurant'
 import LogisticsBus from  '../pages/logistics/bus/Bus'
@@ -30,8 +30,8 @@ import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
 
 /*映射*/
-import invoice from '@/pages/finance/invoice'
-import neworder from '@/pages/finance/neworder'
+import Invoice from '@/pages/finance/Invoice'
+import Neworder from '@/pages/finance/Neworder'
 
 import Addbus from '../pages/logistics/Addbus'
 import Alterbus from '../pages/logistics/Alterbus'
@@ -164,7 +164,7 @@ export default  [
   },
   {
     path: '/finance/invoice',
-    component: invoice,
+    component: Invoice,
   },
   {
   path: '/finance/Index',
@@ -172,15 +172,15 @@ export default  [
   },
   {
     path: '/finance/neworder',
-    component: neworder,
+    component: Neworder,
   },
   {
     path: '/finance/charlist',
-    component: charlist,
+    component: Charlist,
   },
   {
     path: '/finance/orderlist',
-    component: orderlist,
+    component: Orderlist,
   },
 
 
