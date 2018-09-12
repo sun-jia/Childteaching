@@ -1,8 +1,7 @@
 <template>
   <div>
-    logistics
     <keep-alive>
-      <router-view></router-view>
+      <router-view>111</router-view>
     </keep-alive>
   </div>
 </template>

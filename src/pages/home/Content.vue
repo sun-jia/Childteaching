@@ -33,7 +33,7 @@
           {
             "id": 3,
             "name": "后勤管理",
-            "path": "/logistics",
+            "path": "/logistics/bus",
             "num": "1"
           },
           {

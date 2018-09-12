@@ -3,7 +3,7 @@ import Home from '../pages/home/Index.vue'
 import WebAdvertise from '../pages/advertise/webIndex'
 import H5Advertise from '../pages/advertise/h5Index'
 import Finance from '../pages/finance/Index'
-import charlist from '../pages/finance/charlist'
+import Charlist from '../pages/finance/Charlist'
 import Orderlist from '../pages/finance/Orderlist'
 import Logistics from  '../pages/logistics/Index'
 import LogisticsRestaurant from  '../pages/logistics/restaurant/Restaurant'
@@ -22,6 +22,7 @@ import SelectTemp from '../pages/advertise/webTemplates/SelectTemp'
 import Result from '../pages/advertise/webTemplates/Result'
 
 /*映射*/
+import Index from '../pages/finance/Index'
 // import Index from '../pages/finance/Index'
 import invoice from '../pages/finance/invoice'
 // import charlist from '../pages/finance/charlist'
@@ -33,6 +34,17 @@ import invoice from '../pages/finance/invoice'
 
 import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
+
+/*映射*/
+import Invoice from '@/pages/finance/Invoice'
+import Neworder from '@/pages/finance/Neworder'
+
+import Addbus from '../pages/logistics/Addbus'
+import Alterbus from '../pages/logistics/Alterbus'
+import Driverlist from '../pages/logistics/Driverlist'
+import Adddriver from '../pages/logistics/Adddriver'
+import Alterdriver from '../pages/logistics/Alterdriver'
+import Travelrecord from '../pages/logistics/Travelrecord'
 
 export default  [
   {
@@ -133,6 +145,30 @@ export default  [
     component: Result,
   },
   {
+    path:'/logistics/addbus',
+    component:Addbus,
+  },
+  {
+    path:'/logistics/alterbus',
+    component:Alterbus,
+  },
+  {
+    path:'/logistics/driverlist',
+    component:Driverlist,
+  },
+  {
+    path:'/logistics/adddriver',
+    component:Adddriver,
+  },
+  {
+    path:'/logistics/alterdriver',
+    component:Alterdriver,
+  },
+  {
+    path:'/logistics/travelrecord',
+    component:Travelrecord,
+  },
+  {
     path: '/finance/invoice',
     component: invoice,
   },
@@ -146,10 +182,10 @@ export default  [
   // },
   {
     path: '/finance/charlist',
-    component: charlist,
+    component: Charlist,
   },
   {
-    path: '/finance/Orderlist',
+    path: '/finance/orderlist',
     component: Orderlist,
   },
 

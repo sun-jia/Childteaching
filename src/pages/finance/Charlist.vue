@@ -207,31 +207,31 @@
           console.log(this.isActiveTwo);
         },
         bymoney: function () {
-           this.chartName='金额分布统计';
-           this.visibled = true;
-           this.chartType = 'line';
-           this.barshow=true;
-           this.pieshow=false;
-           this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance?type=MONEY").then(body => {this.data= body.data.data;
-           this.key=this.data.key;
-           this.value=this.data.value;
-           console.log(this.key);
+          this.chartName='金额分布统计';
+          this.visibled = true;
+          this.chartType = 'line';
+          this.barshow=true;
+          this.pieshow=false;
+          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance?type=MONEY").then(body => {this.data= body.data.data;
+            this.key=this.data.key;
+            this.value=this.data.value;
+            console.log(this.key);
             let myChart = this.$echarts.init(document.getElementById('myChart'));
             myChart.setOption({
               title: {text: this.chartName},
               // legend: {
               //   data:['金额分布']
               // },
-                xAxis: {
-                  data: this.key
-                },
-                series: [{
-                  // 根据名字对应到相应的系列
-                  name: '金额分布',
-                  data: this.value
-                }]
-              })
-         })
+              xAxis: {
+                data: this.key
+              },
+              series: [{
+                // 根据名字对应到相应的系列
+                name: '金额分布',
+                data: this.value
+              }]
+            })
+          })
         },
         byway: function () {
           this.chartName='支付方式统计'

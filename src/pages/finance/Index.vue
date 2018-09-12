@@ -210,7 +210,7 @@
       methods: {
         deletechange: function (a) {
           console.log(a);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/deletedata?USERID="+a).then(function(res){
+          this.axios.get("/yii/finance/finance/deletedata?USERID="+a).then(function(res){
             console.log(res.data);
             if(res.data==1){
                location.reload();
@@ -236,7 +236,7 @@
           fd.append('ENDDATE', this.endTime);//传结束时间
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -261,7 +261,7 @@
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
           console.log(fd.getAll('type'));
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -287,7 +287,7 @@
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
           console.log(fd.getAll('type'));
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -313,7 +313,7 @@
           fd.append('ENDDATE', this.endTime);//传结束时间
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -340,7 +340,7 @@
           fd.append('type',this.type);//传类型
           // console.log(fd.getAll('NAME'));
           // console.log(fd.getAll('ENDDATE'));
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -369,7 +369,7 @@
           fd.append('type',this.type);//传类型
           // console.log(fd.getAll('NAME'));
           // console.log(fd.getAll('ENDDATE'));
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -399,7 +399,7 @@
           fd.append('type',this.type);//传类型
           // console.log(fd.getAll('NAME'));
           // console.log(fd.getAll('ENDDATE'));
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -437,7 +437,7 @@
           console.log(fd.getAll('NAME'));
           console.log(fd.getAll('STARTDATE'));
           console.log(fd.getAll('ENDDATE'));
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -457,7 +457,7 @@
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
           fd.append('type',this.type);//传类型
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/exportfinance', fd).then(body => {
+          this.$http.post('/yii/finance/finance/exportfinance', fd).then(body => {
             this.excelData = body.data.data;
             console.log(this.excelData);
             require.ensure([], () => {
@@ -495,7 +495,7 @@
       components: {
       },
       mounted() {
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page=1&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page=1&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
           console.log(this.details);

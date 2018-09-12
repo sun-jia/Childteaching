@@ -48,34 +48,20 @@
               <i v-show="moneysort" class="sort icon-paixushengxu" v-on:click="moneyup()"></i>
               <i v-show="!moneysort" class="sort icon-paixujiangxu" v-on:click="moneydown()"></i>
             </th>
-            <!--<th>收款明细-->
-              <!--<select v-model="kindselected2"  style="font-size:14px;">-->
-                <!--<option disabled value="">选择</option>-->
-                <!--<option value="1" >住宿</option>-->
-                <!--<option value="2">会费</option>-->
-              <!--</select>-->
-              <!--&lt;!&ndash;<p>{{kindselected}}</p>//测试&ndash;&gt;-->
-            <!--</th>-->
-            <th>
-              <div class="block" >
-                <span class="demonstration">日期</span>
-                <el-date-picker
-                  v-model="dateselect"
-                  type="datetimerange"
-                  :picker-options="pickerOptions1"
-                  range-separator="至"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
-                  align="right"
-                  size="small"
-                  format="yyyy-MM-dd HH:mm:ss "
-                  value-format="yyyy-MM-dd HH:mm:ss">
-                </el-date-picker>
-                <i v-show="datesort" class="sort icon-paixushengxu" v-on:click="dateup()"></i>
-                <i v-show="!datesort" class="sort icon-paixujiangxu" v-on:click="datedown()"></i>
-              </div>
-              <!--{{value3}}-->
+            <th>收款明细
+              <select v-model="kindselected2"  style="font-size:14px;">
+                <option disabled value="">选择</option>
+                <option value="1" >住宿</option>
+                <option value="2">会费</option>
+              </select>
+              <!--<p>{{kindselected}}</p>//测试-->
+            </th>
+            <th>日期
+              <date-picker  v-model="startTime2" :option="option"   ></date-picker>--
+              <date-picker  v-model="endTime2" :option="option" :limit="limit" ></date-picker>
               <!--<p>开始日期{{startTime}}结束日期{{endTime}}</p>//测试-->
+              <i v-show="datesort" class="sort icon-paixushengxu" v-on:click="dateup()"></i>
+              <i v-show="!datesort" class="sort icon-paixujiangxu" v-on:click="datedown()"></i>
             </th>
           </tr>
           <tr v-for="detial in invoiceDel">
@@ -169,7 +155,7 @@
       methods: {
         deletechange: function (a) {
           console.log(a);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/deletedata?DATAID="+a).then(function(res){
+          this.axios.get("/yii/finance/finance/deletedata?DATAID="+a).then(function(res){
             console.log(res.data);
             if(res.data==1){
               location.reload();
@@ -224,7 +210,7 @@
           this.type=1;
           this.datesort=!this.datesort;
           console.log(this.datesort);
-          this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
           })
