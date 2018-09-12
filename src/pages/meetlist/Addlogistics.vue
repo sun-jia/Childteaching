@@ -1,10 +1,10 @@
 <template>
-  <div>meetedit</div>
+    
 </template>
 
 <script>
     export default {
-        name: "Index"
+        name: "Addlogistics"
     }
 </script>
 
