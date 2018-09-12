@@ -80,7 +80,7 @@
     require('echarts/lib/component/title');
     require('echarts/lib/component/toolbox');
     export default {
-      name: "charlist.vue",
+      name: "Charlist",
       data() {
         return {
           Arguments:'',
@@ -239,7 +239,7 @@
           // this.type = 'line';
           this.barshow=true;
           this.pieshow=false;
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance?type=ACCOUNT_MODE").then(body => {
+          this.axios.get("/yii/finance/finance?type=ACCOUNT_MODE").then(body => {
             this.data= body.data.data;
             console.log(this.data);
             this.key=this.data.key;
