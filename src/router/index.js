@@ -10,8 +10,9 @@ import LogisticsRestaurant from  '../pages/logistics/restaurant/Restaurant'
 import LogisticsBus from  '../pages/logistics/bus/Bus'
 import LogisticsHotel from  '../pages/logistics/hotel/Hotel'
 
-import MeetEdit from '../pages/meetedit/Index'
+import MeetEdit from '../pages/meetedit/Meetedit'
 import MeetList from '../pages/meetlist/Index'
+import History from '../pages/meetlist/History'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
@@ -22,6 +23,11 @@ import Result from '../pages/advertise/webTemplates/Result'
 
 /*映射*/
 import Index from '../pages/finance/Index'
+// import Index from '../pages/finance/Index'
+import invoice from '../pages/finance/invoice'
+// import charlist from '../pages/finance/charlist'
+// import Orderlist from '../pages/finance/Orderlist'
+// import neworder from '@/pages/finance/neworder'
 
 // Vue.use(VueRouter)   //注册
 /*映射*/
@@ -101,6 +107,10 @@ export default  [
     component: MeetList,
   },
   {
+    path: '/meetlist/History',
+    component: History,
+  },
+  {
     path: '/member',
     component: Member,
   },
@@ -109,11 +119,7 @@ export default  [
     component: Statics,
   },
   {
-    path: '/finance',
-    component: Finance,
-  },
-  {
-    path: '/system',
+    path: '/syetem',
     component: System,
   },
   {
@@ -169,16 +175,16 @@ export default  [
   },
   {
     path: '/finance/invoice',
-    component: Invoice,
+    component: invoice,
   },
   {
   path: '/finance/Index',
-    component: Index,
+    component: Finance,
   },
-  {
-    path: '/finance/neworder',
-    component: Neworder,
-  },
+  // {
+  //   path: '/finance/neworder',
+  //   component: neworder,
+  // },
   {
     path: '/finance/charlist',
     component: Charlist,

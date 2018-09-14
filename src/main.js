@@ -24,7 +24,7 @@ import VueAxios from 'Vue-axios'
 //引入图表库
 import echarts from 'echarts';
 Vue.prototype.$echarts = echarts
-
+//图标
 import VueIconFont from 'vue-icon-font'
 import './common/css/fonts/iconfont.css'
 import './common/css/fonts/iconfont.js'
