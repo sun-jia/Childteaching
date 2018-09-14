@@ -5,6 +5,7 @@ import H5Advertise from '../pages/advertise/h5Index'
 import Finance from '../pages/finance/Index'
 import Charlist from '../pages/finance/Charlist'
 import Orderlist from '../pages/finance/Orderlist'
+import Invoice from '../pages/finance/Invoice'
 import Logistics from  '../pages/logistics/Index'
 import LogisticsRestaurant from  '../pages/logistics/restaurant/Restaurant'
 import LogisticsBus from  '../pages/logistics/bus/Bus'
@@ -20,14 +21,12 @@ import Carousel from '../pages/home/Carousel.vue'
 import ATemplates from '../pages/advertise/webTemplates/Index'
 import SelectTemp from '../pages/advertise/webTemplates/SelectTemp'
 import Result from '../pages/advertise/webTemplates/Result'
-
 /*映射*/
-import Index from '../pages/finance/Index'
+
 // import Index from '../pages/finance/Index'
-import invoice from '../pages/finance/invoice'
-// import charlist from '../pages/finance/charlist'
+// import Charlist from '../pages/finance/Charlist'
 // import Orderlist from '../pages/finance/Orderlist'
-// import neworder from '@/pages/finance/neworder'
+// import Neworder from '@/pages/finance/Neworder'
 
 // Vue.use(VueRouter)   //注册
 /*映射*/
@@ -36,8 +35,7 @@ import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
 
 /*映射*/
-import Invoice from '@/pages/finance/Invoice'
-import Neworder from '@/pages/finance/Neworder'
+import Neworder from '../pages/finance/Neworder'
 
 import Addbus from '../pages/logistics/Addbus'
 import Alterbus from '../pages/logistics/Alterbus'
@@ -119,7 +117,7 @@ export default  [
     component: Statics,
   },
   {
-    path: '/syetem',
+    path: '/system',
     component: System,
   },
   {
@@ -174,8 +172,8 @@ export default  [
     component:Travelrecord,
   },
   {
-    path: '/finance/invoice',
-    component: invoice,
+    path: '/finance/Invoice',
+    component: Invoice,
   },
   {
   path: '/finance/Index',
@@ -195,7 +193,7 @@ export default  [
   },
   {
     path: '/system/Index',
-    component: Index,
+    component: System,
   },
  {
     path: '/system/user',
