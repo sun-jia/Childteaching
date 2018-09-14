@@ -23,11 +23,6 @@ import Result from '../pages/advertise/webTemplates/Result'
 
 /*映射*/
 import Index from '../pages/finance/Index'
-// import Index from '../pages/finance/Index'
-import invoice from '../pages/finance/invoice'
-// import charlist from '../pages/finance/charlist'
-// import Orderlist from '../pages/finance/Orderlist'
-// import neworder from '@/pages/finance/neworder'
 
 // Vue.use(VueRouter)   //注册
 /*映射*/
@@ -170,7 +165,7 @@ export default  [
   },
   {
     path: '/finance/invoice',
-    component: invoice,
+    component: Invoice,
   },
   {
   path: '/finance/Index',
