@@ -1,6 +1,6 @@
 <template>
   <div class="display1">
-  <button class="btn1 "  v-bind:class="{ active: isActive }">用户管理</button>
+  <button class="btn1 "  v-bind:class="{ active: isActive }">权限管理</button>
   <!--<button class="btn3 icon-sousuo">搜索</button>-->
   <div class="display2">
   <!--<div class="col-md-12">-->
@@ -83,7 +83,7 @@ var moment = require('moment');
     // import FileSaver from 'file-saver';
   //import XLSX from 'xlsx';
   export default {
-  	name: "user",
+    name: "user",
   data() {
         return {
           userList:[
@@ -206,7 +206,7 @@ var moment = require('moment');
       },
       
        methods: {
-       	getUser () {
+        getUser () {
         this.$http.get('/yii/system/list')//代替http://localhost:3000/list
         .then((res) => {
           console.log(res.data)

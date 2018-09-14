@@ -40,6 +40,11 @@ import Adddriver from '../pages/logistics/Adddriver'
 import Alterdriver from '../pages/logistics/Alterdriver'
 import Travelrecord from '../pages/logistics/Travelrecord'
 
+
+
+import User from '../pages/system/User'
+import Power from '../pages/system/Power'
+
 export default  [
   {
     path: '/',
@@ -108,7 +113,7 @@ export default  [
     component: Finance,
   },
   {
-    path: '/syetem',
+    path: '/system',
     component: System,
   },
   {
@@ -182,8 +187,22 @@ export default  [
     path: '/finance/orderlist',
     component: Orderlist,
   },
-
-
+  {
+    path: '/system/Index',
+    component: Index,
+  },
+ {
+    path: '/system/user',
+    component: User,
+  },
+ {
+    path: '/system/power',
+    component: Power,
+  },
+ {
+    path: '/member/list',
+    component: Member,
+  },
 ]
 
 

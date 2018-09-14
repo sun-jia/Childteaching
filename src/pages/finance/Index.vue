@@ -12,7 +12,9 @@
               <div class="meeting" >
                 <span style="color:#fff;">搜索会议：</span><input  v-model="inputmeeeting1" placeholder="输入会议名称" style="font-size:14px;width:300px;font-weight:lighter">
               </div>
-              <button class="btn3 icon-sousuo" v-on:click="searcha(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)">搜索</button>
+              <button class="btn3 icon-sousuo" v-on:click="searcha(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)">搜索
+              </button>
+
               <button type="button" class="btn4 icon-daochu1" id="export-table" v-on:click="export2Excel(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)">导出</button>
           <!--<router-link to="/fiance/neworder"><button class="btn4 icon-jiajianzujianjiahao" > 新建订单</button></router-link>-->
                <router-view/>
