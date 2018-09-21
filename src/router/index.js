@@ -195,14 +195,22 @@ export default  [
     path: '/system/Index',
     component: System,
   },
- {
+  /*{
     path: '/system/user',
     component: User,
-  },
+  },*/
  {
     path: '/system/power',
     component: Power,
   },
+  {
+    path: '/system/user',
+    component: User,
+  },
+  /*{
+    path: '/system/test',
+    component: Test,
+  },*/
  {
     path: '/member/list',
     component: Member,

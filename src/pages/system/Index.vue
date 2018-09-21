@@ -19,10 +19,11 @@
                <router-view/>
    <table id="userStatistics">
                 <tr>
+                  <th>ID</th>
                   <th>姓名
                     <input class="input1" v-model="inputname" placeholder="搜索姓名" style="font-size:14px;">
                     <!--<p>{{inputname}}</p>//测试-->
-                  </th>             
+                  </th>
                   <th>性别
                     <select v-model="sexselected"  style="font-size:14px;">
                       <option disabled value="">选择</option>
@@ -45,14 +46,15 @@
                   <th>删除用户</th>
                 </tr>
                 <tr v-for="user in userList">
+                  <td>{{user.ID}}</td>
                   <td>{{user.NAME}}</td>
                   <td>{{user.SEX}}</td>
                   <td>{{user.AGE}}</td>
                   <td>{{user.PHONENUMBER}}</td>
-                   <td>{{user.REMARKS}}</td> 
+                   <td>{{user.REMARKS}}</td>
                     <td>
                     <span v-on:click="deletechange(user.USERID)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
-                  </td>                                              
+                  </td>
                 </tr>
               </table>
               <div class="page">
@@ -65,7 +67,7 @@
                      <li class="page-item"><a class="page-link"  href="#">共<i>{{totlepage}}</i>页</a></li>
                   </ul>
               </div>
- </div>   
+ </div>
  </div>
  </div>
  </div>
@@ -79,7 +81,7 @@ var moment = require('moment');
     let start=this.starTime;
     // start=start.toString();
     console.log(start);
-        
+
     // import FileSaver from 'file-saver';
   //import XLSX from 'xlsx';
   export default {
@@ -199,12 +201,12 @@ var moment = require('moment');
           type: 1,//排序类型，默认日期降序，2为日期升序，3为金额降序，4为金额升序
           visiblepage: 10,//可见页数
           value3: '',//排序类型，默认日期降序，2为日期升序
-       } 
+       }
        },
 
            components: {
       },
-      
+
        methods: {
        	getUser () {
         this.$http.get('/yii/system/list')//代替http://localhost:3000/list
@@ -488,8 +490,8 @@ var moment = require('moment');
             lowPage ++;
           }
           return pageArr;
-        
-      }    
+
+      }
    }
 }
    </script>

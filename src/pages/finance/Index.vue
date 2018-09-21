@@ -236,7 +236,7 @@
           fd.append('ENDDATE', this.endTime);//传结束时间
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
-          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/aaa/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -261,7 +261,7 @@
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
           console.log(fd.getAll('type'));
-          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/aaa/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);

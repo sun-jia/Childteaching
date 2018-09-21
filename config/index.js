@@ -27,7 +27,14 @@ module.exports = {
         pathRewrite: {
           '^/yii': ''//后面可以使重写的新路径，一般不做更改
         }
-      }
+      },
+     '/aaa': {
+        changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+        target: 'http://192.168.1.102/clubApi-master/backend/web/index.php',// 接口的域名
+        pathRewrite: {
+          '^/aaa': ''//后面可以使重写的新路径，一般不做更改
+        }
+      },
     },
 
     // Various Dev Server settings
