@@ -53,8 +53,8 @@ Vue.use(VueAxios,axios)//注册
 Vue.use(Vuerouter)
 
 //滚动
-var vueSmoothScroll = require('vue-smoothscroll');
-Vue.use(vueSmoothScroll);
+/*var vueSmoothScroll = require('vue-smoothscroll');
+Vue.use(vueSmoothScroll);*/
 
 axios.interceptors.request.use(function (config) {  //配置发送请求的信息,添加access_token信息
 
