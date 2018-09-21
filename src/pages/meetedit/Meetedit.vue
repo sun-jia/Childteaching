@@ -118,6 +118,7 @@
             </el-form-item>
           </div>
         </el-form>
+        <!--{{form}}-->
         <!--{{form.checkedModels}}-->
         <!--{{form.duty}}-->
         <div slot="footer" class="dialog-footer">
