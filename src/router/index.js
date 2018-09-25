@@ -17,6 +17,10 @@ import History from '../pages/meetlist/History'
 import Addmem from '../pages/member/Addmem'
 import loginlist from '../pages/member/loginlist'
 import passchange from '../pages/member/passchange'
+import Meeting from '../pages/meetlist/Meeting'
+import Prepare from '../pages/meetlist/Prepare'
+import AddInformation from '../pages/meetlist/AddInformation'
+import AddMeetInfor from '../pages/meetlist/AddMeetInfor'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
@@ -109,8 +113,20 @@ export default  [
     component: MeetList,
   },
   {
+    path: '/meetlist/Meeting',
+    component: Meeting,
+  },
+  {
+    path: '/meetlist/Prepare',
+    component: Prepare,
+  },
+  {
     path: '/meetlist/History',
     component: History,
+  },
+  {
+    path: '/meetlist/AddInformation',
+    component: AddInformation,
   },
   {
     path: '/member',
