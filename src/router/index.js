@@ -14,6 +14,9 @@ import LogisticsHotel from  '../pages/logistics/hotel/Hotel'
 import MeetEdit from '../pages/meetedit/Meetedit'
 import MeetList from '../pages/meetlist/Index'
 import History from '../pages/meetlist/History'
+import Addmem from '../pages/member/Addmem'
+import loginlist from '../pages/member/loginlist'
+import passchange from '../pages/member/passchange'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
@@ -48,6 +51,7 @@ import Travelrecord from '../pages/logistics/Travelrecord'
 
 import User from '../pages/system/User'
 import Power from '../pages/system/Power'
+import loginuser from '../pages/userlogin/loginuser'
 
 export default  [
   {
@@ -203,10 +207,27 @@ export default  [
     path: '/system/power',
     component: Power,
   },
- {
-    path: '/member/list',
-    component: Member,
-  },
+{
+      path: '/member/list',
+      component: Member,
+    },
+    {
+      path: '/member/add',
+      component: Addmem,
+    },
+    {
+      path: '/member/loginlist',
+      component: loginlist,
+    },
+    {
+      path: '/member/passchange',
+      component: passchange,
+    },
+  {
+    path: '/userlogin/loginuser',
+    component: loginuser,
+  }
+
 ]
 
 
