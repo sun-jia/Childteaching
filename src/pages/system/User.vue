@@ -10,21 +10,21 @@
         <div>
                 <div class="user" >
                 <span style="color:#fff;">搜索用户：</span>
-                <input  v-model="inputusername" placeholder="输入用户名称" style="font-size:14px;width:300px;font-weight:lighter">
+                <input  v-model="inputname" placeholder="输入用户名称" style="font-size:14px;width:300px;font-weight:lighter">
               </div>
 
-              <button class="btn3 icon-sousuo" v-on:click="searcha(inputuserid,inputusername,sexselected,inputage,inputphonenumber,inputremarks,value3)">搜索</button>
+              <button class="btn3 icon-sousuo" v-on:click="searchuserlist(inputuser,inputname,sexselected,inputage,inputcardid,inputremarks,value3)">搜索</button>
 
-              <button type="button" class="btn4 icon-daochu" id="export-table" v-on:click="export2Excel(inputuserid,inputusername,sexselected,inputage,inputphonenumber,inputremarks,value3)">导出</button>
+              <button type="button" class="btn4 icon-daochu" id="export-table" v-on:click="export2Excel(inputuser,inputname,sexselected,inputage,inputcardid,inputremarks,value3)">导出</button>
                <router-view/>
    <table id="userStatistics">
                 <tr>
-                  <th>ID
-                    <input class="input" v-model="inputuserid" placeholder="搜索ID" style="font-size:14px;">
+                  <th>用户名
+                    <input class="input" v-model="inputuser" placeholder="搜索用户" style="font-size:14px;">
                   </th>
                   <th>姓名
-                    <input class="input" v-model="inputusername" placeholder="搜索姓名" style="font-size:14px;">
-                    <!--<p>{{inputusername}}</p>//测试-->
+                    <input class="input" v-model="inputname" placeholder="搜索姓名" style="font-size:14px;">
+                    <!--<p>{{inputNAME}}</p>//测试-->
                   </th>
                   <th>性别
                     <select v-model="sexselected"  style="font-size:14px;">
@@ -37,35 +37,35 @@
                  <th>年龄
                     <input class="input" v-model="inputage" placeholder="输入年龄" style="font-size:14px;">
                     <!--<p>{{inputage}}</p>//测试-->
-                    <i v-show="agesort" class="sort icon-paixushengxu" v-on:click="ageup(inputuserid,inputusername,sexselected,inputage,inputphonenumber,inputremarks,value3)"></i>
-                    <i v-show="!agesort" class="sort icon-paixujiangxu" v-on:click="agedown(inputuserid,inputusername,sexselected,inputage,inputphonenumber,inputremarks,value3)"></i>
+                    <i v-show="agesort" class="sort icon-paixushengxu" v-on:click="ageup(inputuser,inputname,sexselected,inputage,inputcardid,inputremarks,value3)"></i>
+                    <i v-show="!agesort" class="sort icon-paixujiangxu" v-on:click="agedown(inputuser,inputname,sexselected,inputage,inputcardid,inputremarks,value3)"></i>
                   </th>
                   <th>手机号
-                    <input class="input" v-model="inputphonenumber" placeholder="输入手机号" style="font-size:14px;width:120px">
+                    <input class="input" v-model="cardid" placeholder="输入手机号" style="font-size:14px;width:120px">
                     <!--<p>{{inputsex}}</p>//测试-->
                   </th>
                   <th>备注</th>
                   <th>删除用户</th>
                 </tr>
                 <tr v-for="user in userList">
-                  <td>{{user.USERID}}</td>
-                  <td>{{user.USERNAME}}</td>
+                  <td>{{user.USER}}</td>
+                  <td>{{user.NAME}}</td>
                   <td>{{user.SEX}}</td>
                   <td>{{user.AGE}}</td>
-                  <td>{{user.PHONENUMBER}}</td>
+                  <td>{{user.CARDID}}</td>
                    <td>{{user.REMARKS}}</td>
                     <td>
-                    <span v-on:click="deletechange(user.USERID)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
+                    <span v-on:click="deletechange(user.USER)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
                   </td>
                 </tr>
               </table>
               <div class="page">
                   <ul class="pagination pagination-sm"><!--分页-->
-                     <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage,inputuserid,inputusername,sexselected,inputage,inputphonenumber,inputremarks,value3)">上一页</a></li>
+                     <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage,inputuser,inputname,sexselected,inputage,inputcardid,inputremarks,value3)">上一页</a></li>
                      <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage == index} ">
-                        <a class="page-link" href="#" v-on:click="pageChange(index,inputuserid,inputusername,sexselected,inputage,inputphonenumber,inputremarks,value3)">{{index}}</a>
+                        <a class="page-link" href="#" v-on:click="pageChange(index,inputuser,inputname,sexselected,inputage,inputcardid,inputremarks,value3)">{{index}}</a>
                      </li>
-                     <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage,inputuserid,inputusername,sexselected,inputage,inputphonenumber,inputremarks,value3)">下一页</a></li>
+                     <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage,inputuser,inputname,sexselected,inputage,inputcardid,inputremarks,value3)">下一页</a></li>
                      <li class="page-item"><a class="page-link"  href="#">共<i>{{totlepage}}</i>页</a></li>
                   </ul>
               </div>
@@ -85,13 +85,13 @@ export default {
      currentpage: 1,//当前页
      datesort: true,//日期排序
      endTime: '',
+     cardid:'',
      excelData:'',//导出数据
      inputuser:'',
-     inputuserid: '',//输入用户名称
-     inputusername: '',//输入姓名
+     inputname: '',//输入姓名
      inputsex: '',//输入性别
      inputage: '',//输入年龄
-     inputphonenumber: '',//输入手机号
+     inputcardid: '',//输入手机号
      inputremarks: '',//输入备注
      isActive: true,
      agesort: true,//金额排序
@@ -119,12 +119,21 @@ methods:{
         this.userList=res.data.data;
         console.log(res.data);
       }, (err) => {
-        console.log(err)
+        console.log(err);
       })
 },
+  /*getpage :function(){
+    this.$http.get('/aaa/system/system/page')//代替http://localhost:3000/list
+      .then((res) => {
+        this.userList=res.data.data;
+        console.log(res.data);
+      }, (err) => {
+        console.log(err);
+      })
+  },*/
   deletechange: function (a) {
     console.log(a);
-    this.axios.get("/aaa/system/system/deleteuserdata?USERID="+a).then(function(res){
+    this.axios.get("/aaa/system/system/deleteuserdata?USER="+a).then(function(res){
       console.log(res.data);
       if(res.data==1){
         location.reload();
@@ -134,25 +143,25 @@ methods:{
         console.log(error);
       });
   },
-  searcha: function (a1,a2,a3,a4,a5,a6,a7) {
-    if(a7.length!=0){
+  searchuserlist: function (a1,a2,a3,a4,a5,a6,a7) {
+   /* if(a7.length!=0){
       this.startTime=a7[0];
       this.endTime=a7[1];
     }
-   // console.log(this.startTime);
+  console.log(this.startTime);*/
     let fd = new FormData();
-    fd.append('USERID', a1);//传姓名
-    fd.append('USERNAME', a2);//传姓名
+    fd.append('USER', a1);
+    fd.append('NAME', a2);//传姓名
     fd.append('SEX', a3);//传性别
     fd.append('AGE', a4);//传年龄
-    fd.append('PHONENUMBER', a5);//传手机号
+    fd.append('CARDID', a5);
     fd.append('REMARKS', a6);//传备注
-   // fd.append('STARTDATE', this.startTime);//传开始时间
-   // fd.append('ENDDATE', this.endTime);//传结束时间
+  // fd.append('STARTDATE', this.startTime);//传开始时间
+   //fd.append('ENDDATE', this.endTime);//传结束时间
     fd.append('page', this.currentpage);//传当前页
     fd.append('type',this.type);//传类型
-    this.$http.post('/aaa/system/system/queryuserdata', fd).then(body => {
-      this.userList = body.data.data.pageall;
+    this.$http.post('/aaa/system/system/querydata', fd).then(body => {
+     this.userList = body.data.data;
       this.totlepage = body.data.data.totlepage;
       console.log(this.userList);
     })
@@ -160,24 +169,24 @@ methods:{
   ageup:function(a1,a2,a3,a4,a5,a6,a7){//年龄升序
     this.type=4;
     this.agesort=!this.agesort;
-    if(a7.length!=0){
+    /*if(a7.length!=0){
       this.startTime=a7[0];
       this.endTime=a7[1];
     }
-    console.log(this.startTime);
+    console.log(this.startTime);*/
     let fd = new FormData();
-    fd.append('USERID', a1);//传姓名
-    fd.append('USERNAME', a2);//传姓名
+    fd.append('USER', a1);//传姓名
+    fd.append('NAME', a2);//传姓名
     fd.append('SEX', a3);//传性别
     fd.append('AGE', a4);//传年龄
-    fd.append('PHONENUMBER', a5);//传手机号
+    fd.append('CARDID', a5);//传手机号
     fd.append('REMARKS', a6);//传备注
-    fd.append('STARTDATE', this.startTime);//传开始时间
-    fd.append('ENDDATE', this.endTime);//传结束时间
+   // fd.append('STARTDATE', this.startTime);//传开始时间
+   // fd.append('ENDDATE', this.endTime);//传结束时间
     fd.append('page', this.currentpage);//传当前页
     fd.append('type',this.type);//传类型
     console.log(fd.getAll('type'));
-    this.$http.post('/aaa/system/system/queryuserdata', fd).then(body => {
+    this.$http.post('/aaa/system/system/querydata', fd).then(body => {
       this.userList = body.data.data.pageall;
       this.totlepage = body.data.data.totlepage;
       console.log(this.userList);
@@ -193,18 +202,18 @@ methods:{
     }
     console.log(this.startTime);
     let fd = new FormData();
-    fd.append('USERID', a1);//传姓名
-    fd.append('USERNAME', a2);//传姓名
+    fd.append('USER', a1);//传姓名
+    fd.append('NAME', a2);//传姓名
     fd.append('SEX', a3);//传性别
     fd.append('AGE', a4);//传年龄
-    fd.append('PHONENUMBER', a5);//传手机号
+    fd.append('CARDID', a5);//传手机号
     fd.append('REMARKS', a6);//传备注
     fd.append('STARTDATE', this.startTime);//传开始时间
     fd.append('ENDDATE', this.endTime);//传结束时间
     fd.append('page', this.currentpage);//传当前页
     fd.append('type',this.type);//传类型
     console.log(fd.getAll('type'));
-    this.$http.post('/aaa/system/system/queryuserdata', fd).then(body => {
+    this.$http.post('/aaa/system/system/querydata', fd).then(body => {
       this.userList = body.data.data.pageall;
       this.totlepage = body.data.data.totlepage;
       console.log(this.userList);
@@ -222,11 +231,11 @@ methods:{
     }
     console.log(this.startTime);
     let fd = new FormData();
-    fd.append('USERID', a1);//传姓名
-    fd.append('USERNAME', a2);//传姓名
+    fd.append('USER', a1);//传姓名
+    fd.append('NAME', a2);//传姓名
     fd.append('SEX', a3);//传性别
     fd.append('AGE', a4);//传年龄
-    fd.append('PHONENUMBER', a5);//传手机号
+    fd.append('CARDID', a5);//传手机号
     fd.append('REMARKS', a6);//传备注
     fd.append('STARTDATE', this.startTime);//传开始时间
     fd.append('ENDDATE', this.endTime);//传结束时间
@@ -234,8 +243,8 @@ methods:{
     fd.append('type',this.type);//传类型
     console.log(fd.getAll('NAME'));
     console.log(fd.getAll('ENDDATE'));
-    this.$http.post('/aaa/system/system/queryuserdata', fd).then(body => {
-      this.userList = body.data.data.pageall;
+    this.$http.post('/aaa/system/system/querydata', fd).then(body => {
+      this.userList = body.data.data;
       this.totlepage = body.data.data.totlepage;
       console.log(this.userList);
     })
@@ -253,11 +262,11 @@ methods:{
     }
     console.log(this.startTime);
     let fd = new FormData();
-    fd.append('USERID', a1);
-    fd.append('USERNAME', a2);//传姓名
+    fd.append('USER', a1);
+    fd.append('NAME', a2);//传姓名
     fd.append('SEX', a3);//传性别
     fd.append('AGE', a4);//传年龄
-    fd.append('PHONENUMBER', a5);//传手机号
+    fd.append('CARDID', a5);//传手机号
     fd.append('REMARKS', a6);//传备注
     fd.append('STARTDATE', this.startTime);//传开始时间
    fd.append('ENDDATE', this.endTime);//传结束时间
@@ -265,8 +274,8 @@ methods:{
     fd.append('type',this.type);//传类型
    console.log(fd.getAll('NAME'));
      console.log(fd.getAll('ENDDATE'));
-    this.$http.post('/aaa/system/system/queryuserdata', fd).then(body => {
-      this.userList = body.data.data.pageall;
+    this.$http.post('/aaa/system/system/querydata', fd).then(body => {
+      this.userList = body.data.data;
       this.totlepage = body.data.data.totlepage;
       console.log(this.userList);
     })
@@ -291,11 +300,11 @@ methods:{
     }
     // console.log(this.startTime);
     let fd = new FormData();
-    fd.append('USERID', a1);//传姓名
-    fd.append('USERNAME', a2);//传姓名
+    fd.append('USER', a1);//传姓名
+    fd.append('NAME', a2);//传姓名
     fd.append('SEX', a3);//传性别
     fd.append('AGE', a4);//传年龄
-    fd.append('PHONENUMBER', a5);//传手机号
+    fd.append('CARDID', a5);//传手机号
     fd.append('REMARKS', a6);//传备注
     //fd.append('STARTDATE', this.startTime);//传开始时间
     //fd.append('ENDDATE', this.endTime);//传结束时间
@@ -304,8 +313,8 @@ methods:{
     console.log(fd.getAll('NAME'));
     console.log(fd.getAll('STARTDATE'));
     console.log(fd.getAll('ENDDATE'));
-    this.$http.post('/aaa/system/system/queryuserdata', fd).then(body => {
-      this.userList = body.data.data.pageall;
+    this.$http.post('/aaa/system/system/querydata', fd).then(body => {
+      this.userList = body.data.data;
       this.totlepage = body.data.data.totlepage;
       console.log(this.userList);
     })
@@ -316,11 +325,11 @@ methods:{
       this.endTime=a5[1];
     }
     let fd = new FormData();
-    fd.append('USERID', a1);
-    fd.append('USERNAME', a2);//传姓名
+    fd.append('USER', a1);
+    fd.append('NAME', a2);//传姓名
     fd.append('SEX', a3);//传性别
     fd.append('AGE', a4);//传年龄
-    fd.append('PHONENUMBER', a5);//传手机号
+    fd.append('CARDID', a5);//传手机号
     fd.append('REMARKS', a6);//传备注
     fd.append('STARTDATE', this.startTime);//传开始时间
     fd.append('ENDDATE', this.endTime);//传结束时间
@@ -333,17 +342,17 @@ methods:{
         const { export_json_to_excel } = require('@/excel/Export2Excel.js');//引入文件
         const tHeader = ['ID','姓名', '性别','年龄', '联系方式','备注'];
         // 上面设置Excel的表格第一行的标题
-        const filterVal = [ 'USERID','USERNAME', 'SEX','AGE','PHONENUMBER','REMARKS'];
+        const filterVal = [ 'USER','NAME', 'SEX','AGE','CARDID','REMARKS'];
         // 上面的index、phone_Num、school_Name是tableData里对象的属性
         const list = this.excelData;  //把data里的tableData存到list
-        // console.log(list);
+         console.log(list);
         const data = this.formatJson(filterVal, list);
         export_json_to_excel(tHeader, data, '用户表单');
       })
     })//传数据
   },
   formatJson(filterVal, jsonData) {
-    console.log(jsonData);
+    //console.log(jsonData);
     return jsonData.map(v => filterVal.map(j => v[j]));
   }
 },

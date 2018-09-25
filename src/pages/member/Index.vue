@@ -9,7 +9,7 @@
       <tr>
 
         <th>姓名 <input class="input1" v-model="inputname" placeholder="搜索姓名" style="font-size:12px;width:80px"></th>
-        <th>用户名<input class="input1" v-model="inputusername" placeholder="搜素用户" style="font-size:12px;width:80px"></th>
+        <th>用户名<input class="input1" v-model="inputNAME" placeholder="搜素用户" style="font-size:12px;width:80px"></th>
         <th>等级<select v-model="rankselected"  style="font-size:12px;">
           <option disabled value="">选择</option>
           <option value="1" >1级</option>
@@ -44,9 +44,9 @@
                 format="yyyy-MM-dd HH:mm:ss "
                 value-format="yyyy-MM-dd HH:mm:ss">
                 </el-date-picker>
-                <i v-show="datesort" class="sort icon-paixushengxu"  v-on:click="dateup(inputname,inputusername,rankselected,sexselected,inputdepart,inputjob,inputadmin,partyselected,value3)"></i>
-                <i v-show="!datesort" class="sort icon-paixujiangxu"  v-on:click="datedown(inputname,inputusername,rankselected,sexselected,inputdepart,inputjob,inputadmin,partyselected,value3)"></i>
-             
+                <i v-show="datesort" class="sort icon-paixushengxu"  v-on:click="dateup(inputname,inputNAME,rankselected,sexselected,inputdepart,inputjob,inputadmin,partyselected,value3)"></i>
+                <i v-show="!datesort" class="sort icon-paixujiangxu"  v-on:click="datedown(inputname,inputNAME,rankselected,sexselected,inputdepart,inputjob,inputadmin,partyselected,value3)"></i>
+
               </div></th>
               <th>备注</th>
             </tr>
@@ -338,7 +338,7 @@
       border-collapse: collapse;
       width:100%;
       margin-top: 10px;
-      
+
     }
     th{
       font-size: 14px;

@@ -45,7 +45,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="../common/images/user.png" class="img-circle" alt="Avatar">
-              <span>{{ userName }}</span>
+              <span>{{ NAME }}</span>
               <i class="icon-submenu lnr lnr-chevron-down"></i></a>
             <ul class="dropdown-menu">
               <li><a href="#"><i class="lnr lnr-user"></i> <span>个人中心</span></a></li>
@@ -62,7 +62,7 @@
 <script>
   export default {
     name: "Header",
-    props: ['userName'],
+    props: ['NAME'],
     data() {
       return {
         headerMeau: {

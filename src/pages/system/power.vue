@@ -7,18 +7,17 @@
         <div>
           <div class="user">
             <span style="color:#fff;">搜索管理员：</span>
-            <input v-model="inputusername" placeholder="输入管理员名称" style="font-size:14px;width:300px;font-weight:lighter">
+            <input v-model="inputname" placeholder="输入管理员名称" style="font-size:14px;width:300px;font-weight:lighter">
           </div>
-
-          <button class="btn3 icon-sousuo" v-on:click="searcha(inputuserid,inputusername,sexselected,inputage,limits,inputremarks,value3)">搜索</button>
+          <button class="btn3 icon-sousuo" v-on:click="searcha(inputuser,inputname,sexselected,inputage,limits,inputremarks,value3)">搜索</button>
+          <button class="btn5" v-on:click="addto(inputuser)">添加</button>
           <table id="userStatistics">
             <tr>
-              <th>序号</th>
-              <th>ID
-                <input class="input1" v-model="inputuserid" placeholder="搜索ID" style="font-size:14px;">
+              <th>用户ID
+                <input class="input1" v-model="inputuser" placeholder="搜索用户ID" style="font-size:14px;">
               </th>
               <th>姓名
-                <input class="input1" v-model="inputusername" placeholder="搜索姓名" style="font-size:14px;"></th>
+                <input class="input1" v-model="inputNAME" placeholder="搜索姓名" style="font-size:14px;"></th>
 
               <th>性别
                 <select v-model="sexselected" style="font-size:14px;">
@@ -31,74 +30,44 @@
               <th>年龄
                 <input class="input1" v-model="inputage" placeholder="输入年龄" style="font-size:14px;">
                 <!--<p>{{inputage}}</p>//测试-->
-                <i v-show="agesort" class="sort icon-paixushengxu" v-on:click="ageup(inputuserid,inputusername,sexselected,inputage,inputphonenumber,limits,inputremarks,value3)"></i>
-                <i v-show="!agesort" class="sort icon-paixujiangxu" v-on:click="agedown(inputuserid,inputusername,sexselected,inputage,inputphonenumber,limits,inputremarks,value3)"></i>
+                <i v-show="agesort" class="sort icon-paixushengxu" v-on:click="ageup(input,inputname,sexselected,inputage,inputcardid,limits,inputremarks,value3)"></i>
+                <i v-show="!agesort" class="sort icon-paixujiangxu" v-on:click="agedown(inputuser,inputname,sexselected,inputage,inputcardid,limits,inputremarks,value3)"></i>
               </th>
-              <th>超级管理员
-
-              </th>
-              <th> 通知管理 </th>
-              <th> 课程管理 </th>
-              <th> 用户管理 </th>
+              <th>超级管理员</th>
+              <th> 会议管理 </th>
+              <th> 财务管理 </th>
+              <th> 宣传模块 </th>
+              <th> 后勤管理 </th>
+              <th> 成员管理 </th>
               <th> 统计管理 </th>
-              <th> 部门中心 </th>
-              <th> 系统设置 </th>
+              <th> 系统管理 </th>
               <th> 权限管理 </th>
+              <th> 权限修改 </th>
+              <th> 权限移交 </th>
               <th>删除用户</th>
             </tr>
 
             <tr v-for="user in userList" v-bind:key='user.ID'>
-              <td>{{user.ID}}</td>
-              <td>{{user.USERID}}</td>
-              <td>{{user.USERNAME}}</td>
+              <td>{{user.USER}}</td>
+              <td>{{user.NAME}}</td>
               <td>{{user.SEX}}</td>
               <td>{{user.AGE}}</td>
 
               <td>
                 <!-- {{user.REMARKS}} -->
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" checked v-if="user.REMARKS">
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" v-else>
+                <input type="checkbox" @change="user.super" checked v-if="user.limits" checked="user.super==1" ng-disabled="true">
+                <input type="checkbox" @change="user.super" checked v-if="user.limits" checked="user.super==1"  disabled="true">
               </td>
-              <td>
-                <!-- {{user.REMARKS}} -->
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" checked v-if="user.REMARKS">
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" v-else>
-              </td>
-              <td>
-                <!-- {{user.REMARKS}} -->
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" checked v-if="user.REMARKS">
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" v-else>
-              </td>
-              <td>
-                <!-- {{user.REMARKS}} -->
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" checked v-if="user.REMARKS">
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" v-else>
-              </td>
-              <td>
-                <!-- {{user.REMARKS}} -->
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" checked v-if="user.REMARKS">
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" v-else>
-              </td>
-              <td>
-                <!-- {{user.REMARKS}} -->
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" checked v-if="user.REMARKS">
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" v-else>
-              </td>
-              <td>
-                <!-- {{user.REMARKS}} -->
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" checked v-if="user.REMARKS">
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" v-else>
-              </td>
-              <td>
-                <!-- {{user.REMARKS}} -->
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" checked v-if="user.REMARKS">
-                <input type="checkbox" @change="inputChange(user.ID,'REMARKS',$event)" v-else>
-              </td>
-              <td>
 
+
+              <td>
+                <button class="" v-on:click="searcha">修改</button>
               </td>
               <td>
-                <span v-on:click="deletechange(user.USERID)">
+                <button class="" v-on:click="searcha">移交</button>
+              </td>
+              <td>
+                <span v-on:click="deletechange(user.USER)">
                   <i class="delete icon-changyonggoupiaorenshanchu"></i>
                 </span>
               </td>
@@ -108,13 +77,13 @@
             <ul class="pagination pagination-sm">
               <!--分页-->
               <li class="page-item" v-if="currentpage!=1">
-                <a class="page-link" href="#" v-on:click="prepage(currentpage,inputuserid,inputusername,sexselected,inputage,inputphonenumber,limits,inputremarks,value3)">上一页</a>
+                <a class="page-link" href="#" v-on:click="prepage(currentpage,inputUSER,inputNAME,sexselected,inputage,inputCARDID,limits,inputremarks,value3)">上一页</a>
               </li>
               <li class="page-item" v-for="index in pagenums" :key="index" v-bind:class="{ active: currentpage == index} ">
-                <a class="page-link" href="#" v-on:click="pageChange(index,inputuserid,inputusername,sexselected,inputage,inputphonenumber,limits,inputremarks,value3)">{{index}}</a>
+                <a class="page-link" href="#" v-on:click="pageChange(index,inputUSER,inputNAME,sexselected,inputage,inputCARDID,limits,inputremarks,value3)">{{index}}</a>
               </li>
               <li class="page-item" v-if="currentpage!=totlepage">
-                <a class="page-link" href="#" v-on:click="nextpage(currentpage,inputuserid,inputusername,sexselected,inputage,inputphonenumber,limits,inputremarks,value3)">下一页</a>
+                <a class="page-link" href="#" v-on:click="nextpage(currentpage,inputUSER,inputNAME,sexselected,inputage,inputCARDID,limits,inputremarks,value3)">下一页</a>
               </li>
               <li class="page-item">
                 <a class="page-link" href="#">共
@@ -145,94 +114,93 @@
       return {
         userList: [
           {
-            ID: 1,
-            USERID: 45795478,
-            USERNAME: "张三",
+            USER: 45795478,
+            NAME: "张三",
             SEX: "男",
             AGE: "18",
-            PHONENUMBER: "110",
+            CARDID: "110",
             LIMITS: 9,
             REMARKS: "NULL"
           },
           {
-            ID: 2,
-            USERID: 45795478,
-            USERNAME: "李四",
+
+            USER: 45795478,
+            NAME: "李四",
             SEX: "男",
             AGE: "20",
-            PHONENUMBER: "119",
+            CARDID: "119",
             REMARKS: "NULL"
           },
           {
-            ID: 3,
-            USERID: 45795478,
-            USERNAME: "王二麻子",
+
+            USER: 45795478,
+            NAME: "王二麻子",
             SEX: "男",
             AGE: "28",
-            PHONENUMBER: "114",
+            CARDID: "114",
             REMARKS: "NULL"
           },
           {
-            ID: 4,
-            USERID: 45795478,
-            USERNAME: "王二麻子",
+
+            USER: 45795478,
+            NAME: "王二麻子",
             SEX: "男",
             AGE: "28",
-            PHONENUMBER: "114",
+            CARDID: "114",
             REMARKS: "NULL"
           },
           {
-            ID: 5,
-            USERID: 45795478,
-            USERNAME: "王二麻子",
+
+            USER: 45795478,
+            NAME: "王二麻子",
             SEX: "男",
             AGE: "28",
-            PHONENUMBER: "114",
+            CARDID: "114",
             REMARKS: "NULL"
           },
           {
-            ID: 6,
-            USERID: 45795478,
-            USERNAME: "王二麻子",
+
+            USER: 45795478,
+            NAME: "王二麻子",
             SEX: "男",
             AGE: "28",
-            PHONENUMBER: "114",
+            CARDID: "114",
             REMARKS: "NULL"
           },
           {
-            ID: 7,
-            USERID: 45795478,
-            USERNAME: "王二麻子",
+
+            USER: 45795478,
+            NAME: "王二麻子",
             SEX: "男",
             AGE: "28",
-            PHONENUMBER: "114",
+            CARDID: "114",
             REMARKS: "NULL"
           },
           {
-            ID: 8,
-            USERID: 45795478,
-            USERNAME: "王二麻子",
+
+            USER: 45795478,
+            NAME: "王二麻子",
             SEX: "男",
             AGE: "28",
-            PHONENUMBER: "114",
+            CARDID: "114",
             REMARKS: "NULL"
           },
           {
-            ID: 9,
-            USERID: 45795478,
-            USERNAME: "王二麻子",
+
+            USER: 45795478,
+            NAME: "王二麻子",
             SEX: "男",
             AGE: "28",
-            PHONENUMBER: "114",
+            CARDID: "114",
             REMARKS: "NULL"
           },
           {
-            ID: 10,
-            USERID: 45795478,
-            USERNAME: "王二麻子",
+
+            USER: 45795478,
+            NAME: "王二麻子",
             SEX: "男",
             AGE: "28",
-            PHONENUMBER: "114",
+            CARDID: "114",
             REMARKS: "NULL"
           }
         ],
@@ -241,11 +209,11 @@
         datesort: true, // 日期排序
         endTime: "",
         excelData: "", // 导出数据
-        inputuserid: "", // 输入用户名称
-        inputusername: "", // 输入姓名
+        inputUSER: "", // 输入用户名称
+        inputNAME: "", // 输入姓名
         inputsex: "", // 输入性别
         inputage: "", // 输入年龄
-        inputphonenumber: "", // 输入手机号
+        inputCARDID: "", // 输入手机号
         inputremarks: "", // 输入备注
         isActive: true,
         pagenums: [],
@@ -383,6 +351,19 @@
   }
   .btn4:hover {
     background-color: #fc6f4f;
+  }
+  .btn5{
+    width: 80px;
+    padding: 7px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: none;
+    color: white;
+    background-color: #338ffc;
+    float: right;
+    margin-left: 15px;
+    margin-top: 13px;
+    /*margin-bottom: 5px;*/
   }
   .delete:hover {
     color: #c1c1c2;

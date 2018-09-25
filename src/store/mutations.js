@@ -28,10 +28,10 @@ const mutations={
     delUser(){
       state.user=""
       localStorage.setItem("vuex",JSON.stringify(state));    },
-    setUserName:function(state,name){
+    setNAME:function(state,name){
       state.name =name;
       localStorage.setItem("vuex",JSON.stringify(state));    },
-    delUserName(){
+    delNAME(){
       state.name=""
       localStorage.setItem("vuex",JSON.stringify(state));    },
     setUserKind:function(state,kind){

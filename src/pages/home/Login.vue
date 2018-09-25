@@ -5,7 +5,7 @@
       <div class="login_form">
           <li class="login-item">
             <span>用户名：</span>
-            <input type="text" id="username" name="username" class="login_input" v-model="username">
+            <input type="text" id="NAME" name="NAME" class="login_input" v-model="NAME">
             <span id="count-msg" class="error"></span>
           </li>
           <li class="login-item">
@@ -29,13 +29,13 @@
     name: "Login",
     data(){
       return{
-        username:"",
+        NAME:"",
         password:"",
       }
     },
     methods: {
       getLogin () {
-        this.$http.post('/yii/index/login',{ username:this.username,password:this.password })
+        this.$http.post('/yii/index/login',{ NAME:this.NAME,password:this.password })
           .then((res) => {
             console.log(res.data)
             if(res.data.data!=null){

@@ -13,9 +13,9 @@
                 <input  v-model="inputuser" placeholder="输入用户名称" style="font-size:14px;width:300px;font-weight:lighter">
               </div>
 
-              <button class="btn3 icon-sousuo" v-on:click="searcha(inputname,sexselected,inputage,inputphonenumber,inputremarks,value3)">搜索</button>
+              <button class="btn3 icon-sousuo" v-on:click="searcha(inputname,sexselected,inputage,inputCARDID,inputremarks,value3)">搜索</button>
 
-              <button type="button" class="btn4 icon-daochu" id="export-table" v-on:click="export2Excel(inputname,sexselected,inputage,inputphonenumber,inputremarks,value3)">导出</button>
+              <button type="button" class="btn4 icon-daochu" id="export-table" v-on:click="export2Excel(inputname,sexselected,inputage,inputCARDID,inputremarks,value3)">导出</button>
                <router-view/>
    <table id="userStatistics">
                 <tr>
@@ -35,11 +35,11 @@
                  <th>年龄
                     <input class="input1" v-model="inputage" placeholder="输入年龄" style="font-size:14px;">
                     <!--<p>{{inputage}}</p>//测试-->
-                    <i v-show="agesort" class="sort icon-paixushengxu" v-on:click="ageup(inputname,sexselected,inputage,inputphonenumber,inputremarks,value3)"></i>
-                    <i v-show="!agesort" class="sort icon-paixujiangxu" v-on:click="agedown(inputname,sexselected,inputage,inputphonenumber,inputremarks,value3)"></i>
+                    <i v-show="agesort" class="sort icon-paixushengxu" v-on:click="ageup(inputname,sexselected,inputage,inputCARDID,inputremarks,value3)"></i>
+                    <i v-show="!agesort" class="sort icon-paixujiangxu" v-on:click="agedown(inputname,sexselected,inputage,inputCARDID,inputremarks,value3)"></i>
                   </th>
                   <th>手机号
-                    <input class="input1" v-model="inputphonenumber" placeholder="输入手机号" style="font-size:14px;width:120px">
+                    <input class="input1" v-model="inputCARDID" placeholder="输入手机号" style="font-size:14px;width:120px">
                     <!--<p>{{inputsex}}</p>//测试-->
                   </th>
                   <th>备注</th>
@@ -50,20 +50,20 @@
                   <td>{{user.NAME}}</td>
                   <td>{{user.SEX}}</td>
                   <td>{{user.AGE}}</td>
-                  <td>{{user.PHONENUMBER}}</td>
+                  <td>{{user.CARDID}}</td>
                    <td>{{user.REMARKS}}</td>
                     <td>
-                    <span v-on:click="deletechange(user.USERID)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
+                    <span v-on:click="deletechange(user.USER)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
                   </td>
                 </tr>
               </table>
               <div class="page">
                   <ul class="pagination pagination-sm"><!--分页-->
-                     <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage,inputname,sexselected,inputage,inputphonenumber,inputremarks,value3)">上一页</a></li>
+                     <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage,inputname,sexselected,inputage,inputCARDID,inputremarks,value3)">上一页</a></li>
                      <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage == index} ">
-                        <a class="page-link" href="#" v-on:click="pageChange(index,inputname,sexselected,inputage,inputphonenumber,inputremarks,value3)">{{index}}</a>
+                        <a class="page-link" href="#" v-on:click="pageChange(index,inputname,sexselected,inputage,inputCARDID,inputremarks,value3)">{{index}}</a>
                      </li>
-                     <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage,inputname,sexselected,inputage,inputphonenumber,inputremarks,value3)">下一页</a></li>
+                     <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage,inputname,sexselected,inputage,inputCARDID,inputremarks,value3)">下一页</a></li>
                      <li class="page-item"><a class="page-link"  href="#">共<i>{{totlepage}}</i>页</a></li>
                   </ul>
               </div>
@@ -94,7 +94,7 @@ var moment = require('moment');
               NAME: '张三',
               SEX: '男',
               AGE: '18',
-              PHONENUMBER:'110',
+              CARDID:'110',
               REMARKS:'NULL'
             },
             {
@@ -102,7 +102,7 @@ var moment = require('moment');
               NAME: '李四',
               SEX: '男',
               AGE: '20',
-              PHONENUMBER:'119',
+              CARDID:'119',
               REMARKS:'NULL'
             },
             {
@@ -110,7 +110,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             },
             {
@@ -118,7 +118,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             },
              {
@@ -126,7 +126,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             },
              {
@@ -134,7 +134,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             },
              {
@@ -142,7 +142,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             },
              {
@@ -150,7 +150,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             },
              {
@@ -158,7 +158,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             },
              {
@@ -166,7 +166,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             },
             {
@@ -174,7 +174,7 @@ var moment = require('moment');
               NAME: '王二麻子',
               SEX: '男',
               AGE: '28',
-              PHONENUMBER:'114',
+              CARDID:'114',
               REMARKS:'NULL'
             }
           ],
@@ -187,7 +187,7 @@ var moment = require('moment');
           inputname: '',//输入姓名
           inputsex: '',//输入性别
           inputage: '',//输入年龄
-          inputphonenumber: '',//输入手机号
+          inputCARDID: '',//输入手机号
           inputremarks: '',//输入备注
           isActive: true,
           agesort: true,//金额排序
@@ -219,7 +219,7 @@ var moment = require('moment');
       },
        deletechange: function (a) {
           console.log(a);
-          this.axios.get("/yii/system/system/deletedata?USERID="+a).then(function(res){
+          this.axios.get("/yii/system/system/deletedata?USER="+a).then(function(res){
             console.log(res.data);
             if(res.data==1){
                location.reload();
@@ -239,7 +239,7 @@ var moment = require('moment');
           fd.append('NAME', a1);//传姓名
           fd.append('SEX', a2);//传性别
           fd.append('AGE', a3);//传年龄
-          fd.append('PHONENUMBER', a4);//传手机号
+          fd.append('CARDID', a4);//传手机号
           fd.append('REMARKS', a5);//传备注
           //fd.append('ACCOUNT_MODE', a5);//传收款方式
           //fd.append('STARTDATE', this.startTime);//传开始时间
@@ -264,7 +264,7 @@ var moment = require('moment');
           fd.append('NAME', a1);//传姓名
           fd.append('SEX', a2);//传性别
           fd.append('AGE', a3);//传年龄
-          fd.append('PHONENUMBER', a4);//传手机号
+          fd.append('CARDID', a4);//传手机号
           fd.append('REMARKS', a5);//传备注
           //fd.append('CONFERENCEID', a4);//传会议ID
           //fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -292,7 +292,7 @@ var moment = require('moment');
           fd.append('NAME', a1);//传姓名
           fd.append('SEX', a2);//传性别
           fd.append('AGE', a3);//传年龄
-          fd.append('PHONENUMBER', a4);//传手机号
+          fd.append('CARDID', a4);//传手机号
           fd.append('REMARKS', a5);//传备注
           //fd.append('CONFERENCEID', a4);//传会议ID
           //fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -323,7 +323,7 @@ var moment = require('moment');
           fd.append('NAME', a1);//传姓名
           fd.append('SEX', a2);//传性别
           fd.append('AGE', a3);//传年龄
-          fd.append('PHONENUMBER', a4);//传手机号
+          fd.append('CARDID', a4);//传手机号
           fd.append('REMARKS', a5);
           //fd.append('CONFERENCEID', a4);//传会议ID
           //fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -356,7 +356,7 @@ var moment = require('moment');
           fd.append('NAME', a1);//传姓名
           fd.append('SEX', a2);//传性别
           fd.append('AGE', a3);//传年龄
-          fd.append('PHONENUMBER', a4);//传手机号
+          fd.append('CARDID', a4);//传手机号
           fd.append('REMARKS', a5);//传备注
           //fd.append('CONFERENCEID', a4);//传会议ID
           //fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -394,7 +394,7 @@ var moment = require('moment');
           fd.append('NAME', a1);//传姓名
           fd.append('SEX', a2);//传性别
           fd.append('AGE', a3);//传年龄
-          fd.append('PHONENUMBER', a4);//传手机号
+          fd.append('CARDID', a4);//传手机号
           fd.append('REMARKS', a5);
           //fd.append('CONFERENCEID', a4);//传会议ID
           //fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -422,7 +422,7 @@ var moment = require('moment');
           fd.append('NAME', a1);//传姓名
           fd.append('SEX', a2);//传性别
           fd.append('AGE', a3);//传年龄
-          fd.append('PHONENUMBER', a4);//传手机号
+          fd.append('CARDID', a4);//传手机号
           fd.append('REMARKS', a5);//传备注
           //fd.append('CONFERENCEID', a4);//传会议ID
           //fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -437,7 +437,7 @@ var moment = require('moment');
               const { export_json_to_excel } = require('@/excel/Export2Excel.js');//引入文件
               const tHeader = ['姓名', '性别','年龄', '联系方式','备注'];
               // 上面设置Excel的表格第一行的标题
-              const filterVal = [ 'NAME', 'SEX','AGE','PHONENUMBER','REMARKS'];
+              const filterVal = [ 'NAME', 'SEX','AGE','CARDID','REMARKS'];
               // 上面的index、phone_Num、school_Name是tableData里对象的属性
               const list = this.excelData;  //把data里的tableData存到list
               // console.log(list);

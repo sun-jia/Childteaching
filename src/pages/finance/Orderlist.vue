@@ -67,7 +67,7 @@
           <tr v-for="detial in details">
             <td>{{detial.ORDER_NUMBER}}</td>
             <td>{{detial.NAME}}</td>
-            <td>{{detial.USERID}}</td>
+            <td>{{detial.USER}}</td>
             <td>{{detial.CONFERENCEID}}</td>
             <td>{{detial.CREATE_TIME}}</td>
             <td v-if='detial.STATUS==1'>等待支付</td>
@@ -76,7 +76,7 @@
             <td v-if='detial.STATUS==0'>订单取消</td>
             <td v-if='detial.STATUS==3'>已开发票</td>
             <td v-if='detial.STATUS==-1'>订单失效</td>
-            <td style="color: #00AAFF"><el-button type="text" @click="open5(detial.ORDER_NUMBER,detial.NAME,detial.USERID,detial.CONFERENCEID,detial.MONEY,detial.TYPE,detial.CREATE_TIME,detial.STATUS)">详情查看</el-button></td>
+            <td style="color: #00AAFF"><el-button type="text" @click="open5(detial.ORDER_NUMBER,detial.NAME,detial.USER,detial.CONFERENCEID,detial.MONEY,detial.TYPE,detial.CREATE_TIME,detial.STATUS)">详情查看</el-button></td>
           </tr>
         </table>
         <div class="page">
@@ -103,7 +103,7 @@
             {
               ORDER_NUMBER: 1234,
               NAME: 'ring',
-              USERID: 12345678,
+              USER: 12345678,
               CONFERENCEID: '世博',
               CREAT_TIME: '20180725',
               STATUS: 1,
@@ -111,7 +111,7 @@
             {
               ORDER_NUMBER: 1234,
               NAME: 'xu',
-              USERID: 123456,
+              USER: 123456,
               CONFERENCEID: '世',
               CREAT_TIME: '20180727',
               STATUS: 3,
@@ -119,7 +119,7 @@
             {
               ORDER_NUMBER: 1234,
               NAME: 'ring',
-              USERID: 1234567878,
+              USER: 1234567878,
               CONFERENCEID: '亚运',
               CREATE_TIME: '20180729',
               STATUS: 9,
@@ -128,7 +128,7 @@
           eachifo:{
             ORDER_NUMBER: 1234,
             NAME: 'ring',
-            USERID: 1234567878,
+            USER: 1234567878,
             CONFERENCEID: '亚运',
             TYPE:'支付宝',
             MONEY:300,
@@ -191,7 +191,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -215,7 +215,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -237,7 +237,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -260,7 +260,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -285,7 +285,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -310,7 +310,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -328,7 +328,7 @@
           }
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -340,7 +340,7 @@
               const { export_json_to_excel } = require('@/excel/Export2Excel.js');//引入文件
               const tHeader = ['订单号','姓名', '身份证号', '会议ID','交易金额','支付方式','订单日期','订单状态'];
               // 上面设置Excel的表格第一行的标题
-              const filterVal = ['ORDER_NUMBER', 'NAME', 'USERID','CONFERENCEID','MONEY','TYPE','CREATE_TIME','STATUS'];
+              const filterVal = ['ORDER_NUMBER', 'NAME', 'USER','CONFERENCEID','MONEY','TYPE','CREATE_TIME','STATUS'];
               // 上面的index、phone_Num、school_Name是tableData里对象的属性
               const list = this.excelData;  //把data里的tableData存到list
               // console.log(list);
@@ -353,7 +353,7 @@
           console.log(jsonData);
           return jsonData.map(v => filterVal.map(j => v[j]));
         },
-        open5(ordernumber,name,userid,conferenceid,money,type,createtime,status) {
+        open5(ordernumber,name,USER,conferenceid,money,type,createtime,status) {
           // console.log(ordernumber);
           if(type==null){
             type='等待支付';
@@ -396,7 +396,7 @@
               h('i', { style: 'color: teal' }, name),
               h('br'),
               h('span', null, '身份证号 '),
-              h('i', { style: 'color: teal' }, userid),
+              h('i', { style: 'color: teal' }, USER),
               h('br'),
               h('span', null, '会议名称 '),
               h('i', { style: 'color: teal' }, conferenceid),

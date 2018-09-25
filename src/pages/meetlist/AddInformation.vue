@@ -330,7 +330,7 @@
                   <el-option label="6" value="6"></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="房间" v-for="key in parseInt(newHotelForm.ROOMTYPENUM)">
+              <el-form-item label="房间" v-for="key in parseInt(newHotelForm.ROOMTYPENUM)" :key="index">
                 <el-select id="roomType" v-model="newHotelForm.ROOM.ROOMTYPE[key-1]" placeholder="请选择房间类型" v-on:click="addRoomType()">
                   <el-option label="单人标间" value="1"></el-option>
                   <el-option label="双人标间" value="2"></el-option>
