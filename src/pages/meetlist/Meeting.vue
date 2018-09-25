@@ -1,8 +1,8 @@
 <template>
   <div class="display1">
-    <button class="btn1 "  v-bind:class="{ active: isActive }">会议准备</button>
+    <router-link to="/meetlist/Index"><button class="btn1 btn2"  >会议准备</button></router-link>
     <router-link to="/meetlist/Prepare"><button class="btn1 btn2"  >会议筹备</button></router-link>
-    <router-link to="/meetlist/Meeting"><button class="btn1 btn2"  >进行会议</button></router-link>
+    <button class="btn1 "  v-bind:class="{ active: isActive }">进行会议</button>
     <router-link to="/meetlist/History"><button class="btn1 btn2"  >历史会议</button></router-link>
     <div class="display2">
       <div>
@@ -28,139 +28,140 @@
           </el-select>
           <button class="btn3 icon-sousuo" v-on:click="search()">搜索</button>
         </div>
-          <table id="moneyStatistics">
-            <tr>
-              <th>
-                会议名称
-              </th>
-              <th>会议ID
-                <input class="input1" v-model="conferenceid" placeholder="输入会议ID" style="font-size:14px;width:120px;font-weight:lighter;">
-              </th>
-              <th>
-                <div class="block" >
-                  <span class="demonstration">会议日期</span>
-                  <el-date-picker
-                    v-model="value"
-                    type="datetimerange"
-                    :picker-options="pickerOptions"
-                    range-separator="至"
-                    start-placeholder="开始日期"
-                    end-placeholder="结束日期"
-                    align="right"
-                    size="small"
-                    format="yyyy-MM-dd HH:mm:ss "
-                    value-format="yyyy-MM-dd HH:mm:ss">
-                  </el-date-picker>
-                  <i v-show="datesort" class="sort icon-paixushengxu"  v-on:click="dateup()"></i>
-                  <i v-show="!datesort" class="sort icon-paixujiangxu"  v-on:click="datedown()"></i>
-                </div>
-              </th>
-              <th>会议信息添加</th>
-            </tr>
-            <tr v-for="item in conference">
-              <td>{{item.conferenceID}}</td>
-              <td>{{item.conferenceName}}</td>
-              <td>{{item.conferenceDate}}</td>
-              <td style="color:#00AAFF;"><router-link to="/meetlist/AddInformation">添加</router-link></td>
-            </tr>
-          </table>
+        <table id="moneyStatistics">
+          <tr>
+            <th>
+              会议名称
+            </th>
+            <th>会议ID
+              <input class="input1" v-model="conferenceid" placeholder="输入会议ID" style="font-size:14px;width:120px;font-weight:lighter;">
+            </th>
+            <th>
+              <div class="block" >
+                <span class="demonstration">会议日期</span>
+                <el-date-picker
+                  v-model="value"
+                  type="datetimerange"
+                  :picker-options="pickerOptions"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                  align="right"
+                  size="small"
+                  format="yyyy-MM-dd HH:mm:ss "
+                  value-format="yyyy-MM-dd HH:mm:ss">
+                </el-date-picker>
+                <i v-show="datesort" class="sort icon-paixushengxu"  v-on:click="dateup()"></i>
+                <i v-show="!datesort" class="sort icon-paixujiangxu"  v-on:click="datedown()"></i>
+              </div>
+            </th>
+            <th>会议信息添加</th>
+          </tr>
+          <tr v-for="item in conference">
+            <td>{{item.conferenceID}}</td>
+            <td>{{item.conferenceName}}</td>
+            <td>{{item.conferenceDate}}</td>
+            <td style="color:#00AAFF;"><router-link to="/meetlist/AddInformation">添加</router-link></td>
+          </tr>
+        </table>
 
-          <div class="page">
-            <ul class="pagination pagination-sm"><!--分页-->
-              <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage)">上一页</a></li>
-              <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage == index} ">
-                <a class="page-link" href="#" v-on:click="pageChange(index)">{{index}}</a>
-              </li>
-              <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage)">下一页</a></li>
-              <li class="page-item"><a class="page-link"  href="#" >共<i>{{totlepage}}</i>页</a></li>
-            </ul>
-          </div>
+        <div class="page">
+          <ul class="pagination pagination-sm"><!--分页-->
+            <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage)">上一页</a></li>
+            <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage == index} ">
+              <a class="page-link" href="#" v-on:click="pageChange(index)">{{index}}</a>
+            </li>
+            <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage)">下一页</a></li>
+            <li class="page-item"><a class="page-link"  href="#" >共<i>{{totlepage}}</i>页</a></li>
+          </ul>
         </div>
       </div>
     </div>
+  </div>
+
 </template>
 
 <script>
     export default {
-        name: "Index",
-        data(){
-          return{
-            isActive: true,
-            conference:[
-              {
-                conferenceID:1001,
-                conferenceName:'会议1',
-                conferenceDate:'2018-01-24'
-             },
-              {
-                conferenceID:1002,
-                conferenceName:'会议2',
-                conferenceDate:'2017-10-02'
-              },
-              {
-                conferenceID:1003,
-                conferenceName:'会议31',
-                conferenceDate:'2018-08-21'
-              },
-            ],
-            conferenceid:'',
-            currentpage: 1,//当前页
-            datesort: true,//日期排序
-            logCurrentpage:1,//当前页
-            logisticsForm: {
-              hotels:[],
-              restaurants:[],
-              cars:[],
-              dirvers:[],
-          },
-            formLabelWidth: '120px',
-            hotelShow:true,
-            isActive: true,
-            resShow:false,
-            dirverShow:false,
-            carShow:false,
-            inputmeet:'',
-            loading: false,
-            options: [],
-            pickerOptions: {
-              shortcuts: [{
-                text: '最近一周',
-                onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                  picker.$emit('pick', [start, end]);
-                }
-              }, {
-                text: '最近一个月',
-                onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                  picker.$emit('pick', [start, end]);
-                }
-              }, {
-                text: '最近三个月',
-                onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                  picker.$emit('pick', [start, end]);
-                }
-              }]
+      name: "Meeting.vue",
+      data(){
+        return{
+          isActive: true,
+          conference:[
+            {
+              conferenceID:1001,
+              conferenceName:'会议1',
+              conferenceDate:'2018-01-24'
             },
-            states:["会议1","会议2","会议3","会议4","会议5","会议6","会议7"],
-            totlepage: 28,//总页数
-            type: 1,//排序类型，默认日期降序，2为日期升序
-            value:'',
-            visiblepage: 10,//可见页数
-          }
+            {
+              conferenceID:1002,
+              conferenceName:'会议2',
+              conferenceDate:'2017-10-02'
+            },
+            {
+              conferenceID:1003,
+              conferenceName:'会议31',
+              conferenceDate:'2018-08-21'
+            },
+          ],
+          conferenceid:'',
+          currentpage: 1,//当前页
+          datesort: true,//日期排序
+          logCurrentpage:1,//当前页
+          logisticsForm: {
+            hotels:[],
+            restaurants:[],
+            cars:[],
+            dirvers:[],
+          },
+          formLabelWidth: '120px',
+          hotelShow:true,
+          isActive: true,
+          resShow:false,
+          dirverShow:false,
+          carShow:false,
+          inputmeet:'',
+          loading: false,
+          options: [],
+          pickerOptions: {
+            shortcuts: [{
+              text: '最近一周',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '最近一个月',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '最近三个月',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                picker.$emit('pick', [start, end]);
+              }
+            }]
+          },
+          states:["会议1","会议2","会议3","会议4","会议5","会议6","会议7"],
+          totlepage: 28,//总页数
+          type: 1,//排序类型，默认日期降序，2为日期升序
+          value:'',
+          visiblepage: 10,//可见页数
+        }
       },
       methods:{
         //取消
         concel:function(){
 
-       },
+        },
         //确定
         submit:function(){
 
@@ -252,6 +253,7 @@
         },
       },
     }
+
 </script>
 
 <style scoped>
@@ -351,7 +353,7 @@
     text-align: center;
   }
   /*.el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{*/
-    /*width:360px !important;*/
+  /*width:360px !important;*/
   /*}*/
   .search{
     /*width:160px;*/
@@ -375,3 +377,4 @@
 
 
 </style>
+

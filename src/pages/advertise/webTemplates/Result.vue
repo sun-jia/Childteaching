@@ -83,11 +83,12 @@
            getdatas(){
              let _this=this
              // console.log(_this.$route.query.sitename)
-             this.$http.post('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/getdatas',{
+             this.$http.post('/yii/advertise/templates/getdatas',{
                  sitename:_this.$route.query.sitename
              }).then(function(res){
 
                _this.alldata=JSON.parse(res.data.datas)
+               console.log("==================");
                console.log(_this.alldata);
                _this.renderdatas()
              })
@@ -215,7 +216,7 @@
     }
   .el-notification{width: 220px!important;height: 300px!important;}
    #index{padding:0px 20px}
-  .topImg{background-image: url("../../common/img/body.jpg");background-repeat: no-repeat;}
+  .topImg{background-image: url("../../../common/img/body.jpg");background-repeat: no-repeat;}
   .banners{height: 200px;}
   .carouselColor{background-color: azure}
 

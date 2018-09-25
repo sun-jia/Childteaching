@@ -49,24 +49,25 @@
         mounted(){
 
             var that=this
-            this.$http.get('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/getmysite').then(function (res) {
-                // console.log(res.data)
-                that.sitename=res.data
+            this.$http.get('/yii/advertise/templates/getmysite').then(function (res) {
+                console.log(res.data)
+                for (let i in res.data) {
+                  that.sitename.push(res.data[i]); //属性
+                }
             })
         },
         methods: {
           handleEdit(index, row) {
-
               this.$router.push({path:`/result`,query:{sitename:row.sitename}})
           },
           handleDelete(index, row) {
             // console.log(typeof  row.sitename);
-            this.$http.get('http://127.0.0.1:8081/clubApi/backend/web/index.php/advertise/templates/delmysite', {
+            this.$http.get('/yii/advertise/templates/delmysite', {
               params: {
                 sitename:row.sitename
               }
             }).then(function (res) {
-               // console.log(res.data)
+               console.log(res.data)
                window.location.reload()
             })
           }

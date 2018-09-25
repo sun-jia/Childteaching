@@ -1,31 +1,49 @@
 <template>
   <div class="display1">
-    <router-link  to="/money"> <button class="btn1 " >订单管理</button></router-link>
+    <router-link  to="/finance/Index"> <button class="btn1 " >订单管理</button></router-link>
     <button class="btn1 btn2"  v-bind:class="{ active: isActive }">发票管理</button>
     <!--<button class="btn3 icon-sousuo">搜索</button>-->
     <div class="display2">
         <div class="meeting" >
-          <span style="color:#fff;">搜索会议：</span><input  v-model="inputmeeeting2" placeholder="输入会议名称" style="font-size:14px;width:300px;font-weight: lighter">
+          <span style="color:#fff;">搜索会议：</span>
+          <el-select
+            v-model="inputmeeting2"
+            filterable
+            multiple
+            remote
+            reserve-keyword
+            size="small"
+            placeholder="请输入会议关键词"
+            :remote-method="remoteMethod"
+            :loading="loading"
+          >
+            <el-option
+              v-for="item in options4"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+          <button class="btn3 icon-sousuo" v-on:click="searcha()">搜索</button>
         </div>
-        <button class="btn3 icon-sousuo" v-on:click="searcha()">搜索</button>
         <router-link to="/neworder"><button class="btn4 icon-jiajianzujianjiahao" > 新建发票</button></router-link>
         <router-view/>
         <table >
           <tr>
             <th>姓名
-              <input class="input1" v-model="inputname2" placeholder="搜索姓名" style="font-size:14px;">
+              <input class="input1" v-model="inputname2" placeholder="搜索姓名" style="font-size:14px;font-weight:lighter;">
               <!--<p>{{inputname2}}</p>//测试-->
             </th>
             <th>身份证号
-              <input  v-model="inputidentity2" placeholder="输入身份证号" style="font-size:14px;width:200px;">
+              <input  v-model="inputidentity2" placeholder="输入身份证号" style="font-size:14px;width:120px;font-weight:lighter;">
               <!--<p>{{inputidentity2}}</p>//测试-->
             </th>
             <th>单位
-              <input class="input1" v-model="inputcompany" placeholder="搜索单位" style="font-size:14px;">
+              <input class="input1" v-model="inputcompany" placeholder="搜索单位" style="font-size:14px;font-weight:lighter;">
               <!--<p>{{inputcompany}}</p>//测试-->
             </th>
             <th>金额
-              <input class="input1" v-model="inputmoney2" placeholder="输入金额" style="font-size:14px;">
+              <input class="input1" v-model="inputmoney2" placeholder="输入金额" style="font-size:14px;font-weight:lighter;">
               <!--<p>{{inputmoney2}}</p>//测试-->
               <i v-show="moneysort" class="sort icon-paixushengxu" v-on:click="moneyup()"></i>
               <i v-show="!moneysort" class="sort icon-paixujiangxu" v-on:click="moneydown()"></i>
@@ -51,7 +69,7 @@
             <td>{{detial.IDENTITY}}</td>
             <td>{{detial.company}}</td>
             <td>{{detial.amount}}</td>
-            <td>{{detial.accounts}}</td>
+            <!--<td>{{detial.accounts}}</td>-->
             <td>{{detial.date}}</td>
           </tr>
         </table>
@@ -80,83 +98,64 @@
             {name: 'ling', IDENTITY: 25435885, company: '北京师范大学', amount: 500, accounts: '会费', date: '20180830'},
             {name: 'xu', IDENTITY: 15674885, company: '华东师范大学', amount: 400, accounts: '住宿', date: '20180727'}
           ],
-          moneysort:true,//金额排序
-          datesort:true,//日期排序
-          showmoney: true,
-          showinvoice: false,
-          showFirstText:true,//显示上一页
-          showNextText:true,//显示下一页
-          inputmeeeting2:'',//输入会议名称
+          pickerOptions1: {
+            shortcuts: [{
+              text: '最近一周',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '最近一个月',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '最近三个月',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                picker.$emit('pick', [start, end]);
+              }
+            }]
+          },
+          currentpage: 1,//当前页
+          dateselect: '',//时间数组
+          datesort: true,//日期排序
+          endTime2: '',
+          inputmeeting2: '',//输入会议名称
           inputname2: '',//输入姓名
           inputidentity2: '',//输入身份证号
           inputcompany: '',//发票单位
           inputmoney2: '',//输入金额
+          isActive: true,
           kindselected2: '',//费用下拉列表
+          list: [],
+          loading: false,
+          moneysort: true,//金额排序
+          options4: [],
           payselected2: '',//支付下拉列表
           startTime2: '',
-          endTime2: '',
-          isActive:true,
-          type:1,//排序类型，默认日期降序，2为日期升序，3为金额降序，4为金额升序
-          currentpage: 1,//当前页
+          showmoney: true,
+          showinvoice: false,
+          showFirstText: true,//显示上一页
+          showNextText: true,//显示下一页
+          states:["会议1","会议2","会议3","会议4","会议5","会议6","会议7"],
+          type: 1,//排序类型，默认日期降序，2为日期升序，3为金额降序，4为金额升序
           totlepage: 28,//总页数
-          visiblepage:10,//可见页数
-          option: {
-            type: 'day',
-            week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-            month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            format: 'YYYY-MM-DD',
-            placeholder: '选择日期',
-            inputStyle: {
-              'display': 'inline-block',
-              'padding': '3px',
-              'line-height': '22px',
-              'font-size': '14px',
-              'border': '2px solid #fff',
-              'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-              'border-radius': '2px',
-              'color': '#5F5F5F',
-              'width': '90px',
-            },
-            color: {
-              header: '#ccc',
-              headerText: '#f00'
-            },
-            buttons: {
-              ok: 'Ok',
-              cancel: 'Cancel'
-            },
-            overlayOpacity: 0.5, // 0.5 as default
-            dismissible: true // as true as default
-          },
-          timeoption: {
-            type: 'min',
-            week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-            month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            format: 'YYYY-MM-DD HH:mm'
-          },
-          multiOption: {
-            type: 'multi-day',
-            week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-            month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            format: "YYYY-MM-DD HH:mm"
-          },
-          limit: [
-            //   {
-            //   type: 'weekday',
-            //   available: [1, 2, 3, 4, 5]
-            // },
-            {
-              type: 'fromto',
-              from: this.start,
-              to: this.nowTime,
-            }],
-          dateBodyClass: 'date-body'
+          visiblepage: 10,//可见页数
         }
       },
       methods: {
         deletechange: function (a) {
           console.log(a);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/deletedata?DATAID="+a).then(function(res){
+          this.axios.get("/yii/finance/finance/deletedata?DATAID="+a).then(function(res){
             console.log(res.data);
             if(res.data==1){
               location.reload();
@@ -175,7 +174,7 @@
           fd.append('ACCOUNT_MODE', a5);//传收款方式
           fd.append('STRTDATE', a6);//传开始时间
           fd.append('ENDDATE', a7);//传结束时间
-          this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data;
           })
         },
@@ -183,7 +182,7 @@
           this.type=4;
           this.moneysort=!this.moneysort;
           console.log(this.moneysort);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+          this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
           })
@@ -192,7 +191,7 @@
           this.type=3;
           this.moneysort=!this.moneysort;
           console.log(this.moneysort);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+          this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
           })
@@ -202,7 +201,7 @@
           console.log(this.type);
           this.datesort=!this.datesort;
           console.log(this.datesort);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+          this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
           })
@@ -222,7 +221,7 @@
             // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
           }
           console.log(page);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+page+"&&type="+this.type).then(body => {
+          this.axios.get("/yii/finance/page?page="+page+"&&type="+this.type).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -235,7 +234,7 @@
             // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
           }
           console.log(page);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+page+"&&type="+this.type).then(body => {
+          this.axios.get("/yii/finance/page?page="+page+"&&type="+this.type).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -248,22 +247,38 @@
             // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
           }
           console.log(page);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+page+"&&type="+this.type).then(body => {
+          this.axios.get("/yii/finance/page?page="+page+"&&type="+this.type).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
           })//测试
         },
+        remoteMethod(query) {
+          if (query !== '') {
+            this.loading = true;
+            setTimeout(() => {
+              this.loading = false;
+              this.options4 = this.list.filter(item => {
+                return item.label.toLowerCase()
+                  .indexOf(query.toLowerCase()) > -1;
+              });
+            }, 200);
+          } else {
+            this.options4 = [];
+          }
+        }
       },
       components: {
-        'date-picker': myDatepicker
       },
       mounted() {
-        this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page=1&&type="+this.type).then(body => {
+        this.axios.get("/yii/finance/page?page=1&&type="+this.type).then(body => {
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
           console.log(this.details);
-        })//测试
+        });//测试
+        this.list = this.states.map(item => {
+          return { value: item, label: item };
+        });
       },
       computed: {
         //计算属性：返回页码数组，这里会自动进行脏检查，不用$watch();
@@ -298,7 +313,7 @@
 
 <style scoped>
   .display1{
-    padding-left:20px;
+    /*padding-left:20px;*/
     padding-top:10px;
   }
   .display2{
@@ -330,7 +345,7 @@
     border-collapse: collapse;
     width:100%;
     margin-top: 10px;
-    margin-left: 20px；
+    /*margin-left: 20px;*/
   }
   th{
     font-size: 14px;
@@ -371,20 +386,18 @@
   }
   .btn3{
     width:80px;
-    padding:7px;
+    padding:5px;
     font-size: 14px;
     border-radius: 3px;
     border:none;
     color:white;
     background-color:#338FFC ;
-    float: left;
-    margin-left: 15px;
-    margin-top:13px;
-    /*margin-bottom: 5px;*/
+    float: right;
+    margin-left: 5px;
   }
-  .btn3:hover{
-    background-color:#5FA7FE;
-  }
+  /*.btn3:hover{*/
+  /*background-color:#5FA7FE;*/
+  /*}*/
   .btn4{
     width:90px;
     padding:7px;
@@ -395,7 +408,7 @@
     background-color:#FA4E28 ;
     float: right;
     /*margin-left: 15px;*/
-    margin-top: 13px;
+    margin-top: 20px;
     /*margin-bottom: 5px;*/
   }
   .btn4:hover{
@@ -407,4 +420,7 @@
   .page{
     text-align: center;
   }
+  /*.el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{*/
+    /*width:360px !important;*/
+  /*}*/
 </style>

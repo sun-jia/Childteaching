@@ -2,32 +2,56 @@
 import Home from '../pages/home/Index.vue'
 import WebAdvertise from '../pages/advertise/webIndex'
 import H5Advertise from '../pages/advertise/h5Index'
-import Finance from  '../pages/finance/Index'
+import Finance from '../pages/finance/Index'
+import Charlist from '../pages/finance/Charlist'
+import Orderlist from '../pages/finance/Orderlist'
+import Invoice from '../pages/finance/Invoice'
 import Logistics from  '../pages/logistics/Index'
-import LogisticsRestaurant from  '../pages/logistics/Restaurant'
-import LogisticsBus from  '../pages/logistics/Bus'
-import LogisticsHotel from  '../pages/logistics/Hotel'
+import LogisticsRestaurant from  '../pages/logistics/restaurant/Restaurant'
+import LogisticsBus from  '../pages/logistics/bus/Bus'
+import LogisticsHotel from  '../pages/logistics/hotel/Hotel'
 
-import MeetEdit from '../pages/meetedit/Index'
+import MeetEdit from '../pages/meetedit/Meetedit'
 import MeetList from '../pages/meetlist/Index'
+import History from '../pages/meetlist/History'
+import Meeting from '../pages/meetlist/Meeting'
+import Prepare from '../pages/meetlist/Prepare'
+import AddInformation from '../pages/meetlist/AddInformation'
+import AddMeetInfor from '../pages/meetlist/AddMeetInfor'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
 import Carousel from '../pages/home/Carousel.vue'
-import ATemplates from '../pages/aTemplates/Index'
-import SelectTemp from '../pages/aTemplates/SelectTemp'
-import Result from '../pages/aTemplates/Result'
-
+import ATemplates from '../pages/advertise/webTemplates/Index'
+import SelectTemp from '../pages/advertise/webTemplates/SelectTemp'
+import Result from '../pages/advertise/webTemplates/Result'
 /*映射*/
-import money from '@/pages/finance/money'
-import invoice from '@/pages/finance/invoice'
-import neworder from '@/pages/finance/neworder'
+
+// import Index from '../pages/finance/Index'
+// import Charlist from '../pages/finance/Charlist'
+// import Orderlist from '../pages/finance/Orderlist'
+// import Neworder from '@/pages/finance/Neworder'
 
 // Vue.use(VueRouter)   //注册
 /*映射*/
 
 import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
+
+/*映射*/
+import Neworder from '../pages/finance/Neworder'
+
+import Addbus from '../pages/logistics/Addbus'
+import Alterbus from '../pages/logistics/Alterbus'
+import Driverlist from '../pages/logistics/Driverlist'
+import Adddriver from '../pages/logistics/Adddriver'
+import Alterdriver from '../pages/logistics/Alterdriver'
+import Travelrecord from '../pages/logistics/Travelrecord'
+
+
+
+import User from '../pages/system/User'
+import Power from '../pages/system/Power'
 
 export default  [
   {
@@ -54,10 +78,10 @@ export default  [
     path: '/finance',
     component: Finance,
   },
-  {
-    path: '/frontend',
-    component: Frontend,
-  },
+  // {
+  //   path: '/frontend',
+  //   component: Frontend,
+  // },
   {
     path: '/logistics',
     component: Logistics,
@@ -85,6 +109,22 @@ export default  [
     component: MeetList,
   },
   {
+    path: '/meetlist/Meeting',
+    component: Meeting,
+  },
+  {
+    path: '/meetlist/Prepare',
+    component: Prepare,
+  },
+  {
+    path: '/meetlist/History',
+    component: History,
+  },
+  {
+    path: '/meetlist/AddInformation',
+    component: AddInformation,
+  },
+  {
     path: '/member',
     component: Member,
   },
@@ -93,11 +133,7 @@ export default  [
     component: Statics,
   },
   {
-    path: '/finance',
-    component: Finance,
-  },
-  {
-    path: '/syetem',
+    path: '/system',
     component: System,
   },
   {
@@ -127,7 +163,66 @@ export default  [
     path: '/result',
     component: Result,
   },
-
+  {
+    path:'/logistics/addbus',
+    component:Addbus,
+  },
+  {
+    path:'/logistics/alterbus',
+    component:Alterbus,
+  },
+  {
+    path:'/logistics/driverlist',
+    component:Driverlist,
+  },
+  {
+    path:'/logistics/adddriver',
+    component:Adddriver,
+  },
+  {
+    path:'/logistics/alterdriver',
+    component:Alterdriver,
+  },
+  {
+    path:'/logistics/travelrecord',
+    component:Travelrecord,
+  },
+  {
+    path: '/finance/Invoice',
+    component: Invoice,
+  },
+  {
+  path: '/finance/Index',
+    component: Finance,
+  },
+  // {
+  //   path: '/finance/neworder',
+  //   component: neworder,
+  // },
+  {
+    path: '/finance/charlist',
+    component: Charlist,
+  },
+  {
+    path: '/finance/orderlist',
+    component: Orderlist,
+  },
+  {
+    path: '/system/Index',
+    component: System,
+  },
+ {
+    path: '/system/user',
+    component: User,
+  },
+ {
+    path: '/system/power',
+    component: Power,
+  },
+ {
+    path: '/member/list',
+    component: Member,
+  },
 ]
 
 

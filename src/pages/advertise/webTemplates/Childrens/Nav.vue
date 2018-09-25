@@ -12,7 +12,7 @@
       <el-menu-item index="0">今天是{{timeNow |normalTime}}</el-menu-item>
       v-for
       <el-menu-item  v-for="(item,index) in items"  :key="index" :index="index+1+''">{{item}}</el-menu-item>
-      <el-submenu :index="num+'-'+index1" v-for="(item1,index1) in subitems" >
+      <el-submenu :index="num+'-'+index1" v-for="(item1,index1) in subitems"  :key="index" >
          <template slot="title">{{Object.keys(item1)[0]}}</template>
          <el-menu-item  v-for="(item2,index2) in Object.values(item1)[0]"  :key="index2" :index="num+'-'+index1+index2+1+''">{{item2}}</el-menu-item>
       </el-submenu>
@@ -64,7 +64,7 @@
                   //有待完善
                }
           })
-          console.log(newValue)
+          // console.log(newValue)
           this.name=newValue.name
           this.address=newValue.address
           this.time=newValue.time

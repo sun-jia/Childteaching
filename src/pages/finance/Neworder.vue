@@ -5,7 +5,7 @@
       <hr>
     </div>
     <div class="form">
-        <span >输入会议名称：<input v-model="conference" placeholder=""></span> <br>
+        <span >输入会议名称：<input v-model="conference" placeholder="" style="width:300px"></span> <br>
         <span >输入姓名：<input v-model="name" placeholder="如张三"></span> <br>
         <span  style="margin-top: 10px;">输入身份证号：<input v-model="identity" placeholder="共18位" style="width:200px;"></span><br>
         <span >
@@ -128,7 +128,7 @@
             fd.append('ACCOUNT_TYPE', money);//传消费类型
             fd.append('ACCOUNT_MODE', account_mode);//传支付方式
             fd.append('STRTDATE', date);//传日期
-            this.$http.post('http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/querydata', fd).then
+            this.$http.post('/yii/finance/finance/querydata', fd).then
               (function(res){
                 console.log(res.data);
               });

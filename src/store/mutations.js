@@ -12,6 +12,7 @@ const state={
 	sider:JSON.parse(localStorage.getItem("vuex"))?JSON.parse(localStorage.getItem("vuex"))['sider']:false,
   login:JSON.parse(localStorage.getItem("vuex"))?JSON.parse(localStorage.getItem("vuex"))['login']:true,
   Loading:JSON.parse(localStorage.getItem("vuex"))?JSON.parse(localStorage.getItem("vuex"))['Loading']:false,
+  Smart:false
 };
 
 const mutations={
@@ -56,8 +57,11 @@ const mutations={
       localStorage.setItem("vuex",JSON.stringify(state));    },
     hideLoading(state){
       state.Loading=false
-      localStorage.setItem("vuex",JSON.stringify(state));
-    },
+      localStorage.setItem("vuex",JSON.stringify(state));    },
+    showSmart(state){
+      state.Smart=true                                      },
+    hideSmart(state){
+      state.Smart=false                                     },
 };
 
 export default{
