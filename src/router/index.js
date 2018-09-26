@@ -5,6 +5,7 @@ import H5Advertise from '../pages/advertise/h5Index'
 import Finance from '../pages/finance/Index'
 import Charlist from '../pages/finance/Charlist'
 import Orderlist from '../pages/finance/Orderlist'
+import Invoice from '../pages/finance/Invoice'
 import Logistics from  '../pages/logistics/Index'
 import LogisticsRestaurant from  '../pages/logistics/restaurant/Restaurant'
 import LogisticsBus from  '../pages/logistics/bus/Bus'
@@ -13,6 +14,10 @@ import LogisticsHotel from  '../pages/logistics/hotel/Hotel'
 import MeetEdit from '../pages/meetedit/Meetedit'
 import MeetList from '../pages/meetlist/Index'
 import History from '../pages/meetlist/History'
+import Meeting from '../pages/meetlist/Meeting'
+import Prepare from '../pages/meetlist/Prepare'
+import AddInformation from '../pages/meetlist/AddInformation'
+import AddMeetInfor from '../pages/meetlist/AddMeetInfor'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
@@ -31,8 +36,7 @@ import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
 
 /*映射*/
-import Invoice from '@/pages/finance/Invoice'
-import Neworder from '@/pages/finance/Neworder'
+import Neworder from '../pages/finance/Neworder'
 
 import Addbus from '../pages/logistics/Addbus'
 import Alterbus from '../pages/logistics/Alterbus'
@@ -102,8 +106,20 @@ export default  [
     component: MeetList,
   },
   {
+    path: '/meetlist/Meeting',
+    component: Meeting,
+  },
+  {
+    path: '/meetlist/Prepare',
+    component: Prepare,
+  },
+  {
     path: '/meetlist/History',
     component: History,
+  },
+  {
+    path: '/meetlist/AddInformation',
+    component: AddInformation,
   },
   {
     path: '/member',
@@ -114,7 +130,7 @@ export default  [
     component: Statics,
   },
   {
-    path: '/syetem',
+    path: '/system',
     component: System,
   },
   {
@@ -190,7 +206,7 @@ export default  [
   },
   {
     path: '/system/Index',
-    component: Index,
+    component: System,
   },
  {
     path: '/system/user',

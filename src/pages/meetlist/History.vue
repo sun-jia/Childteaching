@@ -1,6 +1,8 @@
 <template>
   <div class="display1">
-    <router-link to="/meetList"><button class="btn1 ">已经发布</button></router-link>
+    <router-link to="/meetlist"><button class="btn1 btn2"  >会议准备</button></router-link>
+    <router-link to="/meetlist/Prepare"><button class="btn1 btn2"  >会议筹备</button></router-link>
+    <router-link to="/meetlist/Meeting"><button class="btn1 btn2"  >进行会议</button></router-link>
     <button class="btn1 btn2"    v-bind:class="{ active: isActive }" >历史会议</button>
     <div class="display2">
       <div>
@@ -53,16 +55,12 @@
                 <i v-show="!datesort" class="sort icon-paixujiangxu"  v-on:click="datedown()"></i>
               </div>
             </th>
-            <th>会议宣传</th>
-            <th>后勤管理</th>
-            <th>财务管理</th>
+            <th>会议信息</th>
           </tr>
           <tr v-for="item in conference">
             <td>{{item.conferenceID}}</td>
             <td>{{item.conferenceName}}</td>
             <td>{{item.conferenceDate}}</td>
-            <td style="color:#00AAFF;">查看</td>
-            <td style="color:#00AAFF;">查看</td>
             <td style="color:#00AAFF;">查看</td>
           </tr>
         </table>
