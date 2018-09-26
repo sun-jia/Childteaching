@@ -61,7 +61,7 @@
             <td>{{item.conferenceID}}</td>
             <td>{{item.conferenceName}}</td>
             <td>{{item.conferenceDate}}</td>
-            <td style="color:#00AAFF;"><router-link to="/meetlist/AddInformation">添加</router-link></td>
+            <td style="color:#00AAFF;"><router-link to="/meetlist/AddPrograssInfor">添加</router-link></td>
           </tr>
         </table>
 
@@ -83,7 +83,7 @@
 
 <script>
     export default {
-      name: "Meeting.vue",
+      name: "Prograss.vue",
       data(){
         return{
           isActive: true,

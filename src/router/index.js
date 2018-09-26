@@ -14,10 +14,11 @@ import LogisticsHotel from  '../pages/logistics/hotel/Hotel'
 import MeetEdit from '../pages/meetedit/Meetedit'
 import MeetList from '../pages/meetlist/Index'
 import History from '../pages/meetlist/History'
-import Meeting from '../pages/meetlist/Meeting'
+import Meeting from '../pages/meetlist/Prograss'
 import Prepare from '../pages/meetlist/Prepare'
 import AddInformation from '../pages/meetlist/AddInformation'
-import AddMeetInfor from '../pages/meetlist/AddMeetInfor'
+import AddMeetInfor from '../pages/meetlist/AddPrepareInfor'
+import AddPrograssInfor from '../pages/meetlist/AddPrograssInfor'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
@@ -123,6 +124,14 @@ export default  [
   {
     path: '/meetlist/AddInformation',
     component: AddInformation,
+  },
+  {
+    path: '/meetlist/AddPrepareInfor',
+    component: AddMeetInfor,
+  },
+  {
+    path: '/meetlist/AddPrograssInfor',
+    component: AddPrograssInfor,
   },
   {
     path: '/member',

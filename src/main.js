@@ -52,6 +52,11 @@ Vue.use(VueAxios,axios)//注册
 // Vue.use(VueResource)
 Vue.use(Vuerouter)
 
+//上传
+import uploader from 'vue-simple-uploader'
+
+Vue.use(uploader)
+
 //滚动
 var vueSmoothScroll = require('vue-smoothscroll');
 Vue.use(vueSmoothScroll);

@@ -435,6 +435,8 @@
           });
         },
         x_control:function () {
+
+          // console.log(document.getElementById("num_x").value);
           if (document.getElementById("num_x").value == 'ACCOUNT_MODE') {
             document.getElementById("num_y").options[2].disabled= true;
             document.getElementById("num_y").options[3].disabled= true;

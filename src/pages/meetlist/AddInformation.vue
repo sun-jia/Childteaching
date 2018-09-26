@@ -1,8 +1,20 @@
 <template>
     <div class="display  col-md-12">
         <!--顶部-->
-        <div class="top">
+        <div class="top col-md-12">
           <span>会议准备信息填写</span>
+          <el-dropdown size="medium" style="float:right;" split-button type="primary">
+            <!--<span class="el-dropdown-link">-->
+              <!--页面菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+            <!--</span>-->
+            页面菜单
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item><router-link to="/meetlist/AddInformation">会议准备</router-link></el-dropdown-item>
+              <el-dropdown-item><router-link to="/meetlist/AddPrepareInfor">会议筹备</router-link></el-dropdown-item>
+              <el-dropdown-item><router-link to="/meetlist/AddPrograssInfor">会议进行</router-link></el-dropdown-item>
+              <el-dropdown-item>会议进行</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
           <hr>
         </div>
         <div class="left col-md-10">
@@ -54,45 +66,45 @@
               <div class="col-md-11">
                 <el-form :model="logisticsForm">
                   <div  class="add" v-show="dirverShow">
-                <span class="search icon-sousuo">
-                  <input class="input2 " v-model="hotelInfor" placeholder="输入关键词" >
-                 </span>
-                    <br>
-                    <el-table
-                      ref="multipleTableOne"
-                      :data="dirvers"
-                      tooltip-effect="dark"
-                      style="width: 100%"
-                      @selection-change="dirverHandleSelectionChange">
-                      <el-table-column
-                        type="selection"
-                        width="80">
-                      </el-table-column>
-                      <el-table-column
-                        prop="name"
-                        label="姓名"
-                        width="200">
-                      </el-table-column>
-                      <el-table-column
-                        prop="tel"
-                        label="联系方式"
-                        show-overflow-tooltip>
-                      </el-table-column>
-                    </el-table>
-                    <div style="margin-top: 20px">
-                      <el-button class="icon-jiajianzujianjiahao"  style="margin-left:10px;font-size:14px;color:#2798FC;"  @click="dirverDialogVisible = true">新增</el-button>
-                      <el-button @click="toggleSelectionOne()" style="margin-left:10px;">取消选择</el-button>
-                    </div>
-                    <div class="page">
-                      <ul class="pagination pagination-sm"><!--分页-->
-                        <li class="page-item" v-if="logCurrentpage!=1"><span class="page-link" href="#" v-on:click="prepageLog(logCurrentpage)">上一页</span></li>
-                        <li class="page-item" v-for="index in pagenumsLog" v-bind:class="{ active: logCurrentpage == index} ">
-                          <span class="page-link" href="#" v-on:click="pageChangeLog(index)">{{index}}</span>
-                        </li>
-                        <li class="page-item" v-if="logCurrentpage!=totlepage"><span class="page-link"  href="#"  v-on:click="nextpageLog(logCurrentpage)">下一页</span></li>
-                        <li class="page-item"><span class="page-link"  href="#">共<i>{{totlepage}}</i>页</span></li>
-                      </ul>
-                    </div>
+                    <span class="search icon-sousuo">
+                      <input class="input2 " v-model="hotelInfor" placeholder="输入关键词" >
+                     </span>
+                      <br>
+                      <el-table
+                        ref="multipleTableOne"
+                        :data="dirvers"
+                        tooltip-effect="dark"
+                        style="width: 100%"
+                        @selection-change="dirverHandleSelectionChange">
+                        <el-table-column
+                          type="selection"
+                          width="80">
+                        </el-table-column>
+                        <el-table-column
+                          prop="name"
+                          label="姓名"
+                          width="200">
+                        </el-table-column>
+                        <el-table-column
+                          prop="tel"
+                          label="联系方式"
+                          show-overflow-tooltip>
+                        </el-table-column>
+                      </el-table>
+                      <div style="margin-top: 20px">
+                        <el-button class="icon-jiajianzujianjiahao"  style="margin-left:10px;font-size:14px;color:#2798FC;"  @click="dirverDialogVisible = true">新增</el-button>
+                        <el-button @click="toggleSelectionOne()" style="margin-left:10px;">取消选择</el-button>
+                      </div>
+                      <div class="page">
+                        <ul class="pagination pagination-sm"><!--分页-->
+                          <li class="page-item" v-if="logCurrentpage!=1"><span class="page-link" href="#" v-on:click="prepageLog(logCurrentpage)">上一页</span></li>
+                          <li class="page-item" v-for="index in pagenumsLog" v-bind:class="{ active: logCurrentpage == index} ">
+                            <span class="page-link" href="#" v-on:click="pageChangeLog(index)">{{index}}</span>
+                          </li>
+                          <li class="page-item" v-if="logCurrentpage!=totlepage"><span class="page-link"  href="#"  v-on:click="nextpageLog(logCurrentpage)">下一页</span></li>
+                          <li class="page-item"><span class="page-link"  href="#">共<i>{{totlepage}}</i>页</span></li>
+                        </ul>
+                      </div>
                   </div>
                   <div class="add" v-show="resShow">
                 <span class="search icon-sousuo">
@@ -236,7 +248,7 @@
                 <el-input v-model="newDirverForm.DRIVERNAME" style="width:200px;"></el-input>
               </el-form-item>
               <el-form-item label="出生年月">
-                <el-col :span="11">
+                <el-col :span="110">
                   <el-date-picker type="date" placeholder="选择日期" v-model="newDirverForm.AGE" style="width: 100%;"></el-date-picker>
                 </el-col>
               </el-form-item>
@@ -267,7 +279,7 @@
               <el-form-item label="车名">
                 <el-input v-model="newCarForm.BUSNAME" style="width:200px;"></el-input>
               </el-form-item>
-              <el-form-item label="车牌号">
+              <el-form-item label="车牌">
                 <el-input v-model="newCarForm.PLATENUM" style="width:200px;"></el-input>
               </el-form-item>
               <el-form-item label="车型">
@@ -278,7 +290,7 @@
                   <el-option label="其他" value="4"></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="座位数">
+              <el-form-item label="座数">
                 <el-input v-model="newCarForm.SEATNUM" style="width:120px;"></el-input>
               </el-form-item>
             </el-form>
@@ -298,6 +310,9 @@
               </el-form-item>
               <el-form-item label="餐厅位置">
                 <el-input v-model="newResForm.RESPOSITION" style="width:400px;"></el-input>
+              </el-form-item>
+              <el-form-item label="联系电话">
+                <el-input v-model="newResForm.RESTEL" style="width:400px;"></el-input>
               </el-form-item>
               <el-form-item label="总计餐费">
                 <el-input v-model="newResForm.RESMONEY" style="width:120px;"></el-input>&nbsp元/人
@@ -320,6 +335,9 @@
               <el-form-item label="酒店位置">
                 <el-input v-model="newHotelForm.HOTELPOSITION" style="width:400px;"></el-input>
               </el-form-item>
+              <el-form-item label="联系电话">
+                <el-input v-model="newHotelForm.HOTELTEL" style="width:400px;"></el-input>
+              </el-form-item>
               <el-form-item label="房间种类数目">
                 <el-select v-model="newHotelForm.ROOMTYPENUM" placeholder="请选择房间类型数目">
                   <el-option label="1" value="1"></el-option>
@@ -330,7 +348,7 @@
                   <el-option label="6" value="6"></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="房间" v-for="key in parseInt(newHotelForm.ROOMTYPENUM)">
+              <el-form-item label="房间类型" v-for="key in parseInt(newHotelForm.ROOMTYPENUM)">
                 <el-select id="roomType" v-model="newHotelForm.ROOM.ROOMTYPE[key-1]" placeholder="请选择房间类型" v-on:click="addRoomType()">
                   <el-option label="单人标间" value="1"></el-option>
                   <el-option label="双人标间" value="2"></el-option>
@@ -382,13 +400,15 @@
                       width="200">
                     </el-table-column>
                     <el-table-column
-                      property="link"
-                      label="查看"
-                      show-overflow-tooltip>
+                      label="操作"
+                    >
+                      <template slot-scope="scope">
+                        <el-button  type="text" size="small" v-on:click="review(scope.row)">预览</el-button>
+                      </template>
                     </el-table-column>
                   </el-table>
                   <div style="margin-top: 20px">
-                    <!--<el-button class="icon-jiajianzujianjiahao"  style="margin-left:10px;font-size:14px;color:#2798FC;">新增</el-button>-->
+                    <el-button class="icon-jiajianzujianjiahao"  style="margin-left:10px;font-size:14px;color:#2798FC;">制作</el-button>
                     <el-button @click="setCurrentOne()">取消选择</el-button>
                   </div>
                   <div class="page">
@@ -413,7 +433,7 @@
                     :data="web"
                     highlight-current-row
                     @current-change="handleCurrentChangeTwo"
-                    style="width: 100%">
+                    style="width: 90%">
                     <el-table-column
                       type="index"
                       width="80">
@@ -424,14 +444,15 @@
                       width="200">
                     </el-table-column>
                     <el-table-column
-                      property="link"
-                      label="查看"
-                      show-overflow-tooltip
-                    >
+                      label="操作"
+                      >
+                      <template slot-scope="scope">
+                        <el-button  type="text" size="small" v-on:click="review(scope.row)">预览</el-button>
+                      </template>
                     </el-table-column>
                   </el-table>
                   <div style="margin-top: 20px">
-                    <!--<el-button class="icon-jiajianzujianjiahao"  style="margin-left:10px;font-size:14px;color:#2798FC;">新增</el-button>-->
+                    <el-button class="icon-jiajianzujianjiahao"  style="margin-left:10px;font-size:14px;color:#2798FC;">制作</el-button>
                     <el-button @click="setCurrentTwo()">取消选择</el-button>
                   </div>
                   <div class="page">
@@ -451,31 +472,35 @@
               <!--{{advertise}}-->
             </div>
             <hr>
+            <div class="nextStep">
+              <span class="nextStepSpan">进入筹备阶段<i class="icon-processing"></i></span>
+            </div>
           </div>
         </div>
         <div class="right col-md-2">
           <div class="ancherFixed">
             <div style="height:76px;">
               <el-button   circle  v-bind:class="{ anchor: isActiveAncher1}" v-on:click="isActiveAncher1=true;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=false;jump(0)"></el-button>
-              <span style="padding-top:0px;font-size: 16px;" v-bind:class="{textActive:isActiveAncher1 }">负责人信息</span><br>
+              <span style="padding-top:0px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher1 }">负责人信息</span><br>
               <div style="width: 3px; height: 50px; background-color: #DFDFDF;margin-left:11px;"></div>
             </div>
             <div style="height:86px;">
               <el-button   circle  v-bind:class="{ anchor: isActiveAncher2}" v-on:click="isActiveAncher1=false;isActiveAncher2=true;isActiveAncher3=false;isActiveAncher4=false;jump(1)"></el-button>
-              <span style="font-size: 16px;" v-bind:class="{textActive:isActiveAncher2 }">填写财务管理信息</span><br>
+              <span style="font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher2 }">填写财务管理信息</span><br>
               <div style="width: 3px; height: 60px; background-color: #DFDFDF;margin-left:11px;"></div>
             </div>
             <div style="height:106px;">
               <el-button   circle  v-bind:class="{ anchor: isActiveAncher3 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=true;isActiveAncher4=false;jump(2)"></el-button>
-              <span style="padding-top:5px;font-size: 16px;" v-bind:class="{textActive:isActiveAncher3 }">填写后勤管理信息</span><br>
+              <span style="padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher3 }">填写后勤管理信息</span><br>
               <div style="width: 3px; height: 80px; background-color: #DFDFDF;margin-left:11px;"></div>
             </div>
             <div style="height:26px;">
               <el-button   circle  v-bind:class="{ anchor: isActiveAncher4 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=true;jump(3)"></el-button>
-              <span style="padding-top:5px;font-size: 16px;" v-bind:class="{textActive:isActiveAncher4}">填写宣传管理信息</span><br>
+              <span style="padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher4}">填写宣传管理信息</span><br>
             </div>
           </div>
         </div>
+
         <div class="bottom col-md-12">
           已到达底部
         </div>
@@ -664,6 +689,7 @@
                     newHotelForm:{
                       HOTELNAME:'',
                       HOTELPOSITION:'',//酒店位置
+                      HOTELTEL:'',//联系电话
                       ROOMTYPENUM:3,//房间种类
                       ROOM:
                         {
@@ -675,6 +701,7 @@
                     newResForm:{
                       RESNAME:'',
                       RESPOSITION:'',//餐厅位置
+                      RESTEL:'',//联系电话
                       RESMONEY:'',//餐费
                     },//新增餐厅
                     logCurrentpage:1,//当前页
@@ -911,6 +938,10 @@
                 },
                 handleCurrentChangeTwo(val) {
                   this.advertise.h5 = val;
+                },
+                //预览宣传
+                review:function(){
+
                 },
                 jump (index) {
                     // 用 class="d_jump" 添加锚点
@@ -1154,6 +1185,20 @@
             /*margin-left:20px;*/
             margin-bottom:20px;
             height:550px;
+          }
+          .nextStep{
+            text-align: center;
+            font-size:20px;
+            padding-top:50px;
+          }
+          .nextStepSpan{
+            border:solid 1px #C9C8C8 ;
+            border-radius: 8px;
+            padding:10px 20px 10px 20px;
+            background-color: #F2F2F2;
+          }
+          .nextStepSpan:hover{
+            background-color: #fff;
           }
           .search{
             /*width:160px;*/
