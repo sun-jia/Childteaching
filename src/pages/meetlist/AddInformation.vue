@@ -3,18 +3,7 @@
         <!--顶部-->
         <div class="top col-md-12">
           <span>会议准备信息填写</span>
-          <el-dropdown size="medium" style="float:right;" split-button type="primary">
-            <!--<span class="el-dropdown-link">-->
-              <!--页面菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <!--</span>-->
-            页面菜单
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item><router-link to="/meetlist/AddInformation">会议准备</router-link></el-dropdown-item>
-              <el-dropdown-item><router-link to="/meetlist/AddPrepareInfor">会议筹备</router-link></el-dropdown-item>
-              <el-dropdown-item><router-link to="/meetlist/AddPrograssInfor">会议进行</router-link></el-dropdown-item>
-              <el-dropdown-item>会议进行</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+         <MeetlistHeader></MeetlistHeader>
           <hr>
         </div>
         <div class="left col-md-10">
@@ -404,6 +393,7 @@
                     >
                       <template slot-scope="scope">
                         <el-button  type="text" size="small" v-on:click="review(scope.row)">预览</el-button>
+                        <el-button  class="icon-fenxiang"  type="text" size="small" v-on:click="shareWeb()">分享</el-button>
                       </template>
                     </el-table-column>
                   </el-table>
@@ -508,10 +498,12 @@
 </template>
 
         <script>
+            import MeetlistHeader from "./MeetlistHeader";
             export default {
               name: "AddInformation",
               //新建子组件
               components:{
+                MeetlistHeader,
                   newRoomForm:{
                     template:'',
                     // data(){
@@ -734,6 +726,7 @@
                     carShow:false,
                     websShow:true,
                     h5sShow:false,
+                    // share:false,//网站分享
                     dirverInfor:'',//司机搜索
                     resInfor:'',//饭店搜索
                     hotelInfor:'',//酒店搜索
@@ -980,6 +973,10 @@
                       }
                     }
                 },
+                //网站分享
+                shareWeb:function(){
+                  // share=true;
+                }
               },
               mounted: function () {
                 // console.log(this.fullHeight);
