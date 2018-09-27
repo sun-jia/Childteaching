@@ -83,7 +83,7 @@
 
 <script>
     export default {
-      name: "Prograss.vue",
+      name: "Progress",
       data(){
         return{
           isActive: true,

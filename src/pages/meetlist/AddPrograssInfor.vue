@@ -308,7 +308,7 @@
 
 <script>
     export default {
-        name: "AddPrograssInfor.vue",
+        name: "AddPrograssInfor",
       data(){
          return{
            Announcement:[
