@@ -2,7 +2,7 @@
   <div class="display1">
     <router-link to="/meetlist"><button class="btn1 btn2"  >会议准备</button></router-link>
     <router-link to="/meetlist/Prepare"><button class="btn1 btn2"  >会议筹备</button></router-link>
-    <router-link to="/meetlist/Meeting"><button class="btn1 btn2"  >进行会议</button></router-link>
+    <router-link to="/meetlist/Progress"><button class="btn1 btn2"  >进行会议</button></router-link>
     <button class="btn1 btn2"    v-bind:class="{ active: isActive }" >历史会议</button>
     <div class="display2">
       <div>

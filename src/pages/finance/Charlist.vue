@@ -212,7 +212,7 @@
           this.chartType = 'line';
           this.barshow=true;
           this.pieshow=false;
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance?type=MONEY").then(body => {this.data= body.data.data;
+          this.axios.get("/yii/finance/finance?type=MONEY").then(body => {this.data= body.data.data;
             this.key=this.data.key;
             this.value=this.data.value;
             console.log(this.key);
@@ -346,7 +346,7 @@
             b='ACCOUNT_MODE';
           }
           console.log(c);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/finance/multigroup?first="+a+"&&second="+b+"&&CONFERENCEID="+c+"&&type=0").then(body => {
+          this.axios.get("/yii/finance/finance/multigroup?first="+a+"&&second="+b+"&&CONFERENCEID="+c+"&&type=0").then(body => {
             console.log(body.data.data);
             // let that=this;
             this.returnData= body.data.data;
@@ -435,6 +435,8 @@
           });
         },
         x_control:function () {
+
+          // console.log(document.getElementById("num_x").value);
           if (document.getElementById("num_x").value == 'ACCOUNT_MODE') {
             document.getElementById("num_y").options[2].disabled= true;
             document.getElementById("num_y").options[3].disabled= true;

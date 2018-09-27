@@ -1,8 +1,8 @@
 <template>
   <div class="display1">
     <router-link to="/meetlist"><button class="btn1 btn2"  >会议准备</button></router-link>
-    <button class="btn1 btn2"  >会议筹备</button>
-    <router-link to="/meetlist/Meeting"><button class="btn1 btn2"  >进行会议</button></router-link>
+    <button class="btn1 btn2"   v-bind:class="{ active: isActive }" >会议筹备</button>
+    <router-link to="/meetlist/Progress"><button class="btn1 btn2"  >进行会议</button></router-link>
     <router-link to="/meetlist/History"><button class="btn1 btn2"  >历史会议</button></router-link>
     <div class="display2">
       <div>
@@ -61,7 +61,7 @@
             <td>{{item.conferenceID}}</td>
             <td>{{item.conferenceName}}</td>
             <td>{{item.conferenceDate}}</td>
-            <td style="color:#00AAFF;"><router-link to="/meetlist/AddMeetInfor">添加</router-link></td>
+            <td style="color:#00AAFF;"><router-link to="/meetlist/AddPrepareInfor">添加</router-link></td>
           </tr>
         </table>
 
@@ -84,7 +84,7 @@
 
 <script>
     export default {
-      name: "Prepare.vue",
+      name: "prepare",
       data(){
         return{
           isActive: true,
