@@ -31,16 +31,15 @@
         <table id="moneyStatistics">
           <tr>
             <th>
-              会议名称
+              会议ID
             </th>
-            <th>会议ID
-              <input class="input1" v-model="conferenceid" placeholder="输入会议ID" style="font-size:14px;width:120px;font-weight:lighter;">
+            <th>
+              会议名称
             </th>
             <th>
               <div class="block" >
-                <span class="demonstration">会议日期</span>
                 <el-date-picker
-                  v-model="value"
+                  v-model="startDate"
                   type="datetimerange"
                   :picker-options="pickerOptions"
                   range-separator="至"
@@ -51,19 +50,39 @@
                   format="yyyy-MM-dd HH:mm:ss "
                   value-format="yyyy-MM-dd HH:mm:ss">
                 </el-date-picker>
-                <i v-show="datesort" class="sort icon-paixushengxu"  v-on:click="dateup()"></i>
-                <i v-show="!datesort" class="sort icon-paixujiangxu"  v-on:click="datedown()"></i>
+                <i v-show="startDateSort" class="sort icon-paixushengxu"  v-on:click="startDateUp()"></i>
+                <i v-show="!startDateSort" class="sort icon-paixujiangxu"  v-on:click="startDateDown()"></i>
               </div>
             </th>
-            <th>会议信息</th>
+            <th>
+              <div class="block" >
+                <el-date-picker
+                  v-model="endDate"
+                  type="datetimerange"
+                  :picker-options="pickerOptions"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                  align="right"
+                  size="small"
+                  format="yyyy-MM-dd HH:mm:ss "
+                  value-format="yyyy-MM-dd HH:mm:ss">
+                </el-date-picker>
+                <i v-show="endDateSort" class="sort icon-paixushengxu"  v-on:click="endDateUp()"></i>
+                <i v-show="!endDateSort" class="sort icon-paixujiangxu"  v-on:click="endDateDown()"></i>
+              </div>
+            </th>
+            <th>会议信息添加</th>
           </tr>
           <tr v-for="item in conference">
             <td>{{item.conferenceID}}</td>
             <td>{{item.conferenceName}}</td>
             <td>{{item.conferenceDate}}</td>
+            <td>{{item.conferenceEndDate}}</td>
             <td style="color:#00AAFF;">查看</td>
           </tr>
         </table>
+
         <div class="page">
           <ul class="pagination pagination-sm"><!--分页-->
             <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage)">上一页</a></li>
@@ -71,43 +90,50 @@
               <a class="page-link" href="#" v-on:click="pageChange(index)">{{index}}</a>
             </li>
             <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage)">下一页</a></li>
-            <li class="page-item"><a class="page-link"  href="#">共<i>{{totlepage}}</i>页</a></li>
+            <li class="page-item"><a class="page-link"  href="#" >共<i>{{totlepage}}</i>页</a></li>
           </ul>
         </div>
       </div>
     </div>
+
   </div>
+
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
-    name: "History",
+    name: "prepare",
     data(){
       return{
         isActive: true,
+        list:[],//用于检索会议名称
+        options: [],//检索结果存放
+        inputmeet:'',//检索关键字
+        loading: false,//检索时候的等待状态
+
         conference:[
-          {
-            conferenceID:1001,
-            conferenceName:'会议1',
-            conferenceDate:'2018-01-24'
-          },
-          {
-            conferenceID:1002,
-            conferenceName:'会议2',
-            conferenceDate:'2017-10-02'
-          },
-          {
-            conferenceID:1003,
-            conferenceName:'会议31',
-            conferenceDate:'2018-08-21'
-          },
+          // {
+          //   conferenceID:1001,
+          //   conferenceName:'会议1',
+          //   conferenceDate:'2018-01-24'
+          // }
         ],
-        conferenceid:'',
-        currentpage: 1,//当前页
-        datesort: true,//日期排序
-        inputmeet:'',
-        loading: false,
-        options: [],
+        // conferenceid:'',
+        // logCurrentpage:1,//当前页
+        logisticsForm: {
+          hotels:[],
+          restaurants:[],
+          cars:[],
+          dirvers:[],
+        },
+        // formLabelWidth: '120px',
+        // hotelShow:true,
+        // resShow:false,
+        // dirverShow:false,
+        // carShow:false,
+
+        //时间插件的格式样式属性控制
         pickerOptions: {
           shortcuts: [{
             text: '最近一周',
@@ -135,28 +161,56 @@
             }
           }]
         },
-        states:["会议1","会议2","会议3","会议4","会议5","会议6","会议7"],
+        currentpage: 1,//当前页
         totlepage: 28,//总页数
-        type: 1,//排序类型，默认日期降序，2为日期升序
-        value:'',
         visiblepage: 10,//可见页数
+
+        startDateSort: true,//日期排序的图标显示
+        endDateSort: true,//日期排序的图标显示
+        type: 'id',//排序类型，默认日期降序，2为日期升序
+        sort:"asc",//排序类别
+
+        startDate:'',
+        endDate:'',
       }
     },
     methods:{
-      dateup:function () {//日期升序
-        this.type=2;
-        console.log(this.type);
-        this.datesort=!this.datesort;
-        console.log(this.datesort);
+      //取消
+      concel:function(){
+
       },
-      datedown:function () {//日期降序
-        this.type=1;
-        this.datesort=!this.datesort;
-        console.log(this.datesort);
+      //确定
+      submit:function(){
+
+      },
+      startDateUp:function () {//日期升序
+        this.type='startDate';
+        this.startDateSort=!this.startDateSort;
+        this.sort="asc";
+        this.getMeetList();
+      },
+      startDateDown:function () {//日期降序
+        this.type='startDate';
+        this.startDateSort=!this.startDateSort;
+        this.sort="desc";
+        this.getMeetList();
+      },
+      endDateUp:function () {//日期升序
+        this.type='endDate';
+        this.endDateSort=!this.endDateSort;
+        this.sort="asc";
+        this.getMeetList();
+      },
+      endDateDown:function () {//日期降序
+        this.type='endDate';
+        this.endDateSort=!this.endDateSort;
+        this.sort="desc";
+        this.getMeetList();
       },
       pageChange: function(page){//分页
         if (this.currentpage != page) {
           this.currentpage = page;
+          this.getMeetList();
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
         console.log(this.currentpage );
@@ -165,6 +219,7 @@
         page--;
         if (this.currentpage != page) {
           this.currentpage = page;
+          this.getMeetList();
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
         console.log(page);
@@ -173,6 +228,7 @@
         page++;
         if (this.currentpage != page) {
           this.currentpage = page;
+          this.getMeetList();
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
         console.log(page);
@@ -186,6 +242,7 @@
               return item.label.toLowerCase()
                 .indexOf(query.toLowerCase()) > -1;
             });
+
           }, 200);
         } else {
           this.options = [];
@@ -195,11 +252,40 @@
       search:function(){
 
       },
+      getMeetList (page,type,kind) {
+        let data={
+          userId:this.$store.getters.getUser,
+          kind:1,
+          page:this.currentpage,
+          sortType:this.type,
+          sortKind:this.sort
+        };
+        this.conference=[];
+        this.$http.post('/yii/meetlist/index/get-meet-list',data)
+          .then((res) => {
+            if(res.data.data!=null){
+              let model=res.data.data.models;
+              this.currentpage=res.data.data.page;
+              this.totlepage=res.data.data.total;
+              for(let item in model){
+                this.conference.push({
+                  conferenceID:model[item].id,
+                  conferenceName:model[item].name,
+                  conferenceDate:model[item].startDate,
+                  conferenceEndDate:model[item].endDate
+                })
+                this.list.push({ value: model[item].id, label: model[item].name });
+              }
+            }else{
+              alert(res.data.message);
+            }
+          }, (err) => {
+            console.log(err)
+          })
+      }
     },
     mounted() {
-      this.list = this.states.map(item => {
-        return { value: item, label: item };
-      });
+      this.getMeetList();
     },
     computed: {
       //计算属性：返回页码数组，这里会自动进行脏检查，不用$watch();
@@ -227,9 +313,13 @@
           lowPage ++;
         }
         return pageArr;
-      }
+      },
     },
+    ...mapGetters([
+      'getUser',
+    ]),
   }
+
 </script>
 
 <style scoped>
@@ -300,6 +390,20 @@
   .input1{
     width:80px;
   }
+  .input2{
+    float:right;
+    border:1px solid #338FFC;
+    border-radius: 5px;
+    color:#000;
+    width:190px;
+  }
+  .element.style {
+    font-size: 14px;
+    width: 190px;
+    height: 30px;
+    font-weight: lighter;
+    margin-right: 10px;
+  }
   .btn3{
     width:80px;
     padding:5px;
@@ -317,10 +421,25 @@
   /*.el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{*/
   /*width:360px !important;*/
   /*}*/
+  .search{
+    /*width:160px;*/
+    background-color: #00AAFF;
+    border-radius: 5px;
+    width: 20%;
+    padding:5px;
+    color:#fff;
+    font-weight:bold;
+    float:right;
+    margin-right:10px;
+    margin-bottom:10px;
+    margin-top:5px;
+  }
   .sort{
     color:#1C93FC;
   }
   .sort:hover{
     color:#5CB0FA;
   }
+
+
 </style>
