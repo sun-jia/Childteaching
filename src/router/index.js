@@ -122,16 +122,22 @@ export default  [
     component: History,
   },
   {
+    name:"addInformation",
     path: '/meetlist/AddInformation',
     component: AddInformation,
+    props: true
   },
   {
+    name:"addPrepareInfor",
     path: '/meetlist/AddPrepareInfor',
     component: AddMeetInfor,
+    props: true
   },
   {
+    name:"addPrograssInfor",
     path: '/meetlist/AddPrograssInfor',
     component: AddPrograssInfor,
+    props: true
   },
   {
     path: '/member',
