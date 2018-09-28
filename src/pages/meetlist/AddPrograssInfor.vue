@@ -9,6 +9,8 @@
     <div class="left col-md-10">
       <!--公告-->
      <Announcement></Announcement>
+      <!--私信-->
+      <PrivateLetter></PrivateLetter>
       <!--资料-->
      <Resource></Resource>
       <!--交互-->
@@ -17,18 +19,23 @@
     <div class="right col-md-2">
       <div class="ancherFixed">
         <div style="height:76px;">
-          <el-button   circle  v-bind:class="{ anchor: isActiveAncher1}" v-on:click="isActiveAncher1=true;isActiveAncher2=false;isActiveAncher3=false;jump(0)"></el-button>
+          <el-button   circle  v-bind:class="{ anchor: isActiveAncher1}" v-on:click="isActiveAncher1=true;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=false;jump(0)"></el-button>
           <span style="padding-top:0px;font-size: 16px;vertical-align:bottom;" v-bind:class="{textActive:isActiveAncher1 }">会议公告</span><br>
           <div style="width: 3px; height: 50px; background-color: #DFDFDF;margin-left:11px;"></div>
         </div>
         <div style="height:86px;">
-          <el-button   circle  v-bind:class="{ anchor: isActiveAncher2}" v-on:click="isActiveAncher1=false;isActiveAncher2=true;isActiveAncher3=false;jump(1)"></el-button>
-          <span style="font-size: 16px;vertical-align:bottom;" v-bind:class="{textActive:isActiveAncher2 }">会议资料</span><br>
+          <el-button   circle  v-bind:class="{ anchor: isActiveAncher2}" v-on:click="isActiveAncher1=false;isActiveAncher2=true;isActiveAncher3=false;isActiveAncher4=false;jump(1)"></el-button>
+          <span style="font-size: 16px;vertical-align:bottom;" v-bind:class="{textActive:isActiveAncher2 }">私信用户</span><br>
           <div style="width: 3px; height: 60px; background-color: #DFDFDF;margin-left:11px;"></div>
         </div>
-        <div style="height:106px;">
-          <el-button   circle  v-bind:class="{ anchor: isActiveAncher3 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=true;jump(2)"></el-button>
-          <span style="padding-top:5px;font-size: 16px;vertical-align:bottom;" v-bind:class="{textActive:isActiveAncher3 }">会议交互</span><br>
+        <div style="height:86px;">
+          <el-button   circle  v-bind:class="{ anchor: isActiveAncher3 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=true;isActiveAncher4=false;jump(2)"></el-button>
+          <span style="padding-top:5px;font-size: 16px;vertical-align:bottom;" v-bind:class="{textActive:isActiveAncher3 }">会议资料</span><br>
+          <div style="width: 3px; height: 60px; background-color: #DFDFDF;margin-left:11px;"></div>
+        </div>
+        <div style="height:26px;">
+          <el-button   circle  v-bind:class="{ anchor: isActiveAncher4 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=true;jump(3)"></el-button>
+          <span style="padding-top:5px;font-size: 16px;vertical-align:bottom;" v-bind:class="{textActive:isActiveAncher4 }">会议交互</span><br>
         </div>
       </div>
     </div>
@@ -43,21 +50,20 @@
     import Announcement from "./Progress/Announcement";
     import Resource from "./Progress/Resource";
     import Interacion from "./Progress/Interacion";
+    import PrivateLetter from "./Progress/PrivateLetter";
     export default {
         name: 'AddPrograssInfor',
-      components: {Interacion, Resource, Announcement, MeetlistHeader},
+      components: {PrivateLetter, Interacion, Resource, Announcement, MeetlistHeader},
       data () {
          return {
            isActiveAncher1: true, // 锚点
            isActiveAncher2: false, // 锚点
            isActiveAncher3: false, // 锚点
+           isActiveAncher4: false,
            fullHeight: document.documentElement.clientHeight// 网页高度
          }
       },
       methods: {
-
-
-
           jump (index) {
             // 用 class="d_jump" 添加锚点
             let jump = document.querySelectorAll('.d_jump')
@@ -100,6 +106,7 @@
         document.getElementById('fullHeight1').style.height = (this.fullHeight) + 'px'
         document.getElementById('fullHeight2').style.height = (this.fullHeight) + 'px'
         document.getElementById('fullHeight3').style.height = (this.fullHeight) + 'px'
+        document.getElementById('fullHeight4').style.height = (this.fullHeight) + 'px'
       }
     }
 </script>
