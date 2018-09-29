@@ -1,7 +1,7 @@
 <template>
-  <div id="fullHeight4" index="05" class="d_jump" title="论文筛选">
+  <div class="fullHeight d_jump" index="05"  title="论文筛选">
     <div class="listname">论文筛选<i class="el-icon-menu" style="padding-left:5px;vertical-align: center"></i></div>
-    <div class="col-md-12" style="margin-top: 10px;">
+    <div style="margin-top: 10px;">
       <el-table
         ref="multipleTable"
         :data="paper"

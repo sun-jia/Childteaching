@@ -1,5 +1,5 @@
 <template>
-  <div id="fullHeight2" index="04" class="d_jump" title="会议宣传信息填写">
+  <div index="04" class="fullHeight d_jump" title="会议宣传信息填写">
     <div class="listname">会议宣传<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <div class="advertise">
       <div class="col-md-1">

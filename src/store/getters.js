@@ -9,6 +9,9 @@ export default {
   getUserName:(state)=>{
     return state.name
   },
+  getMeetId:(state)=>{
+    return state.meetId
+  },
   showSider:(state)=>{
     return state.sider
   },

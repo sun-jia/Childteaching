@@ -80,7 +80,7 @@
             <td>{{item.conferenceDate}}</td>
             <td>{{item.conferenceEndDate}}</td>
             <td style="color:#00AAFF;">
-              <router-link :to="{ name:'addPrograssInfor', params:{ meetId: item.conferenceID}}">
+              <router-link :to="{ name:'addProgressInfo', params:{ meetId: item.conferenceID}}">
                 编辑
               </router-link>
             </td>
@@ -318,10 +318,10 @@
         }
         return pageArr;
       },
-    },
-    ...mapGetters([
-      'getUser',
-    ]),
+      ...mapGetters([
+        'getUser',
+      ])
+    }
   }
 
 </script>

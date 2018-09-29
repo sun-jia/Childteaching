@@ -1,5 +1,5 @@
 <template>
-  <div id="fullHeight2" index="02" class="d_jump" title="私信用户">
+  <div index="02" class="d_jump fullHeight" title="私信用户">
     <div class="listname">私信用户<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <el-table
       :data="private"

@@ -1,5 +1,5 @@
 <template>
-  <div id="fullHeight1" index="01" class="d_jump" title="会议公告">
+  <div index="01" class="fullHeight d_jump" title="会议公告">
     <div class="listname">会议公告<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <div>
       <el-table

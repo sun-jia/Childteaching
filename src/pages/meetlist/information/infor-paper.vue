@@ -1,14 +1,14 @@
 <template>
-  <div id="fullHeight3" index="05" class="d_jump" title="论文接收信息填写">
+  <div index="05" class="d_jump fullHeight" title="论文接收信息填写">
     <div class="listname">论文投稿<i class="el-icon-menu" style="padding-left:5px;vertical-align: center"></i></div>
-    <div class="col-md-12" style="margin-top: 10px;">
+    <div style="margin-top: 10px;">
       <el-form :model="paperForm">
         <el-form-item label="论文">
           <span>报告数量</span><el-input placeholder="填入论文主题数量" v-model="topicNum" style="width:120px;"></el-input>
           <span class="el-icon-circle-plus" style="color:#00AAFF" v-on:click="topicAdd()">增加</span>
           <span class="el-icon-remove" style="color:#00AAFF" v-on:click="topicRemove()">减少</span>
         </el-form-item>
-        <div style="padding-bottom:500px;">
+        <div>
           <el-form-item label="" v-for="key in parseInt(topicNum)">
             <span style="font-weight: bold;padding-right:10px;">主题{{key}}</span>
             <el-input v-model="paperForm.topic[key-1]" style="width:200px;"></el-input>&nbsp&nbsp
