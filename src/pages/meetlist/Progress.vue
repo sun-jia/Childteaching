@@ -2,8 +2,8 @@
   <div class="display1">
     <router-link to="/meetlist"><button class="btn1 btn2"  >会议准备</button></router-link>
     <router-link to="/meetlist/Prepare"><button class="btn1 btn2"  >会议筹备</button></router-link>
-    <router-link to="/meetlist/Progress"><button class="btn1 btn2"  >进行会议</button></router-link>
-    <button class="btn1 btn2"    v-bind:class="{ active: isActive }" >历史会议</button>
+    <button class="btn1 "  v-bind:class="{ active: isActive }">进行会议</button>
+    <router-link to="/meetlist/History"><button class="btn1 btn2"  >历史会议</button></router-link>
     <div class="display2">
       <div>
         <div class="meeting" >
@@ -74,12 +74,16 @@
             </th>
             <th>会议信息添加</th>
           </tr>
-          <tr v-for="item in conference">
+          <tr v-for="item in conference" :ket="item.conferenceID">
             <td>{{item.conferenceID}}</td>
             <td>{{item.conferenceName}}</td>
             <td>{{item.conferenceDate}}</td>
             <td>{{item.conferenceEndDate}}</td>
-            <td style="color:#00AAFF;">查看</td>
+            <td style="color:#00AAFF;">
+              <router-link :to="{ name:'addPrograssInfor', params:{ meetId: item.conferenceID}}">
+                编辑
+              </router-link>
+            </td>
           </tr>
         </table>
 

@@ -3,7 +3,10 @@ export default {
   getAccessToken:(state)=>{
     return state.access_token
   },
-  getNAME:(state)=>{
+  getUser:(state)=>{
+    return state.user
+  },
+  getUserName:(state)=>{
     return state.name
   },
   showSider:(state)=>{

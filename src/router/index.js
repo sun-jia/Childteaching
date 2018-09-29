@@ -14,10 +14,14 @@ import LogisticsHotel from  '../pages/logistics/hotel/Hotel'
 import MeetEdit from '../pages/meetedit/Meetedit'
 import MeetList from '../pages/meetlist/Index'
 import History from '../pages/meetlist/History'
-import Meeting from '../pages/meetlist/Meeting'
+import Addmem from '../pages/member/Addmem'
+import loginlist from '../pages/member/loginlist'
+import passchange from '../pages/member/passchange'
+import Progress from '../pages/meetlist/Progress'
 import Prepare from '../pages/meetlist/Prepare'
 import AddInformation from '../pages/meetlist/AddInformation'
-import AddMeetInfor from '../pages/meetlist/AddMeetInfor'
+import AddMeetInfor from '../pages/meetlist/AddPrepareInfor'
+import AddPrograssInfor from '../pages/meetlist/AddPrograssInfor'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
 import System from  '../pages/system/Index'
@@ -26,11 +30,7 @@ import ATemplates from '../pages/advertise/webTemplates/Index'
 import SelectTemp from '../pages/advertise/webTemplates/SelectTemp'
 import Result from '../pages/advertise/webTemplates/Result'
 /*映射*/
-
-// import Index from '../pages/finance/Index'
-// import Charlist from '../pages/finance/Charlist'
-// import Orderlist from '../pages/finance/Orderlist'
-// import Neworder from '@/pages/finance/Neworder'
+import Index from '../pages/finance/Index'
 
 // Vue.use(VueRouter)   //注册
 /*映射*/
@@ -52,6 +52,7 @@ import Travelrecord from '../pages/logistics/Travelrecord'
 
 import User from '../pages/system/User'
 import Power from '../pages/system/Power'
+import loginuser from '../pages/userlogin/loginuser'
 
 export default  [
   {
@@ -109,8 +110,8 @@ export default  [
     component: MeetList,
   },
   {
-    path: '/meetlist/Meeting',
-    component: Meeting,
+    path: '/meetlist/Progress',
+    component: Progress,
   },
   {
     path: '/meetlist/Prepare',
@@ -121,8 +122,22 @@ export default  [
     component: History,
   },
   {
+    name:"addInformation",
     path: '/meetlist/AddInformation',
     component: AddInformation,
+    props: true
+  },
+  {
+    name:"addPrepareInfor",
+    path: '/meetlist/AddPrepareInfor',
+    component: AddMeetInfor,
+    props: true
+  },
+  {
+    name:"addPrograssInfor",
+    path: '/meetlist/AddPrograssInfor',
+    component: AddPrograssInfor,
+    props: true
   },
   {
     path: '/member',
@@ -211,26 +226,35 @@ export default  [
     path: '/system/Index',
     component: System,
   },
-  /*{
+ {
     path: '/system/user',
     component: User,
-  },*/
+  },
  {
     path: '/system/power',
     component: Power,
   },
+{
+      path: '/member/list',
+      component: Member,
+    },
+    {
+      path: '/member/add',
+      component: Addmem,
+    },
+    {
+      path: '/member/loginlist',
+      component: loginlist,
+    },
+    {
+      path: '/member/passchange',
+      component: passchange,
+    },
   {
-    path: '/system/user',
-    component: User,
-  },
-  /*{
-    path: '/system/test',
-    component: Test,
-  },*/
- {
-    path: '/member/list',
-    component: Member,
-  },
+    path: '/userlogin/loginuser',
+    component: loginuser,
+  }
+
 ]
 
 

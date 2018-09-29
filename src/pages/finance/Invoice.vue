@@ -88,7 +88,6 @@
 </template>
 
 <script>
-    import myDatepicker from 'vue-datepicker2'; //引入对应的组件
     export default {
       name: 'invoice',
       data() {
@@ -210,7 +209,7 @@
           this.type=1;
           this.datesort=!this.datesort;
           console.log(this.datesort);
-          this.axios.get("http://192.168.1.100/clubApi/backend/web/index.php/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
+          this.axios.get("/yii/finance/page?page="+this.currentpage+"&&type="+this.type).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
           })

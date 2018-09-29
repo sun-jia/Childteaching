@@ -5,35 +5,25 @@
       <div class="fold">
         <el-collapse accordion>
           <el-collapse-item>
-            <template slot="title" >
-              <p class="name">进行中<i class="name icon-jinxingzhong2"></i></p>
-            </template>
-            <div class="meetDispaly" v-for="item in meeting">
-              {{item.conferenceName}}
-              <span class="see"><button class="btn icon-faxian" v-on:click="seeMeet(item.conferenceName,item.conferenceDate,item.duty.propaganda,item.duty.logistics,item.duty.finance,item.duty.Interaction)">查看</button></span>
-            </div>
-          </el-collapse-item>
-          <el-collapse-item>
             <template slot="title">
               <p class="name">已发布<i class="name icon-weibofang-xue"></i></p>
             </template>
-            <div class="meetDispaly" v-for="item in  release">
+            <div class="meetDispaly" v-for="(item, index) in  release">
               {{item.conferenceName}}
-              <span class="see"><button class="btn icon-changyonggoupiaorenshanchu" v-on:click="deleteMeet()">删除</button></span>
-              <span class="see"><button class="btn icon-shouhuodizhiyebianji" v-on:click="editMeet(item.conferenceNameid)">编辑</button></span>
-              <span class="see"><button class="btn icon-faxian" v-on:click="seeMeet(item.conferenceName,item.duty.propaganda,item.duty.logistics,item.duty.finance,item.duty.Interaction)">查看</button></span>
+              <span class="see"><button class="btn icon-changyonggoupiaorenshanchu" v-on:click="deleteMeet(item.conferenceNameid)">删除</button></span>
+              <span class="see"><button class="btn icon-shouhuodizhiyebianji" v-on:click="editMeet(index,1)">编辑</button></span>
+              <span class="see"><button class="btn icon-faxian" v-on:click="seeMeet(index)">查看</button></span>
             </div>
           </el-collapse-item>
           <el-collapse-item>
             <template slot="title">
               <p class="name">已保存<i class="name icon-baocun3 "></i></p>
             </template>
-            <div class="meetDispaly" v-for="item in  save">
+            <div class="meetDispaly" v-for="(item, index) in  save">
               {{item.conferenceName}}
-              <span class="see"><button class="btn icon-changyonggoupiaorenshanchu" v-on:click="deleteMeet()">删除</button></span>
-              <span class="see"><button class="btn icon-shouhuodizhiyebianji" v-on:click="editMeet(item.conferenceNameid)">编辑</button></span>
-              <span class="see"><button class="btn icon-fabu" v-on:click="releaseMeet()">发布</button></span>
-              <span class="see"><button class="btn icon-faxian" v-on:click="seeMeet(item.conferenceName,item.conferenceDate,item.duty.propaganda,item.duty.logistics,item.duty.finance,item.duty.Interaction)">查看</button></span>
+              <span class="see"><button class="btn icon-changyonggoupiaorenshanchu" v-on:click="deleteMeet(item.conferenceNameid)">删除</button></span>
+              <span class="see"><button class="btn icon-shouhuodizhiyebianji" v-on:click="editMeet(index,2)">编辑</button></span>
+              <span class="see"><button class="btn icon-fabu" v-on:click="releaseMeet(item.conferenceNameid)">发布</button></span>
             </div>
           </el-collapse-item>
         </el-collapse>
@@ -41,7 +31,7 @@
 
     </div>
     <div class="col-md-3">
-      <el-button class="btn4 icon-jiajianzujianjiahao"  v-on:click="addMeet" > 新建订单</el-button>
+      <el-button class="btn4 icon-jiajianzujianjiahao"  v-on:click="addMeet" > 新建会议</el-button>
       <el-dialog title="新建会议" :visible.sync="dialogFormVisible">
         <el-form :model="form" :rules="rules" ref="form">
           <el-form-item label="会议名称" :label-width="formLabelWidth" prop="name">
@@ -51,6 +41,7 @@
             <el-date-picker
               v-model="form.conferenceDate"
               type="datetimerange"
+              @change="getSTime"
               range-separator="至"
               start-placeholder="开始日期"
               end-placeholder="结束日期">
@@ -66,10 +57,127 @@
           <div v-show="duty">
             <el-form-item  label="会议各项负责人" :label-width="formLabelWidth">
               <div v-for="item in form.checkedModels">{{item}}
-                <el-input v-if="item=='会议宣传'" placeholder="输入姓名" v-model="form.duty.propaganda" auto-complete="off" :label-width="formLabelWidth"></el-input>
-                <el-input v-if="item=='后勤管理'" placeholder="输入姓名" v-model="form.duty.logistics" auto-complete="off"></el-input>
-                <el-input v-if="item=='财务管理'" placeholder="输入姓名" v-model="form.duty.finance" auto-complete="off"></el-input>
-                <el-input v-if="item=='会议交互'" placeholder="输入姓名" v-model="form.duty.Interaction" auto-complete="off"></el-input>
+                <el-select
+                  v-if="item=='宣传管理'"
+                  v-model="form.duty.propaganda"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+                <el-select
+                  v-if="item=='后勤管理'"
+                  v-model="form.duty.logistics"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+
+                <el-select
+                  v-if="item=='缴费管理'"
+                  v-model="form.duty.finance"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+                <el-select
+                  v-if="item=='现场管理'"
+                  v-model="form.duty.Interaction"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+                <el-select
+                  v-if="item=='参会管理'"
+                  v-model="form.duty.professor"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+                <el-select
+                  v-if="item=='投稿管理'"
+                  v-model="form.duty.contribute"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
               </div>
             </el-form-item>
           </div>
@@ -79,8 +187,8 @@
         <div slot="footer" class="dialog-footer">
           <el-button class="btn3" type="info"  @click="concel()">取消</el-button>
           <el-button type="primary" v-on:click="reset" class="btn2 icon-huanyihuan">重置</el-button>
-          <el-button type="primary" class="btn2 icon-baocun2" v-on:click="saveMeet(form)">保存</el-button>
-          <el-button type="primary" class="btn2 icon-fabu1" v-on:click="releaseMeet(form)">发布</el-button>
+          <el-button type="primary" class="btn2 icon-baocun2" v-on:click="saveMeet()">保存</el-button>
+          <!--<el-button type="primary" class="btn2 icon-fabu1" v-on:click="releaseMeet(form)">发布</el-button>-->
         </div>
       </el-dialog>
 
@@ -88,12 +196,13 @@
       <el-dialog  title="修改会议" :visible.sync="dialogFormEditVisible">
         <el-form :model="form">
           <el-form-item label="会议名称" :label-width="formLabelWidth">
-            <el-input v-model="form.name" placeholder="" value="form.conferenceNameid" auto-complete="off"></el-input>
+            <el-input v-model="form.name" placeholder=""  auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="会议时间" :label-width="formLabelWidth" prop="conferenceData">
             <el-date-picker
               v-model="form.conferenceDate"
               type="datetimerange"
+              @change="getSTime"
               range-separator="至"
               start-placeholder="开始日期"
               end-placeholder="结束日期">
@@ -101,7 +210,6 @@
           </el-form-item>
           <el-form-item label="需要启用的模块" :label-width="formLabelWidth">
             <el-checkbox :indeterminate="isIndeterminate" v-model="form.checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-            <!--<div style="margin: 15px 0;"></div>-->
             <el-checkbox-group v-model="form.checkedModels"  @change="handleCheckedModelChange">
               <el-checkbox   v-for="model in models" :label="model" :key="model">{{model}}</el-checkbox>
             </el-checkbox-group>
@@ -110,22 +218,144 @@
             <el-form-item  label="会议各项负责人" :label-width="formLabelWidth">
               <!--{{meeting}}-->
               <div v-for="item in form.checkedModels">{{item}}
-                <el-input v-if="item=='会议宣传'" placeholder="输入姓名" v-model="form.duty.propaganda" auto-complete="off" :label-width="formLabelWidth"></el-input>
-                <el-input v-if="item=='后勤管理'" placeholder="输入姓名" v-model="form.duty.logistics" auto-complete="off"></el-input>
-                <el-input v-if="item=='财务管理'" placeholder="输入姓名" v-model="form.duty.finance" auto-complete="off"></el-input>
-                <el-input v-if="item=='会议交互'" placeholder="输入姓名" v-model="form.duty.Interaction" auto-complete="off"></el-input>
+
+                <el-select
+                  v-if="item=='宣传管理'"
+                  v-model="form.duty.propaganda"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                  :value="form.duty.propaganda"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+                <el-select
+                  v-if="item=='后勤管理'"
+                  v-model="form.duty.logistics"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                  :value="form.duty.logistics"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+
+                <el-select
+                  v-if="item=='缴费管理'"
+                  v-model="form.duty.finance"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                  :value="form.duty.finance"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+                <el-select
+                  v-if="item=='现场管理'"
+                  v-model="form.duty.Interaction"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                  :value="form.duty.Interaction"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+                <el-select
+                  v-if="item=='参会管理'"
+                  v-model="form.duty.professor"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                  :value="form.duty.professor"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
+                <el-select
+                  v-if="item=='投稿管理'"
+                  v-model="form.duty.contribute"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="输入姓名"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                  :value="form.duty.contribute"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.ID"
+                    :label="item.NAME"
+                    :value="item.NAME">
+                  </el-option>
+                </el-select>
+
               </div>
             </el-form-item>
           </div>
         </el-form>
-        <!--{{form}}-->
-        <!--{{form.checkedModels}}-->
-        <!--{{form.duty}}-->
+
         <div slot="footer" class="dialog-footer">
-          <el-button class="btn3" type="info"  @click="concel()">取消</el-button>
+          <el-button class="btn3" type="info"  @click="cancel()">取消</el-button>
           <el-button type="primary" v-on:click="reset" class="btn2 icon-huanyihuan">重置</el-button>
-          <el-button type="primary" class="btn2 icon-baocun2" @click="saveMeet(form)">保存</el-button>
-          <el-button type="primary" class="btn2 icon-fabu1" @click="releaseMeet(form)">发布</el-button>
+          <el-button type="primary" class="btn2 icon-baocun2" @click="saveMeet()">保存</el-button>
+          <!--<el-button type="primary" class="btn2 icon-fabu1" @click="releaseMeet(form)">发布</el-button>-->
         </div>
       </el-dialog>
     </div>
@@ -133,247 +363,258 @@
 </template>
 
 <script>
-    const modelOptions = ['会议宣传', '后勤管理', '财务管理','会议交互'];
+    const modelOptions = ['投稿管理','宣传管理','参会管理', '后勤管理', '缴费管理','现场管理'];
     export default {
-        name: "Index",
-        data() {
-          return {
-             meeting:[
-               { conferenceName:'会议1',
-                 conferenceNameid:'1001',
-                 conferenceDate:['2018-02-12 15:20:30','2018-02-16 19:20:30'],
-                 modelOptions:['会议宣传', '后勤管理', '财务管理','会议交互'],
-                 duty: {
-                   propaganda:'张三',
-                   logistics:'李四',
-                   finance:'王五',
-                   Interaction:'赵六'
-                 },
-               },
-               {conferenceName:'会议2',
-                 conferenceNameid:'1002',
-                 modelOptions:['会议宣传', '后勤管理', '财务管理','会议交互'],
-                 duty: {
-                   propaganda:'张三',
-                   logistics:'李四',
-                   finance:'王五',
-                   Interaction:'赵六'
-                 },
-               },
-               {conferenceName:'会议3',
-                 conferenceNameid:'1003',
-                 modelOptions:['会议宣传','会议交互'],
-                 duty: {
-                   propaganda:'张三',
-                   logistics:'李四',
-                   finance:'王五',
-                   Interaction:'赵六'
-                 },
-               }
-             ],
-            release:[
-              {conferenceName:'会议4',
-                conferenceNameid:'1004',
-                modelOptions:['会议宣传', '财务管理','会议交互'],
-                duty: {
-                  propaganda:'张三',
-                  logistics:'李四',
-                  finance:'王五',
-                  Interaction:'赵六'
-                },
-              },
-              {conferenceName:'会议5',
-                conferenceNameid:'1005',
-                modelOptions:['会议宣传', '后勤管理', '财务管理'],
-                duty: {
-                  propaganda:'张三',
-                  logistics:'李四',
-                  finance:'',
-                  Interaction:'赵六'
-                },
-              },
-            ],
-            save:[
-              {conferenceName:'会议6',
-                conferenceNameid:'1006',
-                duty: {
-                  propaganda:'张三',
-                  logistics:'李四',
-                  finance:'王五',
-                  Interaction:'赵六'
-                },
-              }
-            ],
-            models: modelOptions,
-            isIndeterminate: true,
-            dialogFormEditVisible:false,
-            dialogFormVisible: false,
-            duty:false,
-            form: {
-              conferenceDate: [],
-              endTime:'',
-              name: '',
-              checkAll: false,
-              checkedModels: [],
-              duty: {
-                propaganda:'',
-                logistics:'',
-                finance:'',
-                Interaction:'',
-              },
+      name: "Index",
+      data() {
+        return {
+          list:[],//负责人列表
+          options: [],//检索结果存放
+          loading: false,//检索时候的等待状态
+
+          release:[
+            // {
+            //   conferenceName:'会议5',
+            //   conferenceNameid:'1005',
+            //   conferenceDate:['2018-09-12','2018-09-13'],
+            //   modelOptions:['宣传管理', '后勤管理', '缴费管理'],
+            //   duty: {
+            //     propaganda:['张三'],
+            //     logistics:['李四'],
+            //     finance:['赵六'],
+            //     Interaction:[],
+            //     professor:[],
+            //     contribute:[]
+            //   }
+            // }
+          ],
+          save:[
+            // {
+            //   conferenceName:'会议6',
+            //   conferenceNameid:'1006',
+            //   modelOptions:['宣传管理', '后勤管理','缴费管理','现场管理'],
+            //   conferenceDate:['2018-09-12','2018-09-13'],
+            //   duty: {
+            //     propaganda:['张三'],
+            //     logistics:['李四'],
+            //     finance:['王五'],
+            //     Interaction:['赵六'],
+            //     professor:[],
+            //     contribute:[]
+            //   }
+            // }
+          ],
+          //多少个模块
+          models: modelOptions,
+          //全选相关
+          isIndeterminate: true,
+          //修改弹框显示控制
+          dialogFormEditVisible:false,
+          //新建弹框显示控制
+          dialogFormVisible: false,
+          //设置负责人一块的显示
+          duty:false,
+          //填写会议的信息
+          form: {
+            conferenceId: "",
+            conferenceDate: [],
+            name: '',
+            checkAll: false,
+            checkedModels: [],
+            duty: {
+              propaganda:[],
+              logistics:[],
+              finance:[],
+              Interaction:[],
+              professor:[],
+              contribute:[]
             },
-            formLabelWidth: '120px',
-            // item:'',
-            rules: {
-              name: [
-                { required: true, message: '请输入会议名称', trigger: 'blur' },
-                // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-              ],
-              conferenceData: [
-                { type: 'string', required: true, message: '请选择日期', trigger: 'change' }
-              ],
-            }
+          },
+          formLabelWidth: '120px',
+          rules: {
+            name: [
+              { required: true, message: '请输入会议名称', trigger: 'blur' },
+              // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            ],
+            conferenceData: [
+              { type: 'string', message: '请选择日期', trigger: 'change' }
+            ],
+          }
+        }
+      },
+      methods:{
+        getSTime(val) {
+          console.log(val);
+          let s = new Date(val[0]);
+          val[0]=s.getFullYear()+'-'+(s.getMonth()+1)+'-'+s.getDate();
+
+          let e = new Date(val[1]);
+          val[1]=e.getFullYear()+'-'+(e.getMonth()+1)+'-'+e.getDate();
+
+          this.form.conferenceDate = val;
+        },
+        remoteMethod(query) {
+          if (query !== '') {
+            this.loading = true;
+            setTimeout(() => {
+              this.loading = false;
+              this.options = this.list.filter(item => {
+                return item.NAME.toLowerCase()
+                  .indexOf(query.toLowerCase()) > -1;
+              });
+
+            }, 200);
+          } else {
+            this.options = [];
           }
         },
-      methods:{
         //新建会议
         addMeet(){
           this.dialogFormVisible = true;
-          this.form.name='';
-          this.form.checkAll= false;
-          this.form.checkedModels=[];
-          this.form.duty.propaganda = '';
-          this.form.duty.logistics = '';
-          this.form.duty.finance = '';
-          this.form.duty.Interaction = '';
+          this.reset();
         },
         //取消编辑
-        concel(){
+        cancel(){
           this.dialogFormVisible = false;
           this.dialogFormEditVisible = false;
+          this.reset();
           this.$message({
             showClose: true,
             message: '恭喜你，已取消成功',
             type: 'success'
           })
         },
-            //编辑会议
-        editMeet(conferenceNameid){
-          // console.log(conferenceNameid);
+        //编辑会议
+        editMeet(index,kind){
           this.dialogFormEditVisible=true;
-          this.meeting.modelOptions= ['会议宣传','后勤管理' ,'财务管理','会议交互'];
-          this.form.name='会议';
-          this.form.conferenceDate=['2018-02-12 15:20:30','2018-02-16 19:20:30'],
-          this.form.duty.propaganda = '张三';
-          this.form.duty.logistics = '李四';
-          this.form.duty.finance = '王五';
-          this.form.duty.Interaction = '赵六';
-          this.form.checkedModels=this.meeting.modelOptions;
-          //如果全选则显示负责人部分
-          this.form.checkAll = (this.meeting.modelOptions.length==modelOptions.length) ? true : false;
-          // console.log(this.form.checkAll);
-          if(this.meeting.modelOptions.length!=0||this.form.checkAll){
-            this.duty=true;
+          if(kind==1){
+            this.form.conferenceId=this.release[index].conferenceNameid;
+            this.form.name=this.release[index].conferenceName;
+            this.form.conferenceDate=this.release[index].conferenceDate?this.release[index].conferenceDate:[];
+            this.form.duty.propaganda = this.release[index].duty.propaganda?this.release[index].duty.propaganda:[];
+            this.form.duty.logistics = this.release[index].duty.logistics?this.release[index].duty.logistics:[];
+            this.form.duty.finance = this.release[index].duty.finance?this.release[index].duty.finance:[];
+            this.form.duty.Interaction = this.release[index].duty.Interaction?this.release[index].duty.Interaction:[];
+            this.form.duty.contribute = this.release[index].duty.contribute?this.release[index].duty.contribute:[];
+            this.form.duty.professor = this.release[index].duty.professor?this.release[index].duty.professor:[];
+            this.form.checkedModels=this.release[index].modelOptions;
+            //如果全选则显示负责人部分
+            this.form.checkAll = (this.release[index].modelOptions.length==modelOptions.length) ? true : false;
+            if(this.release[index].modelOptions.length!=0||this.form.checkAll){
+              this.duty=true;
+            }
+          }else{
+            this.form.conferenceId=this.save[index].conferenceNameid;
+            this.form.name=this.save[index].conferenceName;
+            this.form.conferenceDate=this.save[index].conferenceDate?this.save[index].conferenceDate:[];
+            this.form.duty.propaganda = this.save[index].duty.propaganda?this.save[index].duty.propaganda:[];
+            this.form.duty.logistics = this.save[index].duty.logistics?this.save[index].duty.logistics:[];
+            this.form.duty.finance = this.save[index].duty.finance?this.save[index].duty.finance:[];
+            this.form.duty.Interaction = this.save[index].duty.Interaction?this.save[index].duty.Interaction:[]
+            this.form.duty.contribute = this.save[index].duty.contribute?this.save[index].duty.contribute:[];
+            this.form.duty.professor = this.save[index].duty.professor?this.save[index].duty.professor:[];
+            this.form.checkedModels=this.save[index].modelOptions;
+            //如果全选则显示负责人部分
+            this.form.checkAll = (this.save[index].modelOptions.length==modelOptions.length) ? true : false;
+            if(this.save[index].modelOptions.length!=0||this.form.checkAll){
+              this.duty=true;
+            }
           }
         },
         //删除会议
-        deleteMeet(){
-
+        deleteMeet(meetId){
+          this.deelMeet(meetId);
         },
         //保存编辑
-        saveMeet(formName){
-          console.log(formName);
+        saveMeet(){
+          this.saveMeetInfo(this);
+          //这里要转换为数据库存储的格式
           this.dialogFormVisible = false;
           this.dialogFormEditVisible = false;
-          // this.$refs[formName].validate((valid) => {
-          //   if (valid) {
-          //     alert('submit!');
-          //   } else {
-          //     console.log('error submit!!');
-          //     return false;
-          //   }
-          // });
-          this.$message({
-            showClose: true,
-            message: '恭喜你，已保存成功',
-            type: 'success'
-          });
-          this.$router.go(0);
+
         },
         //查看会议
-        seeMeet(conferenceName,conferenceDate,propaganda,logistics,finance,Interaction){
-          // console.log(conferenceName);
-          // console.log(conferenceDate);
+        seeMeet(index){
+          let conferenceName=this.release[index].conferenceName;
+          let conferenceDate=this.release[index].conferenceDate?this.release[index].conferenceDate:[];
+          let propaganda = this.release[index].duty.propaganda?this.release[index].duty.propaganda:[];
+          let logistics = this.release[index].duty.logistics?this.release[index].duty.logistics:[];
+          let finance = this.release[index].duty.finance?this.release[index].duty.finance:[];
+          let Interaction = this.release[index].duty.Interaction?this.release[index].duty.Interaction:[];
+          let professor = this.release[index].duty.professor?this.release[index].duty.professor:[];
+          let contribute = this.release[index].duty.contribute?this.release[index].duty.contribute:[];
+          let tempH=[];
+
           const h = this.$createElement;
+
+          if(conferenceName!=""){
+            tempH.push(h('span', null, '会议名称：'));
+            tempH.push(h('i', { style: 'color: teal;margin-left:10px;' }, conferenceName));
+            tempH.push(h('br'));
+          }
+          if(conferenceDate.length!=0){
+            tempH.push(h('span', null, '会议时间：'));
+            tempH.push(h('i', { style: 'color: teal;margin-left:10px;' }, conferenceDate[0]+'—'+conferenceDate[1]));
+            tempH.push(h('br'));
+          }
+          if(propaganda.length!=0){
+            tempH.push(h('span', null, '宣传管理负责人：'));
+            tempH.push(h('i', { style: 'color: teal;margin-left:10px;' }, propaganda.toString()));
+            tempH.push(h('br'));
+          }
+          if(logistics.length!=0){
+            tempH.push(h('span', null, '后勤管理负责人：'));
+            tempH.push(h('i', { style: 'color: teal;margin-left:10px;' }, logistics.toString()));
+            tempH.push(h('br'));
+          }
+          if(finance.length!=0){
+            tempH.push(h('span', null, '缴费管理负责人：'));
+            tempH.push(h('i', { style: 'color: teal;margin-left:10px;' }, finance.toString()));
+            tempH.push(h('br'));
+          }
+          if(Interaction.length!=0){
+            tempH.push(h('span', null, '现场管理负责人：'));
+            tempH.push(h('i', { style: 'color: teal;margin-left:10px;' }, Interaction.toString()));
+            tempH.push(h('br'));
+          }
+          if(professor.length!=0){
+            tempH.push(h('span', null, '参会管理负责人：'));
+            tempH.push(h('i', { style: 'color: teal;margin-left:10px;' }, professor.toString()));
+            tempH.push(h('br'));
+          }
+          if(contribute.length!=0){
+            tempH.push(h('span', null, '投稿管理负责人：'));
+            tempH.push(h('i', { style: 'color: teal;margin-left:10px;' }, contribute.toString()));
+            tempH.push(h('br'));
+          }
           this.$msgbox({
             title: '会议详情',
-            message: h('p', null, [
-              h('span', null, '会议名称 '),
-              h('i', { style: 'color: teal;margin-left:10px;' }, conferenceName),
-              h('br'),
-              h('span', null, '会议时间 '),
-              h('i', { style: 'color: teal;margin-left:10px;' }, conferenceDate[0]+'—'+conferenceDate[1]),
-              h('br'),
-              h('span', { style: 'font-weight:bold;text-align:center;font-size:16px;' }, '模块负责人 '),
-              h('br'),
-              h('span', null, '会议宣传:'),
-              h('i', { style: 'color: teal;margin-left:10px;' }, propaganda),
-              h('br'),
-              h('span', null, '后勤管理:'),
-              h('i', { style: 'color: teal;margin-left:10px;' }, logistics),
-              h('br'),
-              h('span', null, '财务管理:'),
-              h('i', { style: 'color: teal;margin-left:10px;' }, finance),
-              h('br'),
-              h('span', null, '会议互动:'),
-              h('i', { style: 'color: teal;margin-left:10px;' }, Interaction),
-            ]),
+            message: h('p', null, tempH),
             confirmButtonText: '返回',
-          }).then(action => {
-            this.$message({
-              type: 'info',
-              message: '已返回主页面'
-            });
           });
         },
-        // submitForm(formName) {
-        //   this.$refs[formName].validate((valid) => {
-        //     if (valid) {
-        //       alert('submit!');
-        //     } else {
-        //       console.log('error submit!!');
-        //       return false;
-        //     }
-        //   });
-        // },
         //发布会议
-        releaseMeet(formName){
+        releaseMeet(meetId){
           this.dialogFormVisible = false;
           this.dialogFormEditVisible = false;
-          // this.$refs[formName].validate((valid) => {
-          //   if (valid) {
-          //     alert('submit!');
-          //   } else {
-          //     console.log('error submit!!');
-          //     return false;
-          //   }
-          // });
-          this.$message({
-            showClose: true,
-            message: '恭喜你，已发布成功',
-            type: 'success'
-          });
-          this.$route.replace("../pages/meetedit/Index");
-          this.$router.go(0);
+          this.publishMeet(meetId);
         },
         reset(){
-          this.form.duty.propaganda='';
-          this.form.duty.logistics='';
-          this.form.duty.finance='';
-          this.form.duty.Interaction='';
+          this.form.checkAll= false;
+          this.form.checkedModels=[];
+          this.form.conferenceId="";
+          this.form.name="";
+          this.form.conferenceDate=[];
+          this.form.duty.propaganda=[];
+          this.form.duty.logistics=[];
+          this.form.duty.finance=[];
+          this.form.duty.Interaction=[];
+          this.form.duty.professor=[];
+          this.form.duty.contribute=[];
         },
+        //全选
         handleCheckAllChange(val) {
-          this.meeting.checkedModels=this.form.checkedModels = val ? modelOptions : [];
+          this.form.checkedModels=this.form.checkedModels = val ? modelOptions : [];
           this.isIndeterminate = false;
           let checkedCount = this.form.checkedModels.length;
           if( checkedCount == 0){
@@ -382,10 +623,9 @@
             this.duty=true;
           }
         },
+        //单独选
         handleCheckedModelChange(value) {
           let checkedCount = value.length;
-          console.log(checkedCount);
-          console.log(this.models.length);
           this.form.checkAll = checkedCount === this.models.length;
           this.isIndeterminate = checkedCount > 0 && checkedCount < this.models.length;
           if( checkedCount == 0){
@@ -393,7 +633,151 @@
           }else{
             this.duty=true;
           }
+        },
+        getMember(){
+          this.$http.post('/yii/meetedit/meetprepare/get-administrators')
+            .then((res) => {
+              if(res.data.data!=null){
+                this.list=res.data.data.data;
+              }else{
+                alert(res.data.message);
+              }
+            }, (err) => {
+              console.log(err)
+            })
+        },
+        saveMeetInfo(that){
+          //处理数据
+          let findIdByName=function(name){
+            let result=[];
+            for(let indexName in name){
+              for(let index in that.list){
+                if(that.list[index].NAME==name[indexName])
+                  result.push(that.list[index].USER);
+              }
+            }
+            return result;
+          }
+          let dDuty={};
+          let dtemp=this.form.duty;
+          console.log(dtemp);
+          for(let index in dtemp){
+            switch (index) {
+              case 'propaganda':
+                if(dtemp[index].length!=0)
+                  dDuty["7"]=findIdByName(dtemp[index]);
+                break;
+              case 'logistics':
+                if(dtemp[index].length!=0)
+                  dDuty["5"]=findIdByName(dtemp[index]);
+                break;
+              case 'finance':
+                if(dtemp[index].length!=0)
+                  dDuty["3"]=findIdByName(dtemp[index]);
+                break;
+              case 'Interaction':
+                if(dtemp[index].length!=0)
+                  dDuty["6"]=findIdByName(dtemp[index]);
+                break;
+              case 'professor':
+                if(dtemp[index].length!=0)
+                  dDuty["4"]=findIdByName(dtemp[index]);
+                break;
+              case 'contribute':
+                if(dtemp[index].length!=0)
+                  dDuty["2"]=findIdByName(dtemp[index]);
+                break;
+              default:
+                break;
+            }
+          }
+          let data={
+            "startDate": this.form.conferenceDate[0],
+            "endDate": this.form.conferenceDate[1],
+            "name": this.form.name,
+            "checkedModels": this.form.checkedModels,
+            "duty": dDuty
+          }
+          if(this.form.conferenceId!=""){
+            data.meetId=this.form.conferenceId;
+          }
+          console.log(data);
+          let fd = new FormData();
+          fd.append('meetInfo',JSON.stringify(data))
+
+          this.$http.post('/yii/meetedit/meetprepare/add-meet',fd)
+            .then((res) => {
+              if(res.data.data!=null){
+                console.log(res.data.data);
+                this.$message({
+                  showClose: true,
+                  message: '添加成功',
+                  type: 'success'
+                });
+                this.getMeetList();
+              }else{
+                alert(res.data.message);
+              }
+            }, (err) => {
+              console.log(err)
+            })
+        },
+        getMeetList(){
+          this.$http.post('/yii/meetedit/meetprepare/get-meet-list')
+            .then((res) => {
+              if(res.data.data!=null){
+                console.log(res.data.data)
+                this.release= res.data.data.release
+                this.save=res.data.data.save;
+              }else{
+                alert(res.data.message);
+              }
+            }, (err) => {
+              console.log(err)
+            })
+        },
+        publishMeet(meetId){
+          this.$http.post('/yii/meetedit/meetprepare/publish-meet',{"meetId":meetId})
+            .then((res) => {
+              if(res.data.data!=200){
+                console.log(res.data.data)
+                this.$message({
+                  showClose: true,
+                  message: '发布成功',
+                  type: 'success'
+                });
+                //这里要改
+                this.getMeetList();
+              }else{
+                alert(res.data.message);
+              }
+            }, (err) => {
+              console.log(err)
+            })
+        },
+        deelMeet(meetId){
+          this.$http.post('/yii/meetedit/meetprepare/delete-meet',{"meetId":meetId})
+            .then((res) => {
+              if(res.data.data!=200){
+                console.log(res.data.data)
+                this.$message({
+                  showClose: true,
+                  message: '删除成功',
+                  type: 'success'
+                });
+                //这里要改
+                this.getMeetList();
+              }else{
+                alert(res.data.message);
+              }
+            }, (err) => {
+              console.log(err)
+            })
         }
+      },
+      mounted(){
+        this.getMember();
+        this.getMeetList();
       }
     }
 </script>

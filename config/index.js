@@ -23,18 +23,25 @@ module.exports = {
       },
       '/yii': {
         changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
-        target: 'http://139.224.54.245:8081/clubManage/clubApi/backend/web/index.php',// 接口的域名
+        target: 'http://127.0.0.1/clubManage/clubApi/backend/web/index.php',// 接口的域名
         pathRewrite: {
           '^/yii': ''//后面可以使重写的新路径，一般不做更改
         }
       },
-     '/aaa': {
+      '/local': {
         changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
-        target: 'http://192.168.1.102/clubApi-master/backend/web/index.php',// 接口的域名
+        target: 'http://127.0.0.1/clubApi/backend/web/index.php',// 接口的域名
         pathRewrite: {
-          '^/aaa': ''//后面可以使重写的新路径，一般不做更改
+          '^/local': ''//后面可以使重写的新路径，一般不做更改
         }
       },
+      '/translate': {
+        changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+        target: 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20170721T082515Z.54cf3dc583f679db.f4a96182281281d8b5dfe24b4e88298e2133f219&lang=zh-en&text=',// 接口的域名
+        pathRewrite: {
+          '^/translate': ''//后面可以使重写的新路径，一般不做更改
+        }
+      }
     },
 
     // Various Dev Server settings
