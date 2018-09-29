@@ -59,6 +59,7 @@
   import finance from './information/infor-finance';
   import logistics from './information/infor-logistics';
   import advertise from './information/infor-advertise';
+  import MeetlistHeader from "./MeetlistHeader";
   import { mapGetters } from 'vuex';
 
   export default {
@@ -68,7 +69,8 @@
       "info-lead":lead,
       "info-finance":finance,
       "info-logistics":logistics,
-      "info-advertise":advertise
+      "info-advertise":advertise,
+      "MeetlistHeader":MeetlistHeader
     },
     data(){
         return{
@@ -82,6 +84,10 @@
           pay:{},
           professor:{},
           meetInfo:{},
+          isContribute:false,
+          isLogistics:false,
+          isPay:false,
+          isProfessor:false,
           fullHeight: document.documentElement.clientHeight,//网页高度
         }
     },
@@ -147,10 +153,10 @@
     mounted: function () {
       // console.log(this.fullHeight);
        //设置各部分的高度
-      document.getElementById('halfHeight1').style.minHeight=(this.fullHeight/3)+'px';
-      document.getElementById('halfHeight2').style.minHeight=(this.fullHeight/3)+'px';
-      document.getElementById('fullHeight1').style.minHeight=(this.fullHeight)+'px';
-      document.getElementById('fullHeight2').style.minHeight=(this.fullHeight)+'px';
+      document.getElementById('halfHeight1').style.height=(this.fullHeight/3)+'px';
+      document.getElementById('halfHeight2').style.height=(this.fullHeight/3)+'px';
+      document.getElementById('fullHeight1').style.height=(this.fullHeight)+'px';
+      document.getElementById('fullHeight2').style.height=(this.fullHeight)+'px';
       // console.log(document.getElementById('halfHeight1').style.height)
       this.getInformation();
     },
@@ -165,6 +171,12 @@
       },
       pay: {
         handler(newValue, oldValue) {
+        },
+        deep: true
+      },
+      meetId: {
+        handler(newValue, oldValue) {
+          this.getInformation();
         },
         deep: true
       }
