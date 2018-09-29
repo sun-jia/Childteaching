@@ -20,6 +20,9 @@
           <!--会议宣传-->
           <info-advertise></info-advertise>
           <hr>
+          <!--论文接收-->
+          <infor-paper></infor-paper>
+          <hr>
           <div class="nextStep">
             <span class="nextStepSpan">进入筹备阶段<i class="icon-processing"></i></span>
           </div>
@@ -32,18 +35,23 @@
               <div style="width: 3px; height: 50px; background-color: #DFDFDF;margin-left:11px;"></div>
             </div>
             <div style="height:86px;">
-              <el-button   circle  v-bind:class="{ anchor: isActiveAncher2}" v-on:click="isActiveAncher1=false;isActiveAncher2=true;isActiveAncher3=false;isActiveAncher4=false;jump(1)"></el-button>
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher2}" v-on:click="isActiveAncher1=false;isActiveAncher2=true;isActiveAncher3=false;isActiveAncher4=false;isActiveAncher5=false;jump(1)"></el-button>
               <span style="font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher2 }">填写财务管理信息</span><br>
               <div style="width: 3px; height: 60px; background-color: #DFDFDF;margin-left:11px;"></div>
             </div>
             <div style="height:106px;">
-              <el-button   circle  v-bind:class="{ anchor: isActiveAncher3 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=true;isActiveAncher4=false;jump(2)"></el-button>
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher3 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=true;isActiveAncher4=false;isActiveAncher5=false;jump(2)"></el-button>
               <span style="padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher3 }">填写后勤管理信息</span><br>
               <div style="width: 3px; height: 80px; background-color: #DFDFDF;margin-left:11px;"></div>
             </div>
-            <div style="height:26px;">
-              <el-button   circle  v-bind:class="{ anchor: isActiveAncher4 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=true;jump(3)"></el-button>
+            <div style="height:106px;">
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher4 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=true;isActiveAncher5=false;jump(3)"></el-button>
               <span style="padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher4}">填写宣传管理信息</span><br>
+              <div style="width: 3px; height: 80px; background-color: #DFDFDF;margin-left:11px;"></div>
+            </div>
+            <div style="height:26px;">
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher5 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=false;isActiveAncher5=true;jump(4)"></el-button>
+              <span style="padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher5}">论文投稿信息</span><br>
             </div>
           </div>
         </div>
@@ -59,18 +67,20 @@
   import finance from './information/infor-finance';
   import logistics from './information/infor-logistics';
   import advertise from './information/infor-advertise';
-  import MeetlistHeader from "./MeetlistHeader";
   import { mapGetters } from 'vuex';
+  import MeetlistHeader from "./MeetlistHeader";
+  import InforPaper from "./information/infor-paper";
 
   export default {
     name: "AddInformation",
     props:["meetId"],
     components:{
+      InforPaper,
+      MeetlistHeader,
       "info-lead":lead,
       "info-finance":finance,
       "info-logistics":logistics,
-      "info-advertise":advertise,
-      "MeetlistHeader":MeetlistHeader
+      "info-advertise":advertise
     },
     data(){
         return{
@@ -79,6 +89,7 @@
           isActiveAncher2:false,//锚点
           isActiveAncher3:false,//锚点
           isActiveAncher4:false,//锚点
+          isActiveAncher5:false,//锚点
           contribute:{},
           logistics:{},
           pay:{},
@@ -153,10 +164,11 @@
     mounted: function () {
       // console.log(this.fullHeight);
        //设置各部分的高度
-      document.getElementById('halfHeight1').style.height=(this.fullHeight/3)+'px';
-      document.getElementById('halfHeight2').style.height=(this.fullHeight/3)+'px';
-      document.getElementById('fullHeight1').style.height=(this.fullHeight)+'px';
-      document.getElementById('fullHeight2').style.height=(this.fullHeight)+'px';
+      document.getElementById('halfHeight1').style.minHeight=(this.fullHeight/3)+'px';
+      document.getElementById('halfHeight2').style.minHeight=(this.fullHeight/3)+'px';
+      document.getElementById('fullHeight1').style.minHeight=(this.fullHeight)+'px';
+      document.getElementById('fullHeight2').style.minHeight=(this.fullHeight)+'px';
+      document.getElementById('fullHeight3').style.minHeight=(this.fullHeight)+'px';
       // console.log(document.getElementById('halfHeight1').style.height)
       this.getInformation();
     },
