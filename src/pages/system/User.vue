@@ -102,7 +102,7 @@ export default {
      showNextText: true,//显示下一页
      startTime: '',
      totlepage: 10,//总页数
-     type: 1,//排序类型，默认日期降序，2为日期升序，3为金额降序，4为金额升序
+     type: 4,//排序类型，默认日期降序，2为日期升序，3为金额降序，4为金额升序
      visiblepage: 10,//可见页数
      value3: '',//排序类型，默认日期降序，2为日期升
    }
