@@ -1,10 +1,10 @@
 $(function(){
-	$('#username').focus().blur(checkName);
+	$('#NAME').focus().blur(checkName);
 	$('#password').blur(checkPassword);
 });
 
 function checkName(){
-	var name = $('#username').val();
+	var name = $('#NAME').val();
 	if(name == null || name == ""){
 		//提示错误
 		$('#count-msg').html("用户名不能为空");

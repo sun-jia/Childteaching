@@ -4,7 +4,7 @@
     <Condition v-show="showByLogin"></Condition>
 
     <div id="wrapper">
-      <Header v-show="showByLogin" v-bind:user-name="getUserName"></Header>
+      <Header v-show="showByLogin" v-bind:user-name="getNAME"></Header>
 
       <Nav v-show="showSider"></Nav>
 
@@ -41,7 +41,7 @@
     computed: {
       //映射
       ...mapGetters([
-        'getUserName',
+        'getNAME',
         'showByLogin',
         'showSider',   //映射 this.showSider 为 store.getters.showSider
         'loading'   //映射 this.loading 为 store.getters.loading

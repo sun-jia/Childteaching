@@ -3,10 +3,10 @@ import * as types from './type'
 
 export default{
       login:({commit},obj)=>{
-          commit('setUser',obj.user),commit('setUserName',obj.name),commit('setUserKind',obj.kind),commit("setAccessToken",obj.access_token)
+          commit('setUser',obj.user),commit('setNAME',obj.name),commit('setUserKind',obj.kind),commit("setAccessToken",obj.access_token)
       },
       logout:({commit})=>{
-          commit('delUser'),commit('delUserName'),commit('delUserKind'),commit('delAccessToken')
+          commit('delUser'),commit('delNAME'),commit('delUserKind'),commit('delAccessToken')
       },
       showByLogin:({commit})=>{
           commit('showByLogin'), commit('showSider')
