@@ -1,5 +1,5 @@
 <template>
-  <div id="halfHeight1" index="01" class="d_jump" title="负责人信息">
+  <div index="01" class="halfHeight d_jump" title="负责人信息">
     <div class="listname">负责人<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <div class="dutyPerson">
       <table>
@@ -7,7 +7,7 @@
           <th v-for="item in duty">{{ item.moduleName }}</th>
         </tr>
         <tr>
-          <td v-for="item in duty">{{ item.userName }}</td>
+          <td v-for="item in duty">{{ item.userName.toString() }}</td>
         </tr>
       </table>
     </div>

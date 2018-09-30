@@ -1,5 +1,5 @@
 <template>
-  <div id="fullHeight1" index="01" class="d_jump" title="会议公告">
+  <div index="01" class="fullHeight d_jump" title="会议公告">
     <div class="listname">会议公告<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <div>
       <el-table
@@ -68,8 +68,8 @@
       <div slot="footer" class="dialog-footer">
         <el-button class="btn3" type="info"  @click="newAnnouncement=false">取消</el-button>
         <el-button type="primary" v-on:click="reset" class="btn2 icon-huanyihuan">重置</el-button>
-        <el-button type="primary" class="btn2 icon-baocun2" @click="save(newAnnouncementForm)">保存</el-button>
-        <el-button type="primary" class="btn2 icon-fabu1" @click="release(newAnnouncementForm)">发布</el-button>
+        <el-button type="primary" class="btn2 icon-baocun2" @click="save(newAnnouncementForm);newAnnouncement=false">保存</el-button>
+        <el-button type="primary" class="btn2 icon-fabu1" @click="release(newAnnouncementForm);newAnnouncement=false">发布</el-button>
       </div>
     </el-dialog>
     <!--修改公告-->
@@ -93,8 +93,8 @@
       <div slot="footer" class="dialog-footer">
         <el-button class="btn3" type="info"  @click="newAnnouncement=false">取消</el-button>
         <el-button type="primary" v-on:click="reset" class="btn2 icon-huanyihuan">重置</el-button>
-        <el-button type="primary" class="btn2 icon-baocun2" @click="save(newAnnouncementForm)">保存</el-button>
-        <el-button type="primary" class="btn2 icon-fabu1" @click="release(newAnnouncementForm)">发布</el-button>
+        <el-button type="primary" class="btn2 icon-baocun2" @click="save(newAnnouncementForm);newAnnouncement=false">保存</el-button>
+        <el-button type="primary" class="btn2 icon-fabu1" @click="release(newAnnouncementForm);newAnnouncement=false">发布</el-button>
       </div>
     </el-dialog>
   </div>
@@ -175,6 +175,10 @@
           this.newAnnouncementForm.name = ''
           this.newAnnouncementForm.content = ''
         },
+        //推送
+        release:function(){
+
+       }
       }
     }
 </script>

@@ -151,135 +151,90 @@
         webVisible: false,
         h5: [
           {
-            id: '001',
-            name: '模板一',
-            link: '#'
+            id:'001',
+            name:'模板一',
+            link:'#',
           },
           {
-            id: '002',
-            name: '模板二',
-            link: '#'
+            id:'002',
+            name:'模板二',
+            link:'#',
           },
           {
-            id: '003',
-            name: '模板三',
-            link: '#'
+            id:'003',
+            name:'模板三',
+            link:'#',
           },
           {
-            id: '004',
-            name: '模板四',
-            link: '#'
+            id:'004',
+            name:'模板四',
+            link:'#',
           },
           {
-            id: '005',
-            name: '模板五',
-            link: '#'
+            id:'005',
+            name:'模板五',
+            link:'#',
           }
         ]
       }
     },
-    methods: {
-      webShow: function () {
+    methods:{
+      webShow:function () {
         // let web=document.getElementById("web");
-        this.isActiveWeb = true
-        this.isActiveH5 = false
-        this.websShow = true
-        this.h5sShow = false
-        console.log(this.websShow)
-        console.log(this.h5sShow)
+        this.isActiveWeb=true;
+        this.isActiveH5=false;
+        this.websShow=true;
+        this.h5sShow=false;
+        console.log( this.websShow);
+        console.log( this.h5sShow);
       },
-      h5Show: function () {
-        this.isActiveWeb = false
-        this.isActiveH5 = true
-        this.websShow = false
-        this.h5sShow = true
-        console.log(this.websShow)
-        console.log(this.h5sShow)
+      h5Show:function(){
+        this.isActiveWeb=false;
+        this.isActiveH5=true;
+        this.websShow=false;
+        this.h5sShow=true;
+        console.log( this.websShow);
+        console.log( this.h5sShow);
       },
-      handleCurrentChangeOne (val) {
-        this.advertise.web = val
+      handleCurrentChangeOne(val) {
+        this.advertise.web = val;
       },
-      // 预览宣传
-      review: function () {
+      //预览宣传
+      review:function(){
 
       },
-      pageChangeWeb: function (page) { // 分页
+      //单选
+      setCurrentOne(row) {
+        this.$refs.singleTableOne.setCurrentRow(row);
+      },
+      pageChangeWeb: function(page){//分页
         if (this.webCurrentpage != page) {
-          this.webCurrentpage = page
+          this.webCurrentpage = page;
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
-        console.log(this.webCurrentpage)
+        console.log(this.webCurrentpage );
       },
-      prepageWeb: function (page) { // 上一页
-        page--
+      prepageWeb:function(page){//上一页
+        page--;
         if (this.webCurrentpage != page) {
-          this.webCurrentpage = page
+          this.webCurrentpage = page;
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
-        console.log(page)
+        console.log(page);
       },
-      nextpageWeb: function (page) { // 下一页
-        page++
+      nextpageWeb:function(page){//下一页
+        page++;
         if (this.webCurrentpage != page) {
-          this.webCurrentpage = page
+          this.webCurrentpage = page;
           // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
         }
-        console.log(page)
+        console.log(page);
       },
-      setCurrentTwo (row) {
-        this.$refs.singleTableTwo.setCurrentRow(row)
+      setCurrentTwo(row) {
+        this.$refs.singleTableTwo.setCurrentRow(row);
       },
-      handleCurrentChangeTwo (val) {
-        this.advertise.h5 = val
-      },
-      handleRelease (id, tempID, links) {
-        console.log(id, tempID, links)
-        if (links != null) {
-          this.$message({
-            message: '此会议已发布！',
-            type: 'warning'
-          })
-        } else {
-          let that = this
-          let link = 'http://21398ts268.iask.in:20483/ConferenceSite?id=' + id
-          this.$http.post('/local/meetlist/prepare/advertiseweb', {id: id, links: link}).then(function (res) {
-            console.log(res.data)
-            if (res.data == 1) {
-              that.$message({
-                message: '发布成功！',
-                type: 'success'
-              })
-            }
-            // window.location.reload()
-          })
-        }
-      },
-      shareTo (n, link, sitename) {
-        switch (n) {
-          case 0:
-            $('.weixin').attr('href', 'http://qr.liantu.com/api.php?text=' + link)
-            break
-          case 1:
-            $('.tQQ').attr('href', 'http://connect.qq.com/widget/shareqq/index.html?url=' + link + '&sharesource=qzone&title=' + sitename + '&pics=&summary=&desc=')
-            break
-          case 2:
-            $('.qZone').attr('href', 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + link + '&title=' + sitename + '&pics=&summary=')
-            break
-          case 3:
-            $('.sina').attr('href', 'http://service.weibo.com/share/share.php?url=' + link + '&title=' + sitename + '&pic=&searchPic=')
-            break
-          default:
-        }
-      },
-      changeShow (id) {
-        if (this.rowid == id) {
-          this.show = !this.show
-        } else if (this.rowid != id && this.show == false) {
-          this.rowid = id
-          this.show = true
-        } else {
-          this.rowid = id
-        }
+      handleCurrentChangeTwo(val) {
+        this.advertise.h5 = val;
       },
       make () {
         this.webVisible = false
@@ -293,31 +248,31 @@
         }
       }
     },
-    computed: {
-      pagenumsWeb: function () { // 分页
-        // 初始化前后页边界
-        let lowPage = 1
-        let highPage = this.totlepage
-        let pageArr = []
-        if (this.totlepage > this.visiblepage) { // 总页数超过可见页数时，进一步处理；
-          let subVisiblePage = Math.ceil(this.visiblepage / 2)
-          if (this.webCurrentpage > subVisiblePage && this.webCurrentpage < this.totlepage - subVisiblePage + 1) { // 处理正常的分页
-            lowPage = this.webCurrentpage - subVisiblePage
-            highPage = this.webCurrentpage + subVisiblePage - 1
-          } else if (this.webCurrentpage <= subVisiblePage) { // 处理前几页的逻辑
-            lowPage = 1
-            highPage = this.visiblepage
-          } else { // 处理后几页的逻辑
-            lowPage = this.totlepage - this.visiblepage + 1
-            highPage = this.totlepage
+    computed:{
+      pagenumsWeb: function(){//分页
+        //初始化前后页边界
+        let lowPage = 1;
+        let highPage = this.totlepage;
+        let pageArr = [];
+        if(this.totlepage > this.visiblepage){//总页数超过可见页数时，进一步处理；
+          let subVisiblePage = Math.ceil(this.visiblepage/2);
+          if(this.webCurrentpage > subVisiblePage && this.webCurrentpage < this.totlepage - subVisiblePage +1){//处理正常的分页
+            lowPage = this.webCurrentpage - subVisiblePage;
+            highPage = this.webCurrentpage + subVisiblePage -1;
+          }else if(this.webCurrentpage <= subVisiblePage){//处理前几页的逻辑
+            lowPage = 1;
+            highPage = this.visiblepage;
+          }else{//处理后几页的逻辑
+            lowPage = this.totlepage - this.visiblepage + 1;
+            highPage = this.totlepage;
           }
         }
-        // 确定了上下page边界后，要准备压入数组中了
-        while (lowPage <= highPage) {
-          pageArr.push(lowPage)
-          lowPage++
+        //确定了上下page边界后，要准备压入数组中了
+        while(lowPage <= highPage){
+          pageArr.push(lowPage);
+          lowPage ++;
         }
-        return pageArr
+        return pageArr;
       }
     },
     created () {

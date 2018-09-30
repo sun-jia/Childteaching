@@ -93,7 +93,7 @@
                   <td v-if='detial.ACCOUNT_MODE==4'>线下</td>
                   <td>{{detial.ACCOUNT_DATE}}</td>
                   <td>
-                    <span v-on:click="deletechange(detial.USERID)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
+                    <span v-on:click="deletechange(detial.USER)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
                   </td>
                 </tr>
               </table>
@@ -210,7 +210,7 @@
       methods: {
         deletechange: function (a) {
           console.log(a);
-          this.axios.get("/yii/finance/finance/deletedata?USERID="+a).then(function(res){
+          this.axios.get("/yii/finance/finance/deletedata?USER="+a).then(function(res){
             console.log(res.data);
             if(res.data==1){
                location.reload();
@@ -228,7 +228,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -236,7 +236,7 @@
           fd.append('ENDDATE', this.endTime);//传结束时间
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
-          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/aaa/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -252,7 +252,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -261,7 +261,7 @@
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
           console.log(fd.getAll('type'));
-          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/aaa/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -278,7 +278,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -305,7 +305,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -330,7 +330,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -359,7 +359,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -389,7 +389,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -426,7 +426,7 @@
           // console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -450,7 +450,7 @@
           }
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -464,7 +464,7 @@
               const { export_json_to_excel } = require('@/excel/Export2Excel.js');//引入文件
               const tHeader = ['姓名', '身份证号','交易金额', '会议ID','支付方式','日期'];
               // 上面设置Excel的表格第一行的标题
-              const filterVal = [ 'NAME', 'USERID','MONEY','CONFERENCEID','ACCOUNT_MODE','ACCOUNT_DATE'];
+              const filterVal = [ 'NAME', 'USER','MONEY','CONFERENCEID','ACCOUNT_MODE','ACCOUNT_DATE'];
               // 上面的index、phone_Num、school_Name是tableData里对象的属性
               const list = this.excelData;  //把data里的tableData存到list
               // console.log(list);

@@ -29,10 +29,10 @@ const mutations={
     delUser(){
       state.user=""
       localStorage.setItem("vuex",JSON.stringify(state));    },
-    setUserName:function(state,name){
+    setNAME:function(state,name){
       state.name =name;
       localStorage.setItem("vuex",JSON.stringify(state));    },
-    delUserName(){
+    delNAME(){
       state.name=""
       localStorage.setItem("vuex",JSON.stringify(state));    },
     setUserKind:function(state,kind){
@@ -63,6 +63,9 @@ const mutations={
       state.Smart=true                                      },
     hideSmart(state){
       state.Smart=false                                     },
+    setMeetId:function(state,meetId){
+      state.meetId =meetId;
+      localStorage.setItem("vuex",JSON.stringify(state));    }
 };
 
 export default{

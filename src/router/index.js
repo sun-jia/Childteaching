@@ -1,4 +1,3 @@
-
 import Home from '../pages/home/Index.vue'
 import WebAdvertise from '../pages/advertise/webIndex'
 import H5Advertise from '../pages/advertise/h5Index'
@@ -6,25 +5,30 @@ import Finance from '../pages/finance/Index'
 import Charlist from '../pages/finance/Charlist'
 import Orderlist from '../pages/finance/Orderlist'
 import Invoice from '../pages/finance/Invoice'
-import Logistics from  '../pages/logistics/Index'
-import LogisticsRestaurant from  '../pages/logistics/restaurant/Restaurant'
-import LogisticsBus from  '../pages/logistics/bus/Bus'
-import LogisticsHotel from  '../pages/logistics/hotel/Hotel'
+import Logistics from '../pages/logistics/Index'
+import LogisticsRestaurant from '../pages/logistics/restaurant/Restaurant'
+import LogisticsBus from '../pages/logistics/bus/Bus'
+import LogisticsHotel from '../pages/logistics/hotel/Hotel'
 
 import MeetEdit from '../pages/meetedit/Meetedit'
 import MeetList from '../pages/meetlist/Index'
 import History from '../pages/meetlist/History'
 import Addmem from '../pages/member/Addmem'
-import loginlist from '../pages/member/loginlist'
+import MemberInfo from '../pages/member/MemberInfo'
 import passchange from '../pages/member/passchange'
 import Progress from '../pages/meetlist/Progress'
 import Prepare from '../pages/meetlist/Prepare'
 import AddInformation from '../pages/meetlist/AddInformation'
-import AddMeetInfor from '../pages/meetlist/AddPrepareInfor'
-import AddPrograssInfor from '../pages/meetlist/AddPrograssInfor'
+import AddBeforeInfor from '../pages/meetlist/AddBeforeInfor'
+import AddProgressInfor from '../pages/meetlist/AddProgressInfor'
+import MeetSummary from '../pages/meetlist/MeetSummary'
 import Member from '../pages/member/Index'
 import Statics from '../pages/statics/Index'
-import System from  '../pages/system/Index'
+import StaticsAttend from '../pages/statics/StaticsAttend'
+import StaticsInteract from '../pages/statics/StaticsInteract'
+import StaticsMaterial from '../pages/statics/StaticsMaterial'
+import StaticsSign from '../pages/statics/StaticsSign'
+import System from '../pages/system/Index'
 import Carousel from '../pages/home/Carousel.vue'
 import ATemplates from '../pages/advertise/webTemplates/Index'
 import SelectTemp from '../pages/advertise/webTemplates/SelectTemp'
@@ -39,22 +43,25 @@ import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
 
 /*映射*/
-import Neworder from '../pages/finance/Neworder'
 
 import Addbus from '../pages/logistics/Addbus'
 import Alterbus from '../pages/logistics/Alterbus'
+import seeHotelRoom from  '../pages/logistics/hotel/seeHotelRoom'
+import historyHotel from '../pages/logistics/hotel/historyHotel'
+import addHotel from  '../pages/logistics/hotel/addHotel'
+import addRestaurant from '../pages/logistics/restaurant/addRestaurant'
+import historyRestaurant from '../pages/logistics/restaurant/historyRestaurant'
 import Driverlist from '../pages/logistics/Driverlist'
 import Adddriver from '../pages/logistics/Adddriver'
 import Alterdriver from '../pages/logistics/Alterdriver'
 import Travelrecord from '../pages/logistics/Travelrecord'
 
 
-
 import User from '../pages/system/User'
 import Power from '../pages/system/Power'
 import loginuser from '../pages/userlogin/loginuser'
 
-export default  [
+export default [
   {
     path: '/',
     redirect: '/home',
@@ -118,25 +125,33 @@ export default  [
     component: Prepare,
   },
   {
+    name: "history",
     path: '/meetlist/History',
     component: History,
+    props: true
   },
   {
-    name:"addInformation",
+    name: "addInformation",
     path: '/meetlist/AddInformation',
     component: AddInformation,
     props: true
   },
   {
-    name:"addPrepareInfor",
-    path: '/meetlist/AddPrepareInfor',
-    component: AddMeetInfor,
+    name: "addBeforeInfor",
+    path: '/meetlist/AddBeforeInfor',
+    component: AddBeforeInfor,
     props: true
   },
   {
-    name:"addPrograssInfor",
-    path: '/meetlist/AddPrograssInfor',
-    component: AddPrograssInfor,
+    name: "meetSummary",
+    path: '/meetlist/MeetSummary',
+    component: MeetSummary,
+    props: true
+  },
+  {
+    name: "addProgressInfo",
+    path: '/meetlist/AddProgressInfor',
+    component: AddProgressInfor,
     props: true
   },
   {
@@ -146,6 +161,22 @@ export default  [
   {
     path: '/statics',
     component: Statics,
+  },
+  {
+    path: '/statics/Interactive',
+    component: StaticsInteract,
+  },
+  {
+    path: '/statics/attend',
+    component: StaticsAttend,
+  },
+  {
+    path: '/statics/SignIn',
+    component: StaticsSign,
+  },
+  {
+    path: '/statics/Material',
+    component: StaticsMaterial,
   },
   {
     path: '/system',
@@ -179,35 +210,61 @@ export default  [
     component: Result,
   },
   {
-    path:'/logistics/addbus',
-    component:Addbus,
+    path: '/logistics/addRestaurant',
+    component: addRestaurant,
   },
   {
-    path:'/logistics/alterbus',
-    component:Alterbus,
+    name:"historyRestaurant",
+    path:'/logistics/historyRestaurant',
+    component:historyRestaurant,
+    prop:true
   },
   {
-    path:'/logistics/driverlist',
-    component:Driverlist,
+    path: '/logistics/addHotel',
+    component: addHotel,
   },
   {
-    path:'/logistics/adddriver',
-    component:Adddriver,
+    name:"seeHotelRoom",
+    path:'/logistics/seeHotelRoom',
+    component:seeHotelRoom,
+    prop:true
   },
   {
-    path:'/logistics/alterdriver',
-    component:Alterdriver,
+    name:"historyHotel",
+    path:'/logistics/historyHotel',
+    component:historyHotel,
+    prop:true
   },
   {
-    path:'/logistics/travelrecord',
-    component:Travelrecord,
+    path: '/logistics/addbus',
+    component: Addbus,
+  },
+  {
+    path: '/logistics/alterbus',
+    component: Alterbus,
+  },
+  {
+    path: '/logistics/driverlist',
+    component: Driverlist,
+  },
+  {
+    path: '/logistics/adddriver',
+    component: Adddriver,
+  },
+  {
+    path: '/logistics/alterdriver',
+    component: Alterdriver,
+  },
+  {
+    path: '/logistics/travelrecord',
+    component: Travelrecord,
   },
   {
     path: '/finance/Invoice',
     component: Invoice,
   },
   {
-  path: '/finance/Index',
+    path: '/finance/Index',
     component: Finance,
   },
   // {
@@ -226,30 +283,32 @@ export default  [
     path: '/system/Index',
     component: System,
   },
- {
+  {
     path: '/system/user',
     component: User,
   },
- {
+  {
     path: '/system/power',
     component: Power,
   },
-{
-      path: '/member/list',
-      component: Member,
-    },
-    {
-      path: '/member/add',
-      component: Addmem,
-    },
-    {
-      path: '/member/loginlist',
-      component: loginlist,
-    },
-    {
-      path: '/member/passchange',
-      component: passchange,
-    },
+  {
+    path: '/member/list',
+    component: Member,
+  },
+  {
+    name:"memberInfor",
+    path: '/member/memberInfor',
+    component: MemberInfo,
+    props:true
+  },
+  {
+    path: '/member/add',
+    component: Addmem,
+  },
+  {
+    path: '/member/passchange',
+    component: passchange,
+  },
   {
     path: '/userlogin/loginuser',
     component: loginuser,

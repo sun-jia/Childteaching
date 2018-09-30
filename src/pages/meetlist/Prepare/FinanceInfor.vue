@@ -1,5 +1,5 @@
 <template>
-  <div id="fullHeight1" index="02" class="d_jump" title="财务管理信息填写">
+  <div class="fullHeight d_jump" index="02"  title="财务管理信息填写">
     <div class="listname">财务管理<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <div class="meet">
       <!--<span>专家人数:<input class="input" v-model="expertFee" />人</span><br><br>-->

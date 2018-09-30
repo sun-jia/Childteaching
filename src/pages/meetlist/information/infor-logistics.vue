@@ -1,5 +1,5 @@
 <template>
-  <div id="fullHeight1" index="03" class="d_jump" title="后勤管理信息填写">
+  <div index="03" class="fullHeight d_jump" title="后勤管理信息填写">
     <div class="listname">后勤管理<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <div class="logistic">
       <div class="col-md-1">

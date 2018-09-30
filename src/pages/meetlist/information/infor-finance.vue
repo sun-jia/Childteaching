@@ -1,5 +1,5 @@
 <template>
-  <div id="halfHeight2" index="02" class="d_jump" title="财务管理信息填写">
+  <div index="02" class="halfHeight d_jump" title="财务管理信息填写">
     <div class="listname">财务管理<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <div class="meet">
       <span>会议注册费用:<input class="input" v-model="payInfo.publishCharge" />元</span><br>
@@ -76,6 +76,8 @@
     color:#fff;
     background-color:#097FC7;
     width:20%;
+    min-height:40px;
+    height: auto !important;
     height:40px;
     border:solid 1px #097FC7;
     border-radius: 4px;
@@ -86,7 +88,9 @@
     margin-top:10px;
     margin-left:20px;
     margin-bottom:10px;
-    height:100px;
+    min-height:100px;
+    height: auto !important;
+    height: 100px;
   }
   .input{
     border:1px solid #338FFC;
