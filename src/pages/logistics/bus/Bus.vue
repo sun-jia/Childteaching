@@ -499,7 +499,9 @@
   }
   .display2{
     border:solid 2px  #e0e0e0;
+    min-height: 500px;
     height: 500px;
+    height: auto;
     /*text-align: center;*/
     width: 98%;
     padding-left:10px;
@@ -582,7 +584,7 @@
     background-color:#5FA7FE;
   }
   .btn4{
-    width:110px;
+    width:auto;
     padding:7px;
     font-size: 14px;
     border-radius: 3px;

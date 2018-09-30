@@ -43,10 +43,14 @@ import Content from '../pages/home/Content.vue'
 import Login from '../pages/home/Login.vue'
 
 /*映射*/
-import Neworder from '../pages/finance/Neworder'
 
 import Addbus from '../pages/logistics/Addbus'
 import Alterbus from '../pages/logistics/Alterbus'
+import seeHotelRoom from  '../pages/logistics/hotel/seeHotelRoom'
+import historyHotel from '../pages/logistics/hotel/historyHotel'
+import addHotel from  '../pages/logistics/hotel/addHotel'
+import addRestaurant from '../pages/logistics/restaurant/addRestaurant'
+import historyRestaurant from '../pages/logistics/restaurant/historyRestaurant'
 import Driverlist from '../pages/logistics/Driverlist'
 import Adddriver from '../pages/logistics/Adddriver'
 import Alterdriver from '../pages/logistics/Alterdriver'
@@ -204,6 +208,32 @@ export default [
   {
     path: '/result',
     component: Result,
+  },
+  {
+    path: '/logistics/addRestaurant',
+    component: addRestaurant,
+  },
+  {
+    name:"historyRestaurant",
+    path:'/logistics/historyRestaurant',
+    component:historyRestaurant,
+    prop:true
+  },
+  {
+    path: '/logistics/addHotel',
+    component: addHotel,
+  },
+  {
+    name:"seeHotelRoom",
+    path:'/logistics/seeHotelRoom',
+    component:seeHotelRoom,
+    prop:true
+  },
+  {
+    name:"historyHotel",
+    path:'/logistics/historyHotel',
+    component:historyHotel,
+    prop:true
   },
   {
     path: '/logistics/addbus',

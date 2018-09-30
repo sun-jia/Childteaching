@@ -1,49 +1,33 @@
 <template>
   <div class="display1">
-    <button class="btn1 "  v-bind:class="{ active: isActive }">酒店管理</button>
-    <router-link to="/logistics/historyHotel">
-      <button class="btn1 btn2"  >使用记录</button>
-    </router-link>
+    <button class="btn1 btn2" >
+      房间管理
+      <router-link to="/logistics/hotel" v-bind:style="{ fontSize: '14px' }">
+        (返回列表)
+      </router-link>
+    </button>
     <div class="display2">
       <div class="col-md-12">
-        <table>
-          <tr>
-            <th>酒店名称</th>
-            <th>酒店电话</th>
-            <th>负责人</th>
-            <th>地理位置</th>
-            <th>容纳人数</th>
-            <th>查看房间</th>
-            <th>操作</th>
-          </tr>
-          <tr v-for="hotel in hotelList" :key="hotel.id">
-            <td>{{hotel.name}}</td>
-            <td>{{hotel.tel}}</td>
-            <td>{{hotel.charger}}</td>
-            <td>{{hotel.position}}</td>
-            <td>{{hotel.capacity}}</td>
-            <td>
-              <span v-on:click="seeHotelRoom(hotel.id)" >查看</span>
-            </td>
-            <td>
-              <span v-on:click="delHotel(hotel.id)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
-            </td>
-          </tr>
-        </table>
-        <div class="page">
-          <ul class="pagination pagination-sm"><!--分页-->
-            <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage)">上一页</a></li>
-            <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage == index} ">
-              <a class="page-link" href="#" v-on:click="pageChange(index)">{{index}}</a>
-            </li>
-            <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage)">下一页</a></li>
-            <li class="page-item"><a class="page-link"  href="#">共<i>{{totlepage}}</i>页</a></li>
-          </ul>
+        <h3>酒店名称：{{ roomList.hotelName }}</h3>
+        <div class="roomContainer">
+          <div class="roomType">单人间</div>
+          <div class="roomContent">{{ roomList.siginalList.toString() }}</div>
         </div>
-      </div>
-      <div class="col-md-12">
-        <button class="btn4 icon-jiajianzujianjiahao" v-on:click="addHotel()">添加酒店</button>
-        <button class="btn3 icon-sousuo">搜索</button>
+        <hr>
+        <div class="roomContainer">
+          <div class="roomType">双人标间</div>
+          <div class="roomContent">{{ roomList.dobuleList.toString() }}</div>
+        </div>
+        <hr>
+        <div class="roomContainer">
+          <div class="roomType">大床房</div>
+          <div class="roomContent">{{ roomList.bigList.toString() }}</div>
+        </div>
+        <hr>
+        <div class="roomContainer">
+          <div class="roomType">三人房</div>
+          <div class="roomContent">{{ roomList.threeList.toString() }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,44 +39,15 @@
     name: 'bus',
     data() {
       return {
-        hotelList: [
-          {
-            id: 1,
-            name: '七天',
-            tel: 12345678,
-            charger: "陈一",
-            money: 100,
-            position: 1,
-            capacity:120
-          },
-          {
-            id: 2,
-            name: '如家',
-            tel: 12345678,
-            charger: "陈二",
-            money: 123,
-            position: 1,
-            capacity:120
-          },
-          {
-            id: 3,
-            name: '汉庭',
-            tel: 12345678,
-            charger: "陈三",
-            money: 132,
-            position: 1,
-            capacity:120
-          },
-          {
-            id: 4,
-            name: '快捷',
-            tel: 12345678,
-            charger: "陈四",
-            money: 121,
-            position: 1,
-            capacity:120
-          }
-        ],
+        roomList: {
+          id: 1,
+          hotelId:"1",
+          hotelName:"七天",
+          siginalList:["101"],
+          dobuleList:["202"],
+          bigList:["302"],
+          threeList:["402"]
+        },
         currentpage: 1,//当前页
         totlepage: 1,//总页数
         visiblepage:5,//可见页数
@@ -131,7 +86,7 @@
         this.getHotelInfo();
       },
       addHotel:function () {
-        this.$router.push({ path: '/logistics/addHotel'})
+        this.$router.push({ path: '/logistics/seeHotelRoom'})
       }
     },
     mounted() {
@@ -222,38 +177,20 @@
   .btn2{
     margin-left: 0px;
   }
-  .btn3{
-    width:80px;
-    padding:7px;
-    font-size: 14px;
-    border-radius: 3px;
-    border:none;
-    color:white;
-    background-color:#338FFC ;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top:13px;
+  .roomType{
+    width: 10%;
+    display:inline-block;
+    line-height: 30px;
+    min-height: 30px;
+    background: #eee;
+    margin: 0;
   }
-  .btn3:hover{
-    background-color:#5FA7FE;
-  }
-  .btn4{
-    width:90px;
-    padding:7px;
-    font-size: 14px;
-    border-radius: 3px;
-    border:none;
-    color:white;
-    background-color:#FA4E28 ;
-    margin-top: 13px;
-  }
-  .btn4:hover{
-    background-color:#FC6F4F;
-  }
-  .delete:hover{
-    color:#C1C1C2
-  }
-  .page{
-    text-align: center;
+  .roomContent{
+    width: 70%;
+    display:inline-block;
+    line-height: 30px;
+    min-height: 60px;
+    border: 1px solid #eee;
+    margin: 0;
   }
 </style>

@@ -80,10 +80,10 @@
         </el-form-item>
         <hr>
         <!--单选-->
-        <el-form-item label="单选" v-for="key in parseInt(singleNum)" style="margin-top: 10px;">
+        <el-form-item label="单选" v-for="key in parseInt(singleNum)" style="margin-top: 10px;" :key="key">
           问题{{key}}：<el-input v-model="questionForm.singleSelection[key-1].singleSelectionTitle" placeholder="请输入问题" style="width:500px;"></el-input><br>
           <!--选项：-->
-          <el-radio-group v-model="questionForm.singleSelection[key-1].singleSelectionItem" v-for="index in parseInt(singleOptionNumber[key-1])">
+          <el-radio-group v-model="questionForm.singleSelection[key-1].singleSelectionItem" v-for="index in parseInt(singleOptionNumber[key-1])" :key="index">
             <el-radio :label="chooseArr[index-1]">{{chooseArr[index-1]}}<input v-model="questionForm.singleSelection[key-1].singleSelectionOption[index-1]" style="padding:5px;border-radius: 5px;border:1px solid #D2D2D2;margin-left: 5px "><br></el-radio>
             <br>
           </el-radio-group><br>
@@ -91,16 +91,16 @@
         </el-form-item>
         <!--多选-->
         <hr v-show="multipleNum!=0">
-        <el-form-item label="多选" v-for="key in parseInt(multipleNum)" style="margin-top: 10px;">
+        <el-form-item label="多选" v-for="key in parseInt(multipleNum)" style="margin-top: 10px;" :key="key">
           问题{{singleNum+key}}：<el-input v-model="questionForm.multipleSelection[key-1].multipleSelectionTitle" placeholder="请输入问题" style="width:500px;"></el-input><br>
-          <el-checkbox-group v-model="questionForm.multipleSelection[key-1].multipleSelectionItem" v-for="index in parseInt(multipleOptionNumber[key-1])">
+          <el-checkbox-group v-model="questionForm.multipleSelection[key-1].multipleSelectionItem" v-for="index in parseInt(multipleOptionNumber[key-1])" :key="index">
             <el-checkbox :label="chooseArr[index-1]"><input v-model="questionForm.multipleSelection[key-1].multipleSelectionOption[index-1]" style="padding:5px;border-radius: 5px;border:1px solid #D2D2D2 "></el-checkbox>
           </el-checkbox-group>
           <el-button v-on:click="inputReset(2,key-1)" style="margin-top: 5px;">重置</el-button>
         </el-form-item>
         <!--填空-->
         <hr v-show="inputNum!=0">
-        <el-form-item label="填空" v-for="key in parseInt(inputNum)" >
+        <el-form-item label="填空" v-for="key in parseInt(inputNum)"  :key="key">
           问题{{singleNum+multipleNum+key}}：<el-input v-model="questionForm.inputQuestion[key-1].inputQuestionTitle" style="width:500px;" placeholder="请输入问题"></el-input>
           <br>回答：<el-input
           type="textarea"
