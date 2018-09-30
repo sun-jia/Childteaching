@@ -1,7 +1,7 @@
 <template>
   <div class="fullHeight d_jump" index="03" title="后勤管理信息填写">
     <div class="listname">后勤管理<i class="el-icon-menu" style="padding-left:5px;"></i></div>
-    <div class="logistic">
+    <div class="logistic clearfix">
       <div class="col-md-1">
         <button class="btn4" v-on:click="hotelsShow" v-bind:class="{ active: isActiveOne }">住房安排</button><br>
         <button class="btn4" v-on:click="TransferLogShow" v-bind:class="{ active: isActiveTwo }">接送安排</button><br>
