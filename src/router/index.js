@@ -39,6 +39,10 @@ import Driverlist from '../pages/logistics/Driverlist'
 import Adddriver from '../pages/logistics/Adddriver'
 import Alterdriver from '../pages/logistics/Alterdriver'
 import Travelrecord from '../pages/logistics/Travelrecord'
+import Addhotel from '../pages/logistics/hotel/Addhotel'
+import Alterhotel from '../pages/logistics/hotel/Alterhotel'
+import Addroom from '../pages/logistics/hotel/Addroom'
+import Roomlist from '../pages/logistics/hotel/Roomlist'
 
 export default  [
   {
@@ -161,6 +165,22 @@ export default  [
   {
     path:'/logistics/travelrecord',
     component:Travelrecord,
+  },
+  {
+    path:'/logistics/hotel/addhotel',
+    component:Addhotel,
+  },
+  {
+    path:'/logistics/hotel/alterhotel',
+    component:Alterhotel,
+  },
+  {
+    path:'/logistics/hotel/roomlist',
+    component:Roomlist,
+  },
+  {
+    path:'/logistics/hotel/addroom',
+    component:Addroom,
   },
   {
     path: '/finance/invoice',

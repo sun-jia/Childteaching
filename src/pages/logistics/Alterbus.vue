@@ -70,7 +70,7 @@
             console.log(res.data);
             if(res.data.data==1){
               alert("车辆信息修改成功！");
-              that.$router.push('/logistics/bus') ;
+              window.location.href = '/logistics/bus'
             }
           }).catch(function (error) {
             console.log(error);

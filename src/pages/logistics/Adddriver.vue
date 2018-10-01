@@ -5,18 +5,17 @@
       <hr>
     </div>
     <div class="form">
-      <span >姓名：<input v-model="driverName" placeholder=""></span> <br>
-      <span >
-          性别：
+      <span>姓 名：<input v-model="driverName" placeholder=""></span> <br>
+      <span>性 别：
           <select v-model="sex"  style="font-size:14px;">
             <option disabled value="">选择</option>
             <option value="0" >男</option>
             <option value="1">女</option>
           </select>
         </span ><br>
-      <span >年龄：<input v-model="age" placeholder="如：鄂A68X99"></span> <br>
-      <span >身份证号：<input v-model="idNumber" placeholder="如：鄂A68X99"></span> <br>
-      <span >联系电话：<input v-model="tel" placeholder="如：鄂A68X99"></span> <br>
+      <span>年 龄：<input v-model="age" placeholder=""></span> <br>
+      <span>身份证号：<input v-model="idNumber" placeholder="" style="width: 160px;"></span> <br>
+      <span>联系电话：<input v-model="tel" placeholder="" style="width: 160px;"></span> <br>
     </div>
     <button  class="btn2 icon-huanyihuan" v-on:click="reset()">重置</button>
     <button  class="btn1 icon-duigou"  v-on:click="submit(driverName,sex,age,idNumber,tel)">确认</button>
