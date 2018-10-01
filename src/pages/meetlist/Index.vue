@@ -318,10 +318,10 @@
         }
         return pageArr;
       },
-    },
-    ...mapGetters([
-      'getUser',
-    ]),
+      ...mapGetters([
+        'getUser',
+      ]),
+    }
   }
 
 </script>

@@ -2,8 +2,8 @@
     <div class="display col-md-12">
         <!--顶部-->
         <div class="top col-md-12">
-          <span>会议准备信息填写</span>
-         <MeetlistHeader></MeetlistHeader>
+          <span>{{ meetInfo.name }}---会议准备信息填写</span>
+             <MeetlistHeader></MeetlistHeader>
           <hr>
         </div>
 
@@ -12,16 +12,19 @@
           <info-lead v-bind:propdata="meetInfo"></info-lead>
           <hr>
           <!--财务管理-->
-          <info-finance v-bind:propdata="pay"></info-finance>
-          <hr>
+          <info-finance v-if="isPay" v-bind:propdata="pay"></info-finance>
+          <hr v-if="isPay">
+          <!--专家管理-->
+          <info-professor v-if="isProfessor" v-bind:propdata="professor"></info-professor>
+          <hr v-if="isProfessor">
           <!--后勤管理-->
-          <info-logistics  v-bind:propdata="logistics"></info-logistics>
-          <hr>
+          <info-logistics v-if="isLogistics" v-bind:propdata="logistics"></info-logistics>
+          <hr v-if="isLogistics">
+          <!--论文接收-->
+          <infor-paper v-if="isContribute" v-bind:propdata="contribute"></infor-paper>
+          <hr v-if="isContribute">
           <!--会议宣传-->
           <info-advertise></info-advertise>
-          <hr>
-          <!--论文接收-->
-          <infor-paper></infor-paper>
           <hr>
           <div class="nextStep">
             <span class="nextStepSpan">进入筹备阶段<i class="icon-processing"></i></span>
@@ -29,29 +32,34 @@
         </div>
         <div class="right col-md-2">
           <div class="ancherFixed">
-            <div style="height:76px;">
-              <el-button   circle  v-bind:class="{ anchor: isActiveAncher1}" v-on:click="isActiveAncher1=true;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=false;jump(0)"></el-button>
-              <span style="padding-top:0px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher1 }">负责人信息</span><br>
-              <div style="width: 3px; height: 50px; background-color: #DFDFDF;margin-left:11px;"></div>
+            <div class="ancherStation">
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher==1}" v-on:click="isActiveAncher=1;jump('leader')"></el-button>
+              <span class="ancherName"  v-bind:class="{textActive:isActiveAncher==1 }">负责人信息</span><br>
+              <div class="ancherLine"></div>
             </div>
-            <div style="height:86px;">
-              <el-button   circle  v-bind:class="{ anchor: isActiveAncher2}" v-on:click="isActiveAncher1=false;isActiveAncher2=true;isActiveAncher3=false;isActiveAncher4=false;isActiveAncher5=false;jump(1)"></el-button>
-              <span style="font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher2 }">填写财务管理信息</span><br>
-              <div style="width: 3px; height: 60px; background-color: #DFDFDF;margin-left:11px;"></div>
+            <div class="ancherStation" v-show="isPay">
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher==2}" v-on:click="isActiveAncher=2;jump('pay')"></el-button>
+              <span class="ancherName"  v-bind:class="{textActive:isActiveAncher==2 }">填写财务管理信息</span><br>
+              <div class="ancherLine"></div>
             </div>
-            <div style="height:106px;">
-              <el-button   circle  v-bind:class="{ anchor: isActiveAncher3 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=true;isActiveAncher4=false;isActiveAncher5=false;jump(2)"></el-button>
-              <span style="padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher3 }">填写后勤管理信息</span><br>
-              <div style="width: 3px; height: 80px; background-color: #DFDFDF;margin-left:11px;"></div>
+            <div class="ancherStation" v-show="isProfessor">
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher==6 }"  v-on:click="isActiveAncher=6;jump('professor')"></el-button>
+              <span class="ancherName"  v-bind:class="{textActive:isActiveAncher==6 }">填写出席专家信息</span><br>
+              <div class="ancherLine"></div>
             </div>
-            <div style="height:106px;">
-              <el-button   circle  v-bind:class="{ anchor: isActiveAncher4 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=true;isActiveAncher5=false;jump(3)"></el-button>
-              <span style="padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher4}">填写宣传管理信息</span><br>
-              <div style="width: 3px; height: 80px; background-color: #DFDFDF;margin-left:11px;"></div>
+            <div class="ancherStation" v-show="isLogistics">
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher==3 }"  v-on:click="isActiveAncher=3;jump('logistics')"></el-button>
+              <span class="ancherName"  v-bind:class="{textActive:isActiveAncher==3 }">填写后勤管理信息</span><br>
+              <div class="ancherLine"></div>
             </div>
-            <div style="height:26px;">
-              <el-button   circle  v-bind:class="{ anchor: isActiveAncher5 }"  v-on:click="isActiveAncher1=false;isActiveAncher2=false;isActiveAncher3=false;isActiveAncher4=false;isActiveAncher5=true;jump(4)"></el-button>
-              <span style="padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;" v-bind:class="{textActive:isActiveAncher5}">论文投稿信息</span><br>
+            <div class="ancherStation" v-show="isContribute">
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher==4 }"  v-on:click="isActiveAncher=4;jump('contribute')"></el-button>
+              <span class="ancherName"  v-bind:class="{textActive:isActiveAncher==4}">论文投稿信息</span><br>
+              <div class="ancherLine"></div>
+            </div>
+            <div class="ancherStation">
+              <el-button   circle  v-bind:class="{ anchor: isActiveAncher==5 }"  v-on:click="isActiveAncher=5;jump('advertise')"></el-button>
+              <span class="ancherName"  v-bind:class="{textActive:isActiveAncher==5}">填写宣传管理信息</span><br>
             </div>
           </div>
         </div>
@@ -67,10 +75,10 @@
   import finance from './information/infor-finance';
   import logistics from './information/infor-logistics';
   import advertise from './information/infor-advertise';
-  import { mapGetters } from 'vuex';
+  import professor from './information/infor-professor';
   import MeetlistHeader from "./MeetlistHeader";
   import InforPaper from "./information/infor-paper";
-
+  import { mapGetters } from 'vuex';
   export default {
     name: "AddInformation",
     props:["meetId"],
@@ -80,16 +88,12 @@
       "info-lead":lead,
       "info-finance":finance,
       "info-logistics":logistics,
-      "info-advertise":advertise
+      "info-advertise":advertise,
+      'info-professor':professor
     },
     data(){
         return{
-          // formLabelWidth: '120px',
-          isActiveAncher1:true,//锚点
-          isActiveAncher2:false,//锚点
-          isActiveAncher3:false,//锚点
-          isActiveAncher4:false,//锚点
-          isActiveAncher5:false,//锚点
+          isActiveAncher:1,//锚点
           contribute:{},
           logistics:{},
           pay:{},
@@ -99,13 +103,22 @@
           isLogistics:false,
           isPay:false,
           isProfessor:false,
-          fullHeight: document.documentElement.clientHeight,//网页高度
+          isAdvertise:false,
+          dotList:[]
         }
     },
     methods:{
       jump (index) {
-        // 用 class="d_jump" 添加锚点
         let jump = document.querySelectorAll('.d_jump');
+
+        if(index=='leader')
+          index=0;
+        else if(index=='advertise')
+          index=jump.length-1;
+        else
+          index=this.dotList.indexOf(index)+1;
+
+        // 用 class="d_jump" 添加锚点
         let total = jump[index].offsetTop
         let distance = document.documentElement.scrollTop || document.body.scrollTop;
         // 平滑滚动，时长500ms，每10ms一跳，共50跳
@@ -140,19 +153,47 @@
           }
         }
       },
+      trimSpace:function(array){
+        for(var i = 0 ;i<array.length;i++) {
+          if(array[i] == "" || typeof(array[i]) == "undefined") {
+            array.splice(i,1);
+            i= i-1;
+          }
+        }
+        return array;
+      },
       getInformation:function () {
         let data={
           userId:this.$store.getters.getUser,
-          meetId:this.meetId
+          meetId:this.meetId?this.meetId:this.$store.getters.getMeetId
         };
         this.$http.post('/yii/meetlist/prepare/index',data)
           .then((res) => {
             if(res.data.data!=null){
-              this.contribute=res.data.data.contribute;
-              this.logistics=res.data.data.logistics;
-              this.pay=res.data.data.pay;
-              this.professor=res.data.data.professor;
+              if(res.data.data.contribute){
+                this.isContribute=true;
+                this.contribute=res.data.data.contribute!="empty"?res.data.data.contribute:{};
+                this.dotList[4]="contribute";
+              }
+              if(res.data.data.logistics){
+                this.isLogistics=true;
+                this.logistics=res.data.data.logistics!="empty"?res.data.data.logistics:{};
+                this.dotList[3]="logistics";
+              }
+              if(res.data.data.pay){
+                this.isPay=true;
+                this.pay=res.data.data.pay!="empty"?res.data.data.pay:{};
+                this.dotList[1]="pay";
+              }
+              if(res.data.data.professor){
+                this.isProfessor=true;
+                this.professor=res.data.data.professor!="empty"?res.data.data.professor:{};
+                this.dotList[2]="professor";
+              }
+
+              this.dotList=this.trimSpace(this.dotList);
               this.meetInfo=res.data.data.meet;
+
             }else{
               alert(res.data.message);
             }
@@ -162,19 +203,15 @@
       }
     },
     mounted: function () {
-      // console.log(this.fullHeight);
-       //设置各部分的高度
-      document.getElementById('halfHeight1').style.minHeight=(this.fullHeight/3)+'px';
-      document.getElementById('halfHeight2').style.minHeight=(this.fullHeight/3)+'px';
-      document.getElementById('fullHeight1').style.minHeight=(this.fullHeight)+'px';
-      document.getElementById('fullHeight2').style.minHeight=(this.fullHeight)+'px';
-      document.getElementById('fullHeight3').style.minHeight=(this.fullHeight)+'px';
-      // console.log(document.getElementById('halfHeight1').style.height)
       this.getInformation();
     },
-    ...mapGetters([
-      'getUser',
-    ]),
+    computed: {
+      //映射
+      ...mapGetters([
+        "getMeetId",
+        "getUser"
+      ])
+    },
     watch: {
       meetInfo: {
         handler(newValue, oldValue) {
@@ -188,7 +225,16 @@
       },
       meetId: {
         handler(newValue, oldValue) {
-          this.getInformation();
+          if(newValue){
+            this.dotList=[],
+            this.isContribute=false;
+            this.isLogistics=false;
+            this.isPay=false;
+            this.isProfessor=false;
+            this.isAdvertise=false;
+            this.$store.dispatch('setMeetId',newValue)
+            this.getInformation();
+          }
         },
         deep: true
       }
@@ -197,9 +243,53 @@
 </script>
 
 <style scoped>
-  .ancherFixed{
-    position: fixed;
-  }
+    hr{
+      margin: 40px 0px;
+    }
+    .ancherStation{
+      height: 76px;
+    }
+    .ancherName{
+      padding-top:5px;font-size: 16px;vertical-align:-webkit-baseline-middle;
+    }
+    .ancherLine{
+      width: 3px; height: 50px; background-color: #DFDFDF;margin-left:11px;
+    }
+    .halfHeight{
+      min-height: 150px;
+      height: auto;
+    }
+    .fullHeight{
+      min-height: 300px;
+      height: auto;
+    }
+    .add{
+      border:1px solid #BFBFBF;
+      border-radius: 8px;
+      width:80%;
+      padding-left:10px;
+    }
+    .anchor{
+      background-color:#00AAFF;
+      border-color:#00AAFF;
+    }
+    .anchor:hover{
+      background-color:#00AAFF;
+      border-color:#00AAFF;
+    }
+    .textActive{
+      color:#00AAFF;
+    }
+    .ancherFixed{
+      position: fixed;
+    }
+
+    .active{
+      background-color: #1E7CCF;
+    }
+    .ancherFixed{
+      position: fixed;
+    }
    .display{
      background-color:#fff;
      margin-top:20px;

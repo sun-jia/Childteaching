@@ -1,29 +1,31 @@
 <template>
   <div class="display1">
-    <button class="btn1 "  v-bind:class="{ active: isActive }">餐厅管理</button>
-    <router-link to="/logistics/historyRestaurant">
-      <button class="btn1 btn2"  >使用记录</button>
+    <router-link to="/logistics/hotel">
+      <button class="btn1 btn2" >酒店管理</button>
     </router-link>
+    <button class="btn1"  v-bind:class="{ active: isActive }">使用记录</button>
     <div class="display2">
       <div class="col-md-12">
         <table>
           <tr>
-            <th>餐厅名称</th>
-            <th>餐厅电话</th>
-            <th>负责人</th>
-            <th>地理位置</th>
-            <th>容纳人数</th>
-            <th>操作</th>
+            <th>会议名称</th>
+            <th>酒店名称</th>
+            <th>酒店房间</th>
+            <th>使用理由</th>
+            <th>入房日期</th>
+            <th>出房日期</th>
+            <th>房客名称</th>
+            <th>房客电话</th>
           </tr>
-          <tr v-for="restaurant in restaurantList" :key="restaurant.id">
-            <td>{{restaurant.name}}</td>
-            <td>{{restaurant.tel}}</td>
-            <td>{{restaurant.charger}}</td>
-            <td>{{restaurant.position}}</td>
-            <td>{{restaurant.capacity}}</td>
-            <td>
-              <span v-on:click="delRestaurantInfo(restaurant.id)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
-            </td>
+          <tr v-for="accommodation in accommodationList" :key="accommodation.id">
+            <td>{{accommodation.conferenceName}}</td>
+            <td>{{accommodation.hotelName}}</td>
+            <td>{{accommodation.rootName}}</td>
+            <td>{{accommodation.useReason}}</td>
+            <td>{{accommodation.useStartDate}}</td>
+            <td>{{accommodation.useEndDate}}</td>
+            <td>{{accommodation.guestName}}</td>
+            <td>{{accommodation.guestPhone}}</td>
           </tr>
         </table>
         <div class="page">
@@ -37,10 +39,9 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-12">
-        <button class="btn4 icon-jiajianzujianjiahao" v-on:click="addRestaurantInfo()">添加餐厅</button>
-        <button class="btn3 icon-sousuo">搜索</button>
-      </div>
+      <!--<div class="col-md-12">-->
+        <!--<button class="btn3 icon-sousuo">搜索</button>-->
+      <!--</div>-->
     </div>
   </div>
 
@@ -51,42 +52,62 @@
     name: 'bus',
     data() {
       return {
-        restaurantList: [
+        accommodationList: [
           {
             id: 1,
-            name: '一食堂',
-            tel: 12345678,
-            charger: "陈一",
-            money: 100,
-            position: "桂园路",
-            capacity:120
+            conferenceId: '1',
+            conferenceName: '第一次会议',
+            hotelId:"1",
+            hotelName:"七天",
+            roomId:"1",
+            rootName:"101",
+            useReason:"参会",
+            useStartDate:"2019-09-10",
+            useEndDate:"2019-09-12",
+            guestName:"陈1",
+            guestPhone:"152123454"
           },
           {
             id: 2,
-            name: '二食堂',
-            tel: 12345678,
-            charger: "陈二",
-            money: 123,
-            position: "桂园路",
-            capacity:120
+            conferenceId: '1',
+            conferenceName: '第一次会议',
+            hotelId:"1",
+            hotelName:"七天",
+            roomId:"1",
+            rootName:"101",
+            useReason:"参会",
+            useStartDate:"2019-09-10",
+            useEndDate:"2019-09-12",
+            guestName:"陈2",
+            guestPhone:"152123454"
           },
           {
             id: 3,
-            name: '三食堂',
-            tel: 12345678,
-            charger: "陈三",
-            money: 132,
-            position: "桂园路",
-            capacity:120
+            conferenceId: '1',
+            conferenceName: '第一次会议',
+            hotelId:"1",
+            hotelName:"七天",
+            roomId:"1",
+            rootName:"101",
+            useReason:"参会",
+            useStartDate:"2019-09-10",
+            useEndDate:"2019-09-12",
+            guestName:"陈3",
+            guestPhone:"152123454"
           },
           {
             id: 4,
-            name: '四食堂',
-            tel: 12345678,
-            charger: "陈四",
-            money: 121,
-            position: "桂园路",
-            capacity:120
+            conferenceId: '1',
+            conferenceName: '第一次会议',
+            hotelId:"1",
+            hotelName:"七天",
+            roomId:"1",
+            rootName:"101",
+            useReason:"参会",
+            useStartDate:"2019-09-10",
+            useEndDate:"2019-09-12",
+            guestName:"陈4",
+            guestPhone:"152123454"
           }
         ],
         currentpage: 1,//当前页
@@ -96,35 +117,38 @@
       }
     },
     methods: {
-      getRestaurantInfo:function(){
+      getHotelInfo:function(){
         //这里写请求的代码
       },
       pageChange: function(page){//分页
         if (this.currentpage != page) {
           this.currentpage = page;
         }
-        this.getRestaurantInfo();
+        this.getHotelInfo();
       },
       prepage:function(page){//上一页
         page--;
         if (this.currentpage != page) {
           this.currentpage = page;
         }
-        this.getRestaurantInfo();
+        this.getHotelInfo();
       },
       nextpage:function(page){//上一页
         page++;
         if (this.currentpage != page) {
           this.currentpage = page;
         }
-        this.getRestaurantInfo();
+        this.getHotelInfo();
       },
-      delRestaurantInfo:function (id) {
+      seeHotelRoom:function (id) {
+        this.$router.push({ name: 'seeHotelRoom', params: { hotelId: id }})
+      },
+      delHotel:function (id) {
         //写删除酒店请求
-        this.getRestaurantInfo();
+        this.getHotelInfo();
       },
-      addRestaurantInfo:function () {
-        this.$router.push({ path: '/logistics/addRestaurant'})
+      addHotel:function () {
+        this.$router.push({ path: '/logistics/seeHotelRoom'})
       }
     },
     mounted() {

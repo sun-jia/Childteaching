@@ -44,4 +44,7 @@ export default{
       hideSmart:({commit})=>{
         commit('hideSmart')
       },
+      setMeetId:({commit},meetId)=>{
+        commit('setMeetId',meetId)
+      },
 }

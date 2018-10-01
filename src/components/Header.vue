@@ -36,7 +36,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="lnr lnr-question-circle"></i>
               <span>Help</span>
-              <i class="icon-submenu lnr lnr-chevron-down"></i>
+              <i class="lnr lnr-chevron-right"></i>
             </a>
             <ul class="dropdown-menu">
               <li><a href="#">使用手册</a></li>
@@ -45,8 +45,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="../common/images/user.png" class="img-circle" alt="Avatar">
-              <span>{{ NAME }}</span>
-              <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+              <span>{{ userName }}</span>
+              <i class="lnr lnr-chevron-right"></i></a>
             <ul class="dropdown-menu">
               <li><a href="#"><i class="lnr lnr-user"></i> <span>个人中心</span></a></li>
               <li v-on:click="logout"><a href="#"><i class="lnr lnr-exit"></i> <span>退出登入</span></a></li>
@@ -62,7 +62,7 @@
 <script>
   export default {
     name: "Header",
-    props: ['NAME'],
+    props: ['userName'],
     data() {
       return {
         headerMeau: {

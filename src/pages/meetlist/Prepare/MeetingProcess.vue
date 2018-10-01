@@ -1,5 +1,5 @@
 <template>
-  <div id="fullHeight3" index="04" class="d_jump" title="会议进程信息填写">
+  <div class="fullHeight d_jump" index="04" title="会议进程信息填写">
     <div class="listname">会议宣传<i class="el-icon-menu" style="padding-left:5px;"></i></div>
     <div class="meeting">
       <el-form :model="registeredForm">
@@ -25,7 +25,7 @@
           <span class="el-icon-circle-plus" style="color:#00AAFF" v-on:click="reportAdd()">增加</span>
           <span class="el-icon-remove" style="color:#00AAFF" v-on:click="reportRemove()">减少</span>
         </el-form-item>
-        <div style="padding-bottom:500px;">
+        <div>
           <el-form-item label="" v-for="key in parseInt(reportForm.num)">
             <span style="font-weight: bold;padding-right:10px;">报告{{key}}</span>
             <span>报告主题</span>&nbsp<el-input v-model="reportForm.report.topic[key-1]" style="width:200px;"></el-input>&nbsp&nbsp

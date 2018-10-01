@@ -7,9 +7,24 @@
       <table>
         <tr>
           <th style="width: 40px">序号</th>
-          <th style="width: 30px">车牌号
-            <br/>
-            <input class="input1" v-model="plateNum" placeholder="搜索" style="font-size:14px;">
+          <th style="width: 300px">出行司机
+            <i v-show="driverSort" class="sort icon-paixushengxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,1)"></i>
+            <i v-show="!driverSort" class="sort icon-paixujiangxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,2)"></i>
+            <div>
+              <input v-model="driverName" placeholder="搜索" style="font-size:14px;width:90px;">
+            </div>
+          </th>
+          <th placeholder="搜索" style="font-size:14px;width:110px;">联系方式
+            <i v-show="telSort" class="sort icon-paixushengxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,3)"></i>
+            <i v-show="!telSort" class="sort icon-paixujiangxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,4)"></i>
+            <input  v-model="driverTel" placeholder="搜索" style="font-size:14px;width:110px;">
+          </th>
+          <th style="width: 130px">车牌号
+            <i v-show="plateSort" class="sort icon-paixushengxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,5)"></i>
+            <i v-show="!plateSort" class="sort icon-paixujiangxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,6)"></i>
+            <div>
+              <input class="input1" v-model="plateNum" placeholder="搜索" style="font-size:14px;width: 100px;">
+            </div>
           </th>
           <th style="width: 100px">出行时间
             <div class="block;">
@@ -18,47 +33,34 @@
             </div>
           </th>
           <th style="width: 90px">出行地点
-            <br/>
+            <i v-show="placeSort" class="sort icon-paixushengxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,7)"></i>
+            <i v-show="!placeSort" class="sort icon-paixujiangxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,8)"></i>
             <input class="input1" v-model="outPlace" placeholder="搜索" style="font-size:14px;width: 120px">
           </th>
           <th style="width: 90px">出行事由
+            <i v-show="reasonSort" class="sort icon-paixushengxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,9)"></i>
+            <i v-show="!reasonSort" class="sort icon-paixujiangxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,10)"></i>
             <input  v-model="useReason" placeholder="搜索" style="font-size:14px;width:120px;">
           </th>
-          <th style="width: 60px">出行司机
-            <input  v-model="driverName" placeholder="搜索" style="font-size:14px;width:100px;">
-          </th>
-          <th placeholder="搜索" style="font-size:14px;width:120px;">联系方式
-            <input  v-model="driverTel" placeholder="搜索" style="font-size:14px;width:100px;">
-          </th>
           <th placeholder="搜索" style="font-size:14px;width:80px;">乘客信息
+            <i v-show="passageSort" class="sort icon-paixushengxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,11)"></i>
+            <i v-show="!passageSort" class="sort icon-paixujiangxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,12)"></i>
             <input  v-model="passageNum" placeholder="搜索" style="font-size:14px;width:100px;">
           </th>
           <th placeholder="搜索" style="font-size:14px;width:80px;">安排人员
+            <i v-show="arrangerSort" class="sort icon-paixushengxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,13)"></i>
+            <i v-show="!arrangerSort" class="sort icon-paixujiangxu" v-on:click="sort(driverName,driverTel,plateNum,timequantum,outPlace,useReason,passageNum,arranger,14)"></i>
             <input  v-model="arranger" placeholder="搜索" style="font-size:14px;width:100px;">
           </th>
         </tr>
-        <tr v-if="flag==0" v-for="(schedule,index) in scheduleinfo">
-          <td>{{(currentpage-1)*8+index+1}}</td>
-          <td v-if="businfo[index]==null"></td>
-          <td v-if="businfo[index]!=null">{{businfo[index]['PLATENUM']}}</td>
-          <td>{{schedule.USEDATA}}</td>
-          <td>{{schedule.OUTPLACE}}</td>
-          <td>{{schedule.USEREASON}}</td>
-          <td v-if="driinfo[index]==null"></td>
-          <td v-if="driinfo[index]!=null">{{driinfo[index]['DRIVERNAME']}}</td>
-          <td v-if="driinfo[index]==null"></td>
-          <td v-if="driinfo[index]!=null">{{driinfo[index]['TEL']}}</td>
-          <td>{{schedule.PASSAGENUM}}</td>
-          <td>{{schedule.ARRANGERID}}</td>
-        </tr>
-        <tr v-if="flag==1" v-for="(schedule,index) in scheduleinfo">
-          <td>{{(currentpage-1)*8+index+1}}</td>
+        <tr v-for="(schedule,index) in scheduleinfo">
+          <td>{{(currentpage-1)*10+index+1}}</td>
+          <td>{{schedule.DRIVERNAME}}</td>
+          <td>{{schedule.TEL}}</td>
           <td>{{schedule['PLATENUM']}}</td>
           <td>{{schedule.USEDATA}}</td>
           <td>{{schedule.OUTPLACE}}</td>
           <td>{{schedule.USEREASON}}</td>
-          <td>{{schedule.DRIVERNAME}}</td>
-          <td>{{schedule.TEL}}</td>
           <td>{{schedule.PASSAGENUM}}</td>
           <td>{{schedule.ARRANGERID}}</td>
         </tr>
@@ -68,23 +70,13 @@
           <button class="btn3 icon-sousuo" v-on:click="search(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger)">搜索</button>
         </span>
       </div>
-      <div v-if="flag==0" class="page">
+      <div class="page">
         <ul class="pagination pagination-sm"><!--分页-->
-          <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage)">上一页</a></li>
-          <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage == index} ">
-            <a class="page-link" href="#" v-on:click="pageChange(index)">{{index}}</a>
+          <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,currentpage)">上一页</a></li>
+          <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage==index} ">
+            <a class="page-link" href="#" v-on:click="pageChange(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,index)">{{index}}</a>
           </li>
-          <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage)">下一页</a></li>
-          <li class="page-item"><a class="page-link"  href="#">共<i>{{totlepage}}</i>页</a></li>
-        </ul>
-      </div>
-      <div v-model="flag" v-if="flag==1" class="page">
-        <ul class="pagination pagination-sm"><!--分页-->
-          <li class="page-item" v-if="currentpage1!=1"><a class="page-link" href="#" v-on:click="prepage1(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,currentpage1)">上一页1</a></li>
-          <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage1 == index} ">
-            <a class="page-link" href="#" v-on:click="pageChange1(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,index)">{{index}}</a>
-          </li>
-          <li class="page-item" v-if="currentpage1!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage1(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,currentpage1)">下一页1</a></li>
+          <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,currentpage)">下一页</a></li>
           <li class="page-item"><a class="page-link"  href="#">共<i>{{totlepage}}</i>页</a></li>
         </ul>
       </div>
@@ -98,16 +90,11 @@
     name: 'Travelrecord',
     data() {
       return {
-        driinfo: [],
-        businfo: [],
-        driverschedule:[],
         scheduleinfo:[],
         moneysort:true,//金额排序
         datesort:true,//日期排序
         showmoney: true,
         showinvoice: false,
-        showFirstText:true,//显示上一页
-        showNextText:true,//显示下一页
         plateNum:'',
         outPlace:'',
         useReason:'',
@@ -115,26 +102,25 @@
         driverTel:'',
         passageNum:'',
         arranger:'',
-
         inputname: '',//输入姓名
         inputsex: '',//输入性别
         inputage: '',//输入年龄
         inputidentity: '',//输入身份证号
         inputtel: '',//输入电话号码
-        flag:0,
-        flag1:0,
         visible2: false,
-        kindselected2: '',//费用下拉列表
-        payselected2: '',//支付下拉列表
-        startTime2: '',
-        endTime2: '',
         isActive:true,
-        type:1,//排序类型，默认日期降序，2为日期升序，3为金额降序，4为金额升序
+        type:0,//排序类型，默认日期降序，2为日期升序，3为金额降序，4为金额升序
         currentpage: 1,//当前页
-        currentpage1:1,
         totlepage: '',//总页数
         visiblepage:10,//可见页数
-
+        driverSort:true,
+        telSort:true,
+        plateSort:true,
+        placeSort:true,
+        reasonSort:true,
+        passageSort:true,
+        arrangerSort:true,
+        sortType:0,
         pickerOptions2: {
           shortcuts: [{
             text: '最近一周',
@@ -185,13 +171,9 @@
           console.log(res.data.data);
           that.scheduleinfo=res.data.data[0];
           that.totlepage=res.data.data[1];
-          that.driinfo=res.data.data[2];
-          that.businfo=res.data.data[3];
-          console.log(that.driinfo);
         })
       },
       search:function(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger){
-        this.flag=1;
         this.$http.get('/yii/logistics/schedule/coupletquery', {
           params: {
             PLATENUM: plateNum,
@@ -203,110 +185,6 @@
             ARRANGERID:arranger
           }
         }).then(res => {
-          console.log(res.data);
-          this.scheduleinfo = res.data.data[0];
-          this.totlepage=res.data.data[1];
-        }).catch(function (error) {
-          console.log(error);
-        });
-      },
-
-      driversheduleview(driverInfoId){
-        console.log(driverInfoId);
-        let that=this;
-        this.$http.post('/yii/logistics/schedule/getdriverschedule',{ID:driverInfoId}).then(function (res) {
-          console.log(res.data);
-          that.driverschedule=[];
-          that.driverschedule=res.data.data;
-          that.flag1=1;
-        }).catch(function (error) {
-          console.log(error);
-        });
-      },
-      statuschange(){
-        this.flag1=0;
-      },
-      pageChange: function(page){//分页
-        if (this.currentpage != page) {
-          this.currentpage = page;
-          // this.$dispatch('page-change', page); //父子组件间的通信：==>子组件通过$diapatch(),分发事件，父组件冒泡通过v-on:page-change监听到相应的事件；
-        }
-        console.log(page);
-        let that=this;
-        this.$http.get('/yii/logistics/schedule/getscheduledata',{
-          params: {
-            page: page
-          }
-        }).then(function (res) {
-          console.log(res.data.data);
-          that.scheduleinfo=res.data.data[0];
-          that.totlepage=res.data.data[1];
-          that.driinfo=res.data.data[2];
-          that.businfo=res.data.data[3];
-        })
-      },
-      pageChange1: function(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,page){//分页
-        if (this.currentpage1 != page) {
-          this.currentpage1 = page;
-        }
-        let that=this;
-        this.$http.get('/yii/logistics/schedule/coupletquery', {
-          params: {
-            PLATENUM: plateNum,
-            OUTPLACE:outPlace,
-            USEREASON:useReason,
-            DRIVERNAME:driverName,
-            TEL:driverTel,
-            PASSAGENUM:passageNum,
-            ARRANGERID:arranger,
-            page:page
-          }
-        }).then(res => {
-          console.log(res.data.data);
-          this.sheduleinfo = res.data.data[0];
-          this.totlepage=res.data.data[1];
-        }).catch(function (error) {
-          console.log(error);
-        });
-      },
-      prepage:function(page){//上一页
-        page--;
-        if (this.currentpage != page) {
-          this.currentpage = page;
-        }
-        console.log(page);
-        let that=this;
-        this.$http.get('/yii/logistics/schedule/getscheduledata',{
-          params: {
-            page: page
-          }
-        }).then(function (res) {
-          console.log(res.data.data);
-          that.scheduleinfo=res.data.data[0];
-          that.totlepage=res.data.data[1];
-          that.driinfo=res.data.data[2];
-          that.businfo=res.data.data[3];
-        })
-      },
-      prepage1:function(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,page){//上一页
-        page--;
-        if (this.currentpage1 != page) {
-          this.currentpage1 = page;
-        }
-        console.log(page);
-        let that=this;
-        this.$http.get('/yii/logistics/schedule/coupletquery', {
-          params: {
-            PLATENUM: plateNum,
-            OUTPLACE:outPlace,
-            USEREASON:useReason,
-            DRIVERNAME:driverName,
-            TEL:driverTel,
-            PASSAGENUM:passageNum,
-            ARRANGERID:arranger,
-            page:page
-          }
-        }).then(res => {
           console.log(res.data.data);
           this.scheduleinfo = res.data.data[0];
           this.totlepage=res.data.data[1];
@@ -314,34 +192,65 @@
           console.log(error);
         });
       },
-
-      nextpage:function(page){//下一页
-        page++;
-        if (this.currentpage != page) {
-          this.currentpage = page;
+      sort:function(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,sortType){
+        this.sortType=sortType;
+        if(sortType==1||sortType==2){
+          this.driverSort=!this.driverSort;
+          this.telSort=true;
+          this.plateSort=true;
+          this.placeSort=true;
+          this.reasonSort=true;
+          this.passageSort=true;
+          this.arrangerSort=true;
+        }else if(sortType==3||sortType==4){
+          this.telSort=!this.telSort;
+          this.driverSort=true;
+          this.plateSort=true;
+          this.placeSort=true;
+          this.reasonSort=true;
+          this.passageSort=true;
+          this.arrangerSort=true;
+        }else if(sortType==5||sortType==6){
+          this.plateSort=!this.plateSort;
+          this.driverSort=true;
+          this.telSort=true;
+          this.placeSort=true;
+          this.reasonSort=true;
+          this.passageSort=true;
+          this.arrangerSort=true;
+        }else if(sortType==7||sortType==8){
+          this.placeSort=!this.placeSort;
+          this.driverSort=true;
+          this.telSort=true;
+          this.plateSort=true;
+          this.reasonSort=true;
+          this.passageSort=true;
+          this.arrangerSort=true;
+        }else if(sortType==9||sortType==10){
+          this.reasonSort=!this.reasonSort;
+          this.driverSort=true;
+          this.telSort=true;
+          this.plateSort=true;
+          this.placeSort=true;
+          this.passageSort=true;
+          this.arrangerSort=true;
+        }else if(sortType==11||sortType==12){
+          this.passageSort=!this.passageSort;
+          this.driverSort=true;
+          this.telSort=true;
+          this.plateSort=true;
+          this.placeSort=true;
+          this.reasonSort=true;
+          this.arrangerSort=true;
+        }else if(sortType==13||sortType==14){
+          this.arrangerSort=!this.arrangerSort;
+          this.driverSort=true;
+          this.telSort=true;
+          this.plateSort=true;
+          this.placeSort=true;
+          this.reasonSort=true;
+          this.passageSort=true;
         }
-        console.log(page);
-        let that=this;
-        console.log(this.flag);
-        this.$http.get('/yii/logistics/schedule/getscheduledata',{
-          params: {
-            page: page
-          }
-        }).then(function (res) {
-          console.log(res.data.data);
-          that.scheduleinfo=res.data.data[0];
-          that.totlepage=res.data.data[1];
-          that.driinfo=res.data.data[2];
-          that.businfo=res.data.data[3];
-        })
-      },
-      nextpage1:function(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,page){//下一页
-        page++;
-        if (this.currentpage1 != page) {
-          this.currentpage1 = page;
-        }
-        console.log(page);
-        let that=this;
         this.$http.get('/yii/logistics/schedule/coupletquery', {
           params: {
             PLATENUM: plateNum,
@@ -351,6 +260,96 @@
             TEL:driverTel,
             PASSAGENUM:passageNum,
             ARRANGERID:arranger,
+            sortType:sortType,
+            page:1
+          }
+        }).then(res => {
+          this.currentpage=1;
+          this.scheduleinfo = res.data.data[0];
+          this.totlepage = res.data.data[1];
+        })
+      },
+      // driversheduleview(driverInfoId){
+      //   console.log(driverInfoId);
+      //   let that=this;
+      //   this.$http.post('/yii/logistics/schedule/getdriverschedule',{ID:driverInfoId}).then(function (res) {
+      //     console.log(res.data);
+      //     that.driverschedule=[];
+      //     that.driverschedule=res.data.data;
+      //   }).catch(function (error) {
+      //     console.log(error);
+      //   });
+      // },
+      pageChange: function(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,page){//分页
+        if (this.currentpage != page) {
+          this.currentpage = page;
+        }
+        console.log(page);
+        this.$http.get('/yii/logistics/schedule/coupletquery', {
+          params: {
+            PLATENUM: plateNum,
+            OUTPLACE:outPlace,
+            USEREASON:useReason,
+            DRIVERNAME:driverName,
+            TEL:driverTel,
+            PASSAGENUM:passageNum,
+            ARRANGERID:arranger,
+            sortType:this.sortType,
+            page:page
+          }
+        }).then(res => {
+          console.log(res.data.data);
+          this.scheduleinfo = res.data.data[0];
+          this.totlepage=res.data.data[1];
+        }).catch(function (error) {
+          console.log(error);
+        });
+      },
+
+      prepage:function(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,page){//上一页
+        page--;
+        if (this.currentpage != page) {
+          this.currentpage = page;
+        }
+        console.log(page);
+        // console.log(this.sortType);
+        this.$http.get('/yii/logistics/schedule/coupletquery', {
+          params: {
+            PLATENUM: plateNum,
+            OUTPLACE:outPlace,
+            USEREASON:useReason,
+            DRIVERNAME:driverName,
+            TEL:driverTel,
+            PASSAGENUM:passageNum,
+            ARRANGERID:arranger,
+            sortType:this.sortType,
+            page:page
+          }
+        }).then(res => {
+          console.log(res.data.data);
+          this.scheduleinfo = res.data.data[0];
+          this.totlepage=res.data.data[1];
+        }).catch(function (error) {
+          console.log(error);
+        });
+      },
+      nextpage:function(plateNum,timequantum,outPlace,useReason,driverName,driverTel,passageNum,arranger,page){//下一页
+        page++;
+        if (this.currentpage != page) {
+          this.currentpage = page;
+        }
+        console.log(page);
+        // console.log(this.sortType);
+        this.$http.get('/yii/logistics/schedule/coupletquery', {
+          params: {
+            PLATENUM: plateNum,
+            OUTPLACE:outPlace,
+            USEREASON:useReason,
+            DRIVERNAME:driverName,
+            TEL:driverTel,
+            PASSAGENUM:passageNum,
+            ARRANGERID:arranger,
+            sortType:this.sortType,
             page:page
           }
         }).then(res => {

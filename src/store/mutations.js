@@ -63,6 +63,9 @@ const mutations={
       state.Smart=true                                      },
     hideSmart(state){
       state.Smart=false                                     },
+    setMeetId:function(state,meetId){
+      state.meetId =meetId;
+      localStorage.setItem("vuex",JSON.stringify(state));    }
 };
 
 export default{

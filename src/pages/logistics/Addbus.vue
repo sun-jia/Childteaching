@@ -55,7 +55,7 @@
           (function(res){
             console.log(res.data);
             alert("车辆信息添加成功！");
-            that.$router.push('/logistics/bus') ;
+            window.location.href = '/logistics/bus'
           });
         }else {
           if (busName==''){
