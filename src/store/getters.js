@@ -3,8 +3,14 @@ export default {
   getAccessToken:(state)=>{
     return state.access_token
   },
+  getUser:(state)=>{
+    return state.user
+  },
   getUserName:(state)=>{
     return state.name
+  },
+  getMeetId:(state)=>{
+    return state.meetId
   },
   showSider:(state)=>{
     return state.sider

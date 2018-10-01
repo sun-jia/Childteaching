@@ -3,24 +3,43 @@
       <button class="btn1" >订单明细</button>
       <div class="display">
         <div class="meeting" >
-          <span style="color:#fff;">搜索会议：</span><input  v-model="inputmeetingID" placeholder="输入会议名称" style="font-size:14px;width:300px;font-weight:lighter">
+          <span style="color:#fff;">搜索会议：</span>
+            <!--<input  v-model="inputmeetingID" placeholder="输入会议名称" style="font-size:14px;width:300px;font-weight:lighter">-->
+          <el-select
+            v-model="inputmeetingID"
+            filterable
+            multiple
+            remote
+            reserve-keyword
+            size="small"
+            placeholder="请输入会议关键词"
+            :remote-method="remoteMethod"
+            :loading="loading"
+          >
+            <el-option
+              v-for="item in options3"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+          <button class="btn3 icon-sousuo" v-on:click="searcha(inputname,inputidentity,inputmeetingID,value2)">搜索</button>
         </div>
-        <button class="btn3 icon-sousuo" v-on:click="searcha(inputname,inputidentity,inputmeetingID,value2)">搜索</button>
         <button type="button" class="btn4 icon-daochu1" id="export-table" v-on:click="export2Excel(inputname,inputidentity,inputmeetingID,value2)">导出</button>
         <table>
           <tr>
             <th>订单号
             </th>
             <th>姓名
-              <input class="input1" v-model="inputname" placeholder="搜索姓名" style="font-size:14px;">
+              <input class="input1" v-model="inputname" placeholder="搜索姓名" style="font-size:14px;font-weight:lighter;">
               <!--<p>{{inputname1}}</p>//测试-->
             </th>
             <th>身份证号
-              <input class="input1" v-model="inputidentity" placeholder="输入身份证号" style="font-size:14px;width:120px">
+              <input class="input1" v-model="inputidentity" placeholder="输入身份证号" style="font-size:14px;width:120px;font-weight:lighter;">
               <!--<p>{{inputidentity1}}</p>//测试-->
             </th>
             <th>会议名称
-              <input class="input1" v-model="inputmeetingID" placeholder="输入会议ID" style="font-size:14px;width:120px">
+              <input class="input1" v-model="inputmeetingID" placeholder="输入会议ID" style="font-size:14px;width:120px;font-weight:lighter;">
             </th>
             <th>
               <div class="block" >
@@ -39,7 +58,7 @@
                 </el-date-picker>
                 <i v-show="datesort" class="sort icon-paixushengxu" style="color:#1C93FC; "  v-on:click="dateup(inputname,inputidentity,inputmeetingID,value2)"></i>
                 <i v-show="!datesort" class="sort icon-paixujiangxu" style="color:#1C93FC; " v-on:click="datedown(inputname,inputidentity,inputmeetingID,value2)"></i>
-             {{value2}}
+             <!--{{value2}}-->
               </div>
             </th>
             <th>订单状态</th>
@@ -48,7 +67,7 @@
           <tr v-for="detial in details">
             <td>{{detial.ORDER_NUMBER}}</td>
             <td>{{detial.NAME}}</td>
-            <td>{{detial.USERID}}</td>
+            <td>{{detial.USER}}</td>
             <td>{{detial.CONFERENCEID}}</td>
             <td>{{detial.CREATE_TIME}}</td>
             <td v-if='detial.STATUS==1'>等待支付</td>
@@ -57,7 +76,7 @@
             <td v-if='detial.STATUS==0'>订单取消</td>
             <td v-if='detial.STATUS==3'>已开发票</td>
             <td v-if='detial.STATUS==-1'>订单失效</td>
-            <td style="color: #00AAFF"><el-button type="text" @click="open5(detial.ORDER_NUMBER,detial.NAME,detial.USERID,detial.CONFERENCEID,detial.MONEY,detial.TYPE,detial.CREATE_TIME,detial.STATUS)">详情查看</el-button></td>
+            <td style="color: #00AAFF"><el-button type="text" @click="open5(detial.ORDER_NUMBER,detial.NAME,detial.USER,detial.CONFERENCEID,detial.MONEY,detial.TYPE,detial.CREATE_TIME,detial.STATUS)">详情查看</el-button></td>
           </tr>
         </table>
         <div class="page">
@@ -84,7 +103,7 @@
             {
               ORDER_NUMBER: 1234,
               NAME: 'ring',
-              USERID: 12345678,
+              USER: 12345678,
               CONFERENCEID: '世博',
               CREAT_TIME: '20180725',
               STATUS: 1,
@@ -92,7 +111,7 @@
             {
               ORDER_NUMBER: 1234,
               NAME: 'xu',
-              USERID: 123456,
+              USER: 123456,
               CONFERENCEID: '世',
               CREAT_TIME: '20180727',
               STATUS: 3,
@@ -100,7 +119,7 @@
             {
               ORDER_NUMBER: 1234,
               NAME: 'ring',
-              USERID: 1234567878,
+              USER: 1234567878,
               CONFERENCEID: '亚运',
               CREATE_TIME: '20180729',
               STATUS: 9,
@@ -109,7 +128,7 @@
           eachifo:{
             ORDER_NUMBER: 1234,
             NAME: 'ring',
-            USERID: 1234567878,
+            USER: 1234567878,
             CONFERENCEID: '亚运',
             TYPE:'支付宝',
             MONEY:300,
@@ -124,7 +143,11 @@
           inputmeeeting: '',//输入会议名称
           inputmeetingID:'',//输入会议ID
           inputname: '',//输入姓名
+          list: [],
+          loading: false,
+          options3: [],
           startTime: '',
+          states:["会议1","会议2","会议3","会议4","会议5","会议6","会议7"],
           totlepage: 28,//总页数
           type: 1,//排序类型，默认日期降序，2为日期升序
           visiblepage: 10,//可见页数
@@ -168,7 +191,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -192,7 +215,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -214,7 +237,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -237,7 +260,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -262,7 +285,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -287,7 +310,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -305,7 +328,7 @@
           }
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('CONFERENCEID', a3);//传会议ID
           fd.append('STARTDATE', this.startTime);//传开始时间
           fd.append('ENDDATE', this.endTime);//传结束时间
@@ -317,7 +340,7 @@
               const { export_json_to_excel } = require('@/excel/Export2Excel.js');//引入文件
               const tHeader = ['订单号','姓名', '身份证号', '会议ID','交易金额','支付方式','订单日期','订单状态'];
               // 上面设置Excel的表格第一行的标题
-              const filterVal = ['ORDER_NUMBER', 'NAME', 'USERID','CONFERENCEID','MONEY','TYPE','CREATE_TIME','STATUS'];
+              const filterVal = ['ORDER_NUMBER', 'NAME', 'USER','CONFERENCEID','MONEY','TYPE','CREATE_TIME','STATUS'];
               // 上面的index、phone_Num、school_Name是tableData里对象的属性
               const list = this.excelData;  //把data里的tableData存到list
               // console.log(list);
@@ -330,7 +353,7 @@
           console.log(jsonData);
           return jsonData.map(v => filterVal.map(j => v[j]));
         },
-        open5(ordernumber,name,userid,conferenceid,money,type,createtime,status) {
+        open5(ordernumber,name,USER,conferenceid,money,type,createtime,status) {
           // console.log(ordernumber);
           if(type==null){
             type='等待支付';
@@ -373,7 +396,7 @@
               h('i', { style: 'color: teal' }, name),
               h('br'),
               h('span', null, '身份证号 '),
-              h('i', { style: 'color: teal' }, userid),
+              h('i', { style: 'color: teal' }, USER),
               h('br'),
               h('span', null, '会议名称 '),
               h('i', { style: 'color: teal' }, conferenceid),
@@ -398,6 +421,20 @@
             });
           });
         },
+        remoteMethod(query) {
+          if (query !== '') {
+            this.loading = true;
+            setTimeout(() => {
+              this.loading = false;
+              this.options3 = this.list.filter(item => {
+                return item.label.toLowerCase()
+                  .indexOf(query.toLowerCase()) > -1;
+              });
+            }, 200);
+          } else {
+            this.options3 = [];
+          }
+        }
       },
       components: {
       },
@@ -406,7 +443,10 @@
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
           console.log(this.details);
-        })//测试
+        });//测试
+        this.list = this.states.map(item => {
+          return { value: item, label: item };
+        });
       },
       computed: {
         //计算属性：返回页码数组，这里会自动进行脏检查，不用$watch();
@@ -457,7 +497,7 @@
     border-collapse: collapse;
     width:100%;
     margin-top: 10px;
-    /*margin-left: 20px;*/
+    margin-left: 5px;
   }
   th{
     font-size: 14px;
@@ -493,20 +533,18 @@
   }
   .btn3{
     width:80px;
-    padding:7px;
+    padding:5px;
     font-size: 14px;
     border-radius: 3px;
     border:none;
     color:white;
     background-color:#338FFC ;
-    float: left;
-    margin-left: 15px;
-    margin-top:13px;
-    /*margin-bottom: 5px;*/
+    float: right;
+    margin-left: 5px;
   }
-  .btn3:hover{
-    background-color:#5FA7FE;
-  }
+  /*.btn3:hover{*/
+  /*background-color:#5FA7FE;*/
+  /*}*/
   .btn4{
     width:90px;
     padding:7px;
@@ -517,7 +555,7 @@
     background-color:#FA4E28 ;
     float: right;
     /*margin-left: 15px;*/
-    margin-top: 13px;
+    margin-top: 20px;
     /*margin-bottom: 5px;*/
   }
   .btn4:hover{
@@ -532,11 +570,12 @@
     border-radius: 5px;
     width: 40%;
     padding:5px;
+    margin-left: 5px;
   }
   .page{
     text-align: center;
   }
-  .el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{
-    width:360px !important;
-  }
+  /*.el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{*/
+    /*width:360px !important;*/
+  /*}*/
 </style>

@@ -89,7 +89,7 @@
 <script>
   import myDatepicker from 'vue-datepicker2'; //引入对应的组件
   export default {
-    name: 'Hotel',
+    name: 'bus',
     data() {
       return {
         hotelInfo:[],
@@ -140,6 +140,7 @@
       this.getHotelData();
     },
     computed: {
+      //计算属性：返回页码数组，这里会自动进行脏检查，不用$watch();
       pagenums: function(){//分页
         //初始化前后页边界
         let lowPage = 1;
@@ -183,22 +184,6 @@
     padding-right:10px;
     background-color:  #fff;
   }
-  .meeting{
-    float:left;
-    margin:10px 0 10px 0;
-    font-weight: bold;
-    background-color: #00AAFF;
-    border:solid 1px #00AAFF;
-    border-radius: 5px;
-    width: 40%;
-    padding:5px;
-  }
-  .sort{
-    color:#1C93FC;
-  }
-  .sort:hover{
-    color:#5CB0FA;
-  }
   table{
     border-collapse: collapse;
     width:100%;
@@ -239,9 +224,6 @@
   .btn2{
     margin-left: 0px;
   }
-  .input1{
-    width:80px;
-  }
   .btn3{
     width:80px;
     padding:7px;
@@ -250,10 +232,9 @@
     border:none;
     color:white;
     background-color:#338FFC ;
-    float: left;
     margin-left: 15px;
+    margin-right: 15px;
     margin-top:13px;
-    /*margin-bottom: 5px;*/
   }
   .btn3:hover{
     background-color:#5FA7FE;
@@ -266,10 +247,7 @@
     border:none;
     color:white;
     background-color:#FA4E28 ;
-    float: right;
-    /*margin-left: 15px;*/
     margin-top: 13px;
-    /*margin-bottom: 5px;*/
   }
   .btn4:hover{
     background-color:#FC6F4F;
@@ -279,8 +257,5 @@
   }
   .page{
     text-align: center;
-  }
-  .top{
-    background: #e0e0e0;
   }
 </style>

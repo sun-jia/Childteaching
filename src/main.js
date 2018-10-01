@@ -24,7 +24,7 @@ import VueAxios from 'Vue-axios'
 //引入图表库
 import echarts from 'echarts';
 Vue.prototype.$echarts = echarts
-
+//图标
 import VueIconFont from 'vue-icon-font'
 import './common/css/fonts/iconfont.css'
 import './common/css/fonts/iconfont.js'
@@ -51,6 +51,15 @@ Vue.use(VueIconFont)
 Vue.use(VueAxios,axios)//注册
 // Vue.use(VueResource)
 Vue.use(Vuerouter)
+
+//上传
+import uploader from 'vue-simple-uploader'
+
+Vue.use(uploader)
+
+//滚动
+/*var vueSmoothScroll = require('vue-smoothscroll');
+Vue.use(vueSmoothScroll);*/
 
 axios.interceptors.request.use(function (config) {  //配置发送请求的信息,添加access_token信息
 

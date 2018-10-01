@@ -7,39 +7,58 @@
       <!--<div class="col-md-12">-->
         <!--<button class="btn3 icon-sousuo">搜索</button>-->
       <!--</div>-->
-      <div class="col-md-12">
+      <!--<div class="col-md-12">-->
         <div>
               <div class="meeting" >
-                <span style="color:#fff;">搜索会议：</span><input  v-model="inputmeeeting1" placeholder="输入会议名称" style="font-size:14px;width:300px;font-weight:lighter">
+                <span style="color:#fff;">搜索会议：</span>
+                <!--<input  v-model="inputmeeting1" placeholder="输入会议名称" style="font-size:14px;width:300px;font-weight:lighter">-->
+                <el-select
+                  v-model="inputmeeting1"
+                  filterable
+                  multiple
+                  remote
+                  reserve-keyword
+                  size="small"
+                  placeholder="请输入会议关键词"
+                  :remote-method="remoteMethod"
+                  :loading="loading"
+                >
+                  <el-option
+                    v-for="item in options2"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+                <button class="btn3 icon-sousuo" v-on:click="searcha(inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)">搜索</button>
               </div>
-              <button class="btn3 icon-sousuo" v-on:click="searcha(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)">搜索</button>
-              <button type="button" class="btn4 icon-daochu1" id="export-table" v-on:click="export2Excel(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)">导出</button>
+              <button type="button" class="btn4 icon-daochu1" id="export-table" v-on:click="export2Excel(inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)">导出</button>
           <!--<router-link to="/fiance/neworder"><button class="btn4 icon-jiajianzujianjiahao" > 新建订单</button></router-link>-->
                <router-view/>
               <table id="moneyStatistics">
                 <tr>
                   <th>姓名
-                    <input class="input1" v-model="inputname1" placeholder="搜索姓名" style="font-size:14px;">
+                    <input class="input1" v-model="inputname1" placeholder="搜索姓名" style="font-size:14px;font-weight:lighter;">
                     <!--<p>{{inputname1}}</p>//测试-->
                   </th>
                   <th>身份证号
-                    <input class="input1" v-model="inputidentity1" placeholder="输入身份证号" style="font-size:14px;width:120px">
+                    <input class="input1" v-model="inputidentity1" placeholder="输入身份证号" style="font-size:14px;width:120px;font-weight:lighter;">
                     <!--<p>{{inputidentity1}}</p>//测试-->
                   </th>
                   <th>金额
-                    <input class="input1" v-model="inputmoney1" placeholder="输入金额" style="font-size:14px;">
+                    <input class="input1" v-model="inputmoney1" placeholder="输入金额" style="font-size:14px;font-weight:lighter;">
                     <!--<p>{{inputmoney1}}</p>//测试-->
-                    <i v-show="moneysort" class="sort icon-paixushengxu" v-on:click="moneyup(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)"></i>
-                    <i v-show="!moneysort" class="sort icon-paixujiangxu" v-on:click="moneydown(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)"></i>
+                    <i v-show="moneysort" class="sort icon-paixushengxu" v-on:click="moneyup(inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)"></i>
+                    <i v-show="!moneysort" class="sort icon-paixujiangxu" v-on:click="moneydown(inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)"></i>
                   </th>
                   <th>
-                    <select v-model="payselected1"  style="font-size:14px;">
+                    <select v-model="payselected1"  style="font-size:14px;font-weight:lighter;">
                       <option disabled value="">选择</option>
                       <option value="1" >支付宝</option>
                       <option value="2">微信</option>
                       <option value="3">银联</option>
                       <option value="4">线下</option>
-                      <option value="null">空</option>
+                      <option value="">空</option>
                     </select>
                   </th>
                   <th>
@@ -57,8 +76,8 @@
                         format="yyyy-MM-dd HH:mm:ss "
                         value-format="yyyy-MM-dd HH:mm:ss">
                       </el-date-picker>
-                      <i v-show="datesort" class="sort icon-paixushengxu"  v-on:click="dateup(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)"></i>
-                      <i v-show="!datesort" class="sort icon-paixujiangxu"  v-on:click="datedown(inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)"></i>
+                      <i v-show="datesort" class="sort icon-paixushengxu"  v-on:click="dateup(inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)"></i>
+                      <i v-show="!datesort" class="sort icon-paixujiangxu"  v-on:click="datedown(inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)"></i>
                     </div>
                     <!--{{value3}}-->
                   </th>
@@ -74,37 +93,28 @@
                   <td v-if='detial.ACCOUNT_MODE==4'>线下</td>
                   <td>{{detial.ACCOUNT_DATE}}</td>
                   <td>
-                    <span v-on:click="deletechange(detial.USERID)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
+                    <span v-on:click="deletechange(detial.USER)" ><i class="delete icon-changyonggoupiaorenshanchu" ></i></span>
                   </td>
                 </tr>
               </table>
               <div class="page">
                   <ul class="pagination pagination-sm"><!--分页-->
-                     <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage,inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)">上一页</a></li>
+                     <li class="page-item" v-if="currentpage!=1"><a class="page-link" href="#" v-on:click="prepage(currentpage,inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)">上一页</a></li>
                      <li class="page-item" v-for="index in pagenums" v-bind:class="{ active: currentpage == index} ">
-                        <a class="page-link" href="#" v-on:click="pageChange(index,inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)">{{index}}</a>
+                        <a class="page-link" href="#" v-on:click="pageChange(index,inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)">{{index}}</a>
                      </li>
-                     <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage,inputname1,inputidentity1,inputmoney1,inputmeeeting1,payselected1,value3)">下一页</a></li>
+                     <li class="page-item" v-if="currentpage!=totlepage"><a class="page-link"  href="#"  v-on:click="nextpage(currentpage,inputname1,inputidentity1,inputmoney1,inputmeeting1,payselected1,value3)">下一页</a></li>
                      <li class="page-item"><a class="page-link"  href="#">共<i>{{totlepage}}</i>页</a></li>
                   </ul>
               </div>
             </div>
-      </div>
+      <!--</div>-->
     </div>
   </div>
 
 </template>
 
 <script>
- // import FileSaver from 'file-saver';
-  //import XLSX from 'xlsx';
-    var moment = require('moment');
-    let nowTime=moment().format();//当前时间
-    console.log(nowTime);
-    console.log(this.starTime);
-    let start=this.starTime;
-    // start=start.toString();
-    console.log(start);
     export default {
       name: 'money',
       data() {
@@ -175,18 +185,22 @@
           datesort: true,//日期排序
           endTime: '',
           excelData:'',//导出数据
-          inputmeeeting1: '',//输入会议名称
+          inputmeeting1: '',//输入会议名称
           inputname1: '',//输入姓名
           inputidentity1: '',//输入身份证号
           inputmoney1: '',//输入金额
           isActive: true,
+          list: [],
+          loading: false,
           moneysort: true,//金额排序
+          options2: [],
           payselected1: '',//支付下拉列表
           showmoney: true,
           showinvoice: false,
           showFirstText: true,//显示上一页
           showNextText: true,//显示下一页
           startTime: '',
+          states:["会议1","会议2","会议3","会议4","会议5","会议6","会议7"],
           totlepage: 28,//总页数
           type: 1,//排序类型，默认日期降序，2为日期升序，3为金额降序，4为金额升序
           visiblepage: 10,//可见页数
@@ -196,7 +210,7 @@
       methods: {
         deletechange: function (a) {
           console.log(a);
-          this.axios.get("/yii/finance/finance/deletedata?USERID="+a).then(function(res){
+          this.axios.get("/yii/finance/finance/deletedata?USER="+a).then(function(res){
             console.log(res.data);
             if(res.data==1){
                location.reload();
@@ -214,7 +228,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -222,7 +236,7 @@
           fd.append('ENDDATE', this.endTime);//传结束时间
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
-          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/aaa/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -238,7 +252,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -247,7 +261,7 @@
           fd.append('page', this.currentpage);//传当前页
           fd.append('type',this.type);//传类型
           console.log(fd.getAll('type'));
-          this.$http.post('/yii/finance/finance/querydata', fd).then(body => {
+          this.$http.post('/aaa/finance/finance/querydata', fd).then(body => {
             this.details = body.data.data.pageall;
             this.totlepage = body.data.data.totlepage;
             console.log(this.details);
@@ -264,7 +278,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -291,7 +305,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -316,7 +330,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -345,7 +359,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -375,7 +389,7 @@
           console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -412,7 +426,7 @@
           // console.log(this.startTime);
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -436,7 +450,7 @@
           }
           let fd = new FormData();
           fd.append('NAME', a1);//传姓名
-          fd.append('USERID', a2);//传身份证号
+          fd.append('USER', a2);//传身份证号
           fd.append('MONEY', a3);//传金额
           fd.append('CONFERENCEID', a4);//传会议ID
           fd.append('ACCOUNT_MODE', a5);//传收款方式
@@ -450,7 +464,7 @@
               const { export_json_to_excel } = require('@/excel/Export2Excel.js');//引入文件
               const tHeader = ['姓名', '身份证号','交易金额', '会议ID','支付方式','日期'];
               // 上面设置Excel的表格第一行的标题
-              const filterVal = [ 'NAME', 'USERID','MONEY','CONFERENCEID','ACCOUNT_MODE','ACCOUNT_DATE'];
+              const filterVal = [ 'NAME', 'USER','MONEY','CONFERENCEID','ACCOUNT_MODE','ACCOUNT_DATE'];
               // 上面的index、phone_Num、school_Name是tableData里对象的属性
               const list = this.excelData;  //把data里的tableData存到list
               // console.log(list);
@@ -463,6 +477,20 @@
           console.log(jsonData);
           return jsonData.map(v => filterVal.map(j => v[j]));
         },
+        remoteMethod(query) {
+          if (query !== '') {
+            this.loading = true;
+            setTimeout(() => {
+              this.loading = false;
+              this.options2 = this.list.filter(item => {
+                return item.label.toLowerCase()
+                  .indexOf(query.toLowerCase()) > -1;
+              });
+            }, 200);
+          } else {
+            this.options2 = [];
+          }
+        }
       },
       components: {
       },
@@ -471,7 +499,10 @@
           this.details = body.data.data.pageall;
           this.totlepage = body.data.data.totlepage;
           console.log(this.details);
-        })//测试
+        });//测试
+        this.list = this.states.map(item => {
+          return { value: item, label: item };
+        });
       },
       computed: {
         //计算属性：返回页码数组，这里会自动进行脏检查，不用$watch();
@@ -506,7 +537,7 @@
 
 <style scoped>
   .display1{
-    padding-left:20px;
+    /*padding-left:20px;*/
     padding-top:10px;
   }
   .display2{
@@ -538,7 +569,7 @@
     border-collapse: collapse;
     width:100%;
     margin-top: 10px;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
   }
   th{
     font-size: 14px;
@@ -579,20 +610,18 @@
   }
   .btn3{
     width:80px;
-    padding:7px;
+    padding:5px;
     font-size: 14px;
     border-radius: 3px;
     border:none;
     color:white;
     background-color:#338FFC ;
-    float: left;
-    margin-left: 15px;
-    margin-top:13px;
-    /*margin-bottom: 5px;*/
+    float: right;
+    margin-left: 5px;
   }
-  .btn3:hover{
-    background-color:#5FA7FE;
-  }
+  /*.btn3:hover{*/
+    /*background-color:#5FA7FE;*/
+  /*}*/
   .btn4{
     width:90px;
     padding:7px;
@@ -603,7 +632,7 @@
     background-color:#FA4E28 ;
     float: right;
     /*margin-left: 15px;*/
-    margin-top: 13px;
+    margin-top: 20px;
     /*margin-bottom: 5px;*/
   }
   .btn4:hover{
@@ -618,7 +647,7 @@
   .top{
     background: #e0e0e0;
   }
-  .el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{
-    width:360px !important;
-  }
+  /*.el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{*/
+    /*width:360px !important;*/
+  /*}*/
 </style>
